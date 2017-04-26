@@ -1,0 +1,6 @@
+*.csv
+*.dbf
+east_end_parcels.shp
+*.shx
+south_hill_parcels.shp
+*.shp

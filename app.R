@@ -1,21 +1,21 @@
-##Internal DoF Parcel Map
-
-library(shiny)
-library(shinythemes)
-library(plyr)
-library(sp)
-library(rgeos)
-library(maptools)
-library(leaflet)
-library(rgdal)
-library(proj4)
-library(raster)
-library(DT)
+##Public Parcel Map
+##Created by: Max Cercone
+##Last Update: 4/3/2017
 library(httr)
+library(jsonlite)
+library(plyr)
+library(dplyr)
+library(sp)
+library(maptools)
+library(raster)
+library(sp)
+library(maptools)
+library(raster)
+library(dplyr)
 
 # Determine if on mobile device
 getWidth <- '$(document).on("shiny:connected", function(e) {
-  var jsWidth = screen.width;
+var jsWidth = screen.width;
 Shiny.onInputChange("GetScreenWidth",jsWidth);
 });'
 
@@ -98,17 +98,54 @@ icons_egg <- iconList(
 )
 
 
-east_end <- readShapeSpatial("east_end_parcels.shp")
-west_end <- readShapeSpatial("west_end_parcels.shp")
-north_side <- readShapeSpatial("north_side_parcels.shp")
-south_hills <- readShapeSpatial("south_hill_parcels.shp")
-hoods_e <- levels(east_end$Neighborho)
-hoods_w <- levels(west_end$Neighborho)
-hoods_n <- levels(north_side$Neighborho)
-hoods_s <- levels(south_hills$Neighborho)
-hood_list <- unlist(list(hoods_e, hoods_w, hoods_n, hoods_s))
-hood_list <- sort(hood_list)
+##Query Ckan API for Property Assessment Data
+query <- "https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%20*%20from%20%22518b583f-7cc8-4f60-94d0-174cc98310dc%22%20WHERE%20%22SCHOOLCODE%22%20LIKE%20%2747%27&limit=9999999"
+getdata <- GET(url=query)
+assessment <- jsonlite::fromJSON(content(getdata, "text"))
+assessment <- assessment$result$records
+assessed <- subset(assessment, select = c("PARID", "PROPERTYHOUSENUM", "PROPERTYFRACTION", "PROPERTYADDRESS", "PROPERTYZIP", "MUNIDESC", "TAXDESC", "CLASSDESC", "OWNERDESC",
+                                            "USEDESC", "HOMESTEADFLAG", "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "SALEPRICE", "SALEDATE", "YEARBLT"))
+assessed$MUNIDESC <- as.factor(assessed$MUNIDESC)
+assessed <- subset(assessed, MUNIDESC != "Mt. Oliver  ")
 
+##Delinquent
+delinquent.query <- "https://data.wprdc.org/api/action/datastore_search?resource_id=ed0d1550-c300-4114-865c-82dc7c23235b&limit=99999"
+getdelqdata <- GET(url=delinquent.query, add_headers(Authorization = "74b409d8-0f6f-439a-8a97-7796b9a0fc8b"))
+delq <- jsonlite::fromJSON(content(getdelqdata, "text"))
+delq <- delq$result$records
+delq <- subset(delq, select = c("pin", "current_delq", "prior_years"))
+delq$delq <- TRUE
+
+##City Owned
+ownership.query <- "https://data.wprdc.org/api/action/datastore_search?resource_id=4ff5eb17-e2ad-4818-97c4-8f91fc6b6396&limit=99999"
+getownerdata <- GET(url=ownership.query, add_headers(Authorization = "74b409d8-0f6f-439a-8a97-7796b9a0fc8b"))
+ownership <- jsonlite::fromJSON(content(getownerdata, "text"))
+ownership <- ownership$result$records
+ownership <- subset(ownership, select = c("pin"))
+ownership$cityowned <- TRUE
+
+##Property Tax Abatements
+abatement.query <- "https://data.wprdc.org/api/action/datastore_search?resource_id=fd924520-d568-4da2-967c-60b3a305e681&limit=99999"
+getabatedata <- GET(url=abatement.query, add_headers(Authorization = "74b409d8-0f6f-439a-8a97-7796b9a0fc8b"))
+abatement <- jsonlite::fromJSON(content(getabatedata, "text"))
+abatement <- abatement$result$records
+abatement <- subset(abatement, select = c("pin", "program_name", "start_year", "num_years", "abatement_amt"))
+abatement$abatement <- TRUE
+
+##Merge all datasets together
+all.property <- merge(assessed, delq, by.x = "PARID", by.y = "pin", all.x = TRUE)
+all.property <- merge(all.property, ownership, by.x = "PARID", "pin", all.x = TRUE)
+all.property <- merge(all.property, abatement, by.x = "PARID", "pin", all.x = TRUE)
+all.property$ADDRESS <- paste(all.property$PROPERTYHOUSENUM, all.property$PROPERTYADDRESS)
+all.property$SALEDATE <- gsub("-", "/", all.property$SALEDATE)
+all.property$SALEDATE <- as.Date(all.property$SALEDATE, "%m/%d/%Y")
+
+##Call and Merge main file with shapefiles
+
+
+
+
+##Application
 ui <- shinyUI(navbarPage(id = "navbar",
                          windowTitle = "Burgh's Eye View Parcels",
                          selected = "Parcels",
@@ -186,37 +223,37 @@ ui <- shinyUI(navbarPage(id = "navbar",
                           )
                                   ),
                          tabPanel("Data", class = "data", value = "Data",
-  div(style = 'overflow-x: scroll', DT::dataTableOutput("datatable"))
-                                  ),
-  tabPanel('About', class = "About", value = "About",
-           includeHTML('about.html'),
-           # Twitter Button
-           tags$script(HTML("var header = $('.navbar > .container-fluid > .navbar-collapse');
-                            header.append('<div class =\"twit\" style=\"float:right;margin-top: 15px;\"><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" align=\"middle\" data-url=\"data.pittsburghpa.gov/BurghsEyeView\" data-text=\"Check out Burgh&#39;s Eye View! A new tool to view city data in Pittsburgh: https://goo.gl/z4cZ30\" data-size=\"large\">Tweet</a></div>');
-                            console.log(header)")),
-           tags$script(HTML("!function(d,s,id){
-                            var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
-                            if(!d.getElementById(id)){
-                            js=d.createElement(s);
-                            js.id=id;
-                            js.src=p+'://platform.twitter.com/widgets.js';
-                            fjs.parentNode.insertBefore(js,fjs);
-                            }
-                            }(document, 'script', 'twitter-wjs');")),
+                                  div(style = 'overflow-x: scroll', DT::dataTableOutput("datatable"))
+                         ),
+                         tabPanel('About', class = "About", value = "About",
+                                  includeHTML('about.html'),
+                                  # Twitter Button
+                                  tags$script(HTML("var header = $('.navbar > .container-fluid > .navbar-collapse');
+                                                   header.append('<div class =\"twit\" style=\"float:right;margin-top: 15px;\"><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" align=\"middle\" data-url=\"data.pittsburghpa.gov/BurghsEyeView\" data-text=\"Check out Burgh&#39;s Eye View! A new tool to view city data in Pittsburgh: https://goo.gl/z4cZ30\" data-size=\"large\">Tweet</a></div>');
+                                                   console.log(header)")),
+                                  tags$script(HTML("!function(d,s,id){
+                                                   var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+                                                   if(!d.getElementById(id)){
+                                                   js=d.createElement(s);
+                                                   js.id=id;
+                                                   js.src=p+'://platform.twitter.com/widgets.js';
+                                                   fjs.parentNode.insertBefore(js,fjs);
+                                                   }
+                                                   }(document, 'script', 'twitter-wjs');")),
                 # Facebook Button
-           HTML('<div id="fb-root"></div>'),
-           tags$script(HTML("(function(d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (d.getElementById(id)) return;
-                            js = d.createElement(s); js.id = id;
-                            js.src = \"//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8\";
-                            fjs.parentNode.insertBefore(js, fjs);
-                            }(document, 'script', 'facebook-jssdk'));")),
+                HTML('<div id="fb-root"></div>'),
+                tags$script(HTML("(function(d, s, id) {
+                                 var js, fjs = d.getElementsByTagName(s)[0];
+                                 if (d.getElementById(id)) return;
+                                 js = d.createElement(s); js.id = id;
+                                 js.src = \"//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8\";
+                                 fjs.parentNode.insertBefore(js, fjs);
+                                 }(document, 'script', 'facebook-jssdk'));")),
                 tags$script(HTML('header.append(\'<div class="fb-share-button" style="float:right;margin-top: 15px;margin-right: 5px;" data-href="http://pittsburghpa.shinyapps.io/BurghsEyeView/?utm_source=facebook_button&amp;utm_campaign=facebook_button&amp;utm_medium=facebook%2Fsocial\" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpittsburghpa.shinyapps.io%2FBurghsEyeView%2F%23utm_source%3Dfacebook_button%26utm_campaign%3Dfacebook_button%26utm_medium%3Dfacebook%252Fsocial&amp;src=sdkpreparse">Share</a></div>\');
                                  console.log(header)'))
+                )
                          )
-  )
-)
+                )
 
 
 
@@ -274,7 +311,7 @@ server <- shinyServer(function(input, output) {
     return(south_data)
   })
   
-
+  
   output$map <- renderLeaflet({
     east_parcel <- east_data()
     west_parcel <- west_data()
@@ -296,11 +333,8 @@ server <- shinyServer(function(input, output) {
                          stroke = TRUE, smoothFactor = 0.5, weight = 0.5, color = "#000000",
                          fill = TRUE, fillColor = ~color_val, fillOpacity = .75,
                          popup = ~(paste("<font color='black'><b>Parcel ID:</b>", east_parcel$CITY_PIN,
-                                         "<br><b>Owner:</b>", east_parcel$OWNER,
                                          "<br><b>Address:</b>", east_parcel$ADDRESS,
                                          "<br><b>Neighborhood:</b>", east_parcel$Neighborho,
-                                         "<br><b>Lot & Block:</b>", east_parcel$MAPBLOCKLO,
-                                         "<br><b>Council District:</b>", east_parcel$Council_Di,
                                          "<br><b>Ward:</b>", east_parcel$MUNIDESC,
                                          "<br><b>Owner Description:</b>", east_parcel$OWNERDESC,
                                          "<br><b>Class Description:</b>", east_parcel$CLASSDESC,
@@ -329,11 +363,8 @@ server <- shinyServer(function(input, output) {
                          stroke = TRUE, smoothFactor = 0.5, weight = 0.5, color = "#000000",
                          fill = TRUE, fillColor = ~color_val, fillOpacity = .75,
                          popup = ~(paste("<font color='black'><b>Parcel ID:</b>", west_parcel$CITY_PIN,
-                                         "<br><b>Owner:</b>", west_parcel$OWNER,
                                          "<br><b>Address:</b>", west_parcel$ADDRESS,
                                          "<br><b>Neighborhood:</b>", west_parcel$Neighborho,
-                                         "<br><b>Lot & Block:</b>", west_parcel$MAPBLOCKLO,
-                                         "<br><b>Council District:</b>", west_parcel$Council_Di,
                                          "<br><b>Ward:</b>", west_parcel$MUNIDESC,
                                          "<br><b>Owner Description:</b>", west_parcel$OWNERDESC,
                                          "<br><b>Class Description:</b>", west_parcel$CLASSDESC,
@@ -362,11 +393,8 @@ server <- shinyServer(function(input, output) {
                          stroke = TRUE, smoothFactor = 0.5, weight = 0.5, color = "#000000",
                          fill = TRUE, fillColor = ~color_val, fillOpacity = .75,
                          popup = ~(paste("<font color='black'><b>Parcel ID:</b>", north_parcel$CITY_PIN,
-                                         "<br><b>Owner:</b>", north_parcel$OWNER,
                                          "<br><b>Address:</b>", north_parcel$ADDRESS,
                                          "<br><b>Neighborhood:</b>", north_parcel$Neighborho,
-                                         "<br><b>Lot & Block:</b>", north_parcel$MAPBLOCKLO,
-                                         "<br><b>Council District:</b>", north_parcel$Council_Di,
                                          "<br><b>Ward:</b>", north_parcel$MUNIDESC,
                                          "<br><b>Owner Description:</b>", north_parcel$OWNERDESC,
                                          "<br><b>Class Description:</b>", north_parcel$CLASSDESC,
@@ -395,11 +423,8 @@ server <- shinyServer(function(input, output) {
                          stroke = TRUE, smoothFactor = 0.5, weight = 0.5, color = "#000000",
                          fill = TRUE, fillColor = ~color_val, fillOpacity = .75,
                          popup = ~(paste("<font color='black'><b>Parcel ID:</b>", south_parcel$CITY_PIN,
-                                         "<br><b>Owner:</b>", south_parcel$OWNER,
                                          "<br><b>Address:</b>", south_parcel$ADDRESS,
                                          "<br><b>Neighborhood:</b>", south_parcel$Neighborho,
-                                         "<br><b>Lot & Block:</b>", south_parcel$MAPBLOCKLO,
-                                         "<br><b>Council District:</b>", south_parcel$Council_Di,
                                          "<br><b>Ward:</b>", south_parcel$MUNIDESC,
                                          "<br><b>Owner Description:</b>", south_parcel$OWNERDESC,
                                          "<br><b>Class Description:</b>", south_parcel$CLASSDESC,
@@ -422,7 +447,7 @@ server <- shinyServer(function(input, output) {
                                          "<br><b>County Identifier:</b>", south_parcel$URL, "</font><br>",
                                          paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=',south_parcel$pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>'))))
     }
-##Places easter egg
+    
     if (nrow(south_parcel) + nrow(north_parcel) + nrow(west_parcel) + nrow(east_parcel) == 0) {
       if (Sys.Date() >= as.Date(paste0(this_year,"-11-01")) & Sys.Date() <= as.Date(paste0(this_year,"-11-08"))) {
         egg <- load.egg
@@ -435,7 +460,7 @@ server <- shinyServer(function(input, output) {
     map
   })
   
-  ##Data Tables
+  ##Data Table
   output$datatable <- DT::renderDataTable({
     df.ee <- as.data.frame(east_end)
     df.we <- as.data.frame(west_end)
@@ -443,15 +468,13 @@ server <- shinyServer(function(input, output) {
     df.sh <- as.data.frame(south_hills)
     table_data <- rbind(df.ee, df.we, df.ns, df.sh)
     table_data <- subset(table_data, !(is.na(CITY_PIN)))
-    table_data <- subset(table_data, select = c("pin", "CITY_PIN", "OWNER", "ADDRESS", "PROP_ZIP", "Neighborho", "MUNIDESC", "TAXDESC", "OWNERDESC", "CLASSDESC", "USEDESC",
+    table_data <- subset(table_data, select = c("pin", "CITY_PIN", "ADDRESS", "PROP_ZIP", "Neighborho", "MUNIDESC", "TAXDESC", "OWNERDESC", "CLASSDESC", "USEDESC",
                                                 "SALEDATE", "SALEPRICE", "COUNTYLAND", "COUNTYBUIL", "COUNTYTOTA", "delq", "PROGRAM_NA",
                                                 "ABATEMENT_", "START_YEAR", "APPROVED_U", "lien", "owedto", "tif", "URL"))
-   colnames(table_data) <- c("COUNTY_PIN", "CITY_PIN", "OWNER", "ADDRESS", "ZIP", "NEIGHBORHOOD", "MUNIDESC", "TAXDESC", "OWNERDESC", "CLASSDESC", "USEDESC",
-                             "SALEDATE", "SALEPRICE", "LANDVAL", "BUILDINGVAL", "TOTALVAL", "DELINQUENT", "ABATE_PROG", "ABATE_AMT", "ABATE_START", "APPROVED_USER",
-                             "LIENS", "TOTAL_LIENS", "TIF", "URL")
+    colnames(table_data) <- c("COUNTY_PIN", "CITY_PIN", "ADDRESS", "ZIP", "NEIGHBORHOOD", "MUNIDESC", "TAXDESC", "OWNERDESC", "CLASSDESC", "USEDESC",
+                              "SALEDATE", "SALEPRICE", "LANDVAL", "BUILDINGVAL", "TOTALVAL", "DELINQUENT", "ABATE_PROG", "ABATE_AMT", "ABATE_START", "APPROVED_USER",
+                              "LIENS", "TOTAL_LIENS", "TIF", "URL")
     table_data
-
-    
   }, filter = "top",
   extensions = 'Buttons',
   options = list(pageLength = 6443,
@@ -468,23 +491,9 @@ server <- shinyServer(function(input, output) {
   rownames = FALSE,
   escape = FALSE
   )  
-  
-  # observeEvent({
-  #   search <- input$datatablet_search_columns
-  #   
-  #   
-  #   # if(is.null(search)){
-  #   #   search <- ""
-  #   # }
-  #   
-  #   print(search)
-  # })
-
-  
-
-  
 })
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+
 

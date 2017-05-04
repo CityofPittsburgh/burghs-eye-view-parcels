@@ -52,6 +52,14 @@ abatement$abatement <- TRUE
 ##Lien Data
 liens <- read.csv("liens.csv")
 
+##PLI Violation
+v.query <- "https://data.wprdc.org/api/action/datastore_search?resource_id=4e5374be-1a88-47f7-afee-6a79317019b4&limit=99999"
+getv <- GET(url=v.query, add_headers(Authorization = "74b409d8-0f6f-439a-8a97-7796b9a0fc8b"))
+violations <- jsonlite::fromJSON(content(getv, "text"))
+violations <- violations$result$records
+violations <- subset(violations, select = c("PARCEL", "VIOLATION", "INSPECTION_RESULT", "CORRECTIVE_ACTION", "LOCATION", "INSPECTION_DATE"))
+
+
 ##Neighborhood
 load.nhood <- fromJSON("./pghnhoods.txt")
 load.nhood <- load.nhood$result$records
@@ -61,6 +69,7 @@ load.nhood$geo_name_nhood <- as.factor(load.nhood$geo_name_nhood)
 hood_list <- as.list(levels(load.nhood$geo_name_nhood))
 hood_list <- gsub("\\-", "_", hood_list)
 hood_list <- gsub(" ", "_", hood_list)
+hood_list <- gsub("\\.", "", hood_list)
 hood_list <- tolower(hood_list)
 write_json(hood_list, "hoodlist.json")
 
@@ -105,4 +114,13 @@ all.property$colorval <- ifelse(all.property$cityowned == TRUE, "#ffff33", all.p
 all.property$colorval <- ifelse(all.property$delq == TRUE, "#e41a1c", all.property$colorval)
 
 ##Function that binds geoJSON data to dataframe
-
+pinjson <- function(x){
+  baseUrl <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
+  endUrl <- x$nhood
+  count <- 1
+  for (i in x$PARID){
+    r <- GET(baseURL, endUrl)
+    c <- fromJSON(content(r, "text", encoding = "ISO-8859-1"))
+    c.1 <- as.data.frame(c$features)
+  }
+}

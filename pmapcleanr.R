@@ -1,13 +1,14 @@
 ##Cleaner file for public parcel map
 ## 4/28/2017
 
-
 library(jsonlite)
 library(httr)
 library(dplyr)
 library(plyr)
 library(lubridate)
 library(R4CouchDB)
+library(geojsonio)
+library(maptools)
 
 options(scipen = 999)
 
@@ -119,15 +120,36 @@ all.property$colorval <- ifelse(all.property$cityowned == TRUE, "#ffff33", all.p
 #all.property$colorval <- ifelse(all.property$tif == TRUE, "#f781bf", all.property$colorval)
 #all.property$colorval <- ifelse(all.property$USEDESC == "VACANT LAND", "#a65628", all.property$colorval)
 all.property$colorval <- ifelse(all.property$delq == TRUE, "#e41a1c", all.property$colorval)
+all.property$nhood <- as.factor(all.property$nhood)
 
 ##Function that binds geoJSON data to dataframe
-pinjson <- function(data){
-  baseURL <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
-  endUrl <- data$nhood
+baseURL <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
+endUrl <- data$nhood
+for (i in levels(all.property$nhood)){
   count <- 1
-  for (i in data$PARID){
-    r <- GET(baseURL, endUrl)
-    c <- fromJSON(content(r, "text", encoding = "ISO-8859-1"))
-    c.1 <- as.data.frame(c$features)
+  r <- GET(paste0(baseURL,i, "/"))
+  f <- fromJSON(content(r, "text", encoding = "ISO-8859-1"))$features
+  for (j in 1:length(f)) {
+    # Translate Coordinates because geojsonio is dumb
+    coords <- t(as.data.frame(f[[j]]$geometry$coordinates[[1]][[1]]))
+    # Get data frame portion
+    df <- data.frame(f[[j]]$properties)
+    # This is a bunch of dumb stuff that sp requires to turn a list into a spatial polygon
+    poly <- Polygon(coords)
+    gons <- Polygons(c(poly), j)
+    spatial <- SpatialPolygons(c(gons), proj4string=CRS("+proj=utm +north +zone=16T + datum=WGS84"))
+    # Ensures unique ID for json
+    gons@ID <- as.character(j)
+    # Behold it is fixed
+    p <- SpatialPolygonsDataFrame(spatial, df, match.ID = FALSE)
+    # Bind to or create final
+    if (count == 1) {
+      final <- p
+      count <- 2
+    } else {
+      final <- spRbind(final, p)
+    }
   }
+  #Couch DB Function posting to DB goes here
 }
+

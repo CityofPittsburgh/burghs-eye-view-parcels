@@ -7,6 +7,7 @@ library(httr)
 library(dplyr)
 library(plyr)
 library(lubridate)
+library(R4CouchDB)
 
 options(scipen = 999)
 
@@ -62,7 +63,7 @@ violations <- subset(violations, INSPECTION_DATE >= this_year)
 
 ##Neighborhood
 system('python pghhoods.py')
-load.nhood <- fromJSON("./pghnhoods.txt")
+load.nhood <- jsonlite::fromJSON("./pghnhoods.txt")
 load.nhood <- load.nhood$result$records
 load.nhood$geo_name_nhood <- as.factor(load.nhood$geo_name_nhood)
 

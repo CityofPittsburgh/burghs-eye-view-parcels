@@ -10,6 +10,8 @@ library(R4CouchDB)
 library(geojsonio)
 library(maptools)
 
+set_config(config(ssl_verifypeer = 0L))
+
 options(scipen = 999)
 
 dollarsComma <- function(x){
@@ -20,9 +22,6 @@ dollarsComma <- function(x){
 ##Set Couch credentials
 couchdb_un <- jsonlite::fromJSON("key.json")$couchdb_un
 couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
-
-##CouchDB Connection
-couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "neighborhood_parcels")
 
 ##Set this year variable
 this_year <- as.Date(format(Sys.Date(), format="%Y-01-01"))
@@ -41,16 +40,15 @@ delinquent.query <- "https://data.wprdc.org/api/action/datastore_search?resource
 getdelqdata <- GET(url=delinquent.query, add_headers(Authorization = "74b409d8-0f6f-439a-8a97-7796b9a0fc8b"))
 delq <- jsonlite::fromJSON(content(getdelqdata, "text"))
 delq <- delq$result$records
-delq <- subset(delq, select = c("pin", "current_delq", "prior_years"))
-delq$delq <- TRUE
+assessment$delq <- ifelse(assessment$PARID %in% delq$pin, TRUE, FALSE)
 
 ##Query Ckan API for City owned property
 ownership.query <- "https://data.wprdc.org/api/action/datastore_search?resource_id=4ff5eb17-e2ad-4818-97c4-8f91fc6b6396&limit=99999"
 getownerdata <- GET(url=ownership.query, add_headers(Authorization = "74b409d8-0f6f-439a-8a97-7796b9a0fc8b"))
 ownership <- jsonlite::fromJSON(content(getownerdata, "text"))
 ownership <- ownership$result$records
-ownership <- subset(ownership, select = c("pin"))
-ownership$cityowned <- TRUE
+assessment$cityown <- ifelse(assessment$PARID %in% ownership$pin, TRUE, FALSE)
+
 
 ##Query Ckan API for Property Tax Abatements
 abatement.query <- "https://data.wprdc.org/api/action/datastore_search?resource_id=fd924520-d568-4da2-967c-60b3a305e681&limit=99999"
@@ -62,13 +60,6 @@ abatement$abatement <- TRUE
 
 ##Lien Data
 liens <- read.csv("liens.csv")
-
-##PLI Violation
-v.query <- "https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%20%22PARCEL%22%2C%22VIOLATION%22%2C%22INSPECTION_RESULT%22%2C%22CORRECTIVE_ACTION%22%2C%22LOCATION%22%2C%22INSPECTION_DATE%22%20from%20%224e5374be-1a88-47f7-afee-6a79317019b4%22&limit=9999999"
-getv <- GET(url=v.query, add_headers(Authorization = "74b409d8-0f6f-439a-8a97-7796b9a0fc8b"))
-violations <- jsonlite::fromJSON(content(getv, "text"))
-violations <- violations$result$records
-violations <- subset(violations, INSPECTION_DATE >= this_year)
 
 ##Neighborhood
 system('python pghhoods.py')
@@ -85,55 +76,37 @@ hood_list <- tolower(hood_list)
 write_json(hood_list, "hoodlist.json")
 
 ##Merge all datasets together
-all.property <- merge(assessment, delq, by.x = "PARID", by.y = "pin", all.x = TRUE)
-all.property <- merge(all.property, ownership, by.x = "PARID", "pin", all.x = TRUE)
-all.property <- merge(all.property, abatement, by.x = "PARID", "pin", all.x = TRUE)
-all.property <- merge(all.property, violations, by.x = "PARID", "PARCEL", all.x = TRUE)
-all.property$ADDRESS <- paste(all.property$PROPERTYHOUSENUM, all.property$PROPERTYADDRESS)
-all.property$SALEDATE <- gsub("-", "/", all.property$SALEDATE)
-all.property$SALEDATE <- as.Date(all.property$SALEDATE, "%m/%d/%Y")
-all.property <- merge(all.property, liens, by.x = "PARID", by.y = "pin", all.x = TRUE)
-all.property <- merge(all.property, load.nhood, by.x = "PARID", by.y = "PIN", all.x = TRUE)
-all.property$nhood <- gsub("\\-", "_", all.property$geo_name_nhood)
-all.property$nhood <- gsub(" ", "_", all.property$nhood)
-all.property$nhood <- tolower(all.property$nhood)
+parcels <- merge(assessment, abatement, by.x = "PARID", "pin", all.x = TRUE)
+parcels$ADDRESS <- paste(parcels$PROPERTYHOUSENUM, parcels$PROPERTYADDRESS)
+parcels$SALEDATE <- gsub("-", "/", parcels$SALEDATE)
+parcels$SALEDATE <- as.Date(parcels$SALEDATE, "%m/%d/%Y")
+parcels.liens <- merge(parcels, liens, by.x = "PARID", by.y = "pin", all.x = TRUE)
+parcels.hoods <- merge(parcels.liens, load.nhood, by.x = "PARID", by.y = "PIN", all.x = TRUE)
+parcels.hoods$nhood <- gsub("\\-", "_", parcels.hoods$geo_name_nhood)
+parcels.hoods$nhood <- gsub(" ", "_", parcels.hoods$nhood)
+parcels.hoods$nhood <- tolower(parcels.hoods$nhood)
 ##General Cleaning
-all.property$current_delq <- as.numeric(all.property$current_delq)
-all.property$current_delq[is.na(all.property$current_delq)] <- 0
-all.property$abatement_amt[is.na(all.property$abatement_amt)] <- 0
-all.property$amount[is.na(all.property$amount)] <- 0
-all.property$owedto[is.na(all.property$owed)] <- 0
-all.property$program_name[is.na(all.property$program_name)] <- "No Abatement"
-all.property$abatement[is.na(all.property$abatement)] <- FALSE
-all.property$delq[is.na(all.property$delq)] <- FALSE
-all.property$cityowned[is.na(all.property$cityowned)] <- FALSE
-all.property$INSPECTION_DATE <- as.Date(all.property$INSPECTION_DATE)
-all.property$VIOLATION[is.na(all.property$VIOLATION)] <- "No Violation"
-all.property$INSPECTION_RESULT[is.na(all.property$INSPECTION_RESULT)] <- ""
+parcels.hoods$abatement_amt[is.na(parcels.hoods$abatement_amt)] <- 0
+parcels.hoods$amount[is.na(parcels.hoods$amount)] <- 0
+parcels.hoods$owedto[is.na(parcels.hoods$owed)] <- 0
+parcels.hoods$program_name[is.na(parcels.hoods$program_name)] <- "No Abatement"
+parcels.hoods$abatement[is.na(parcels.hoods$abatement)] <- FALSE
 
-
-#Set tooltip fields with dollars and commas
-all.property$tt_land <- dollarsComma(all.property$COUNTYLAND)
-all.property$tt_build <- dollarsComma(all.property$COUNTYBUILDING)
-all.property$tt_total <- dollarsComma(all.property$COUNTYTOTAL)
-all.property$tt_sale <- dollarsComma(all.property$SALEPRICE)
-all.property$tt_delq <- dollarsComma(all.property$current_delq)
-all.property$tt_abatement <- dollarsComma(all.property$abatement_amt)
-all.property$tt_lienamt <- dollarsComma(all.property$amount)
 
 ##Set colors for map
-all.property$colorval <- "#ccc7c7"
-all.property$colorval <- ifelse(all.property$program_name == "No Abatement", all.property$colorval, "#4daf4a")
-all.property$colorval <- ifelse(all.property$cityowned == TRUE, "#ffff33", all.property$colorval)
-#all.property$colorval <- ifelse(all.property$tif == TRUE, "#f781bf", all.property$colorval)
-#all.property$colorval <- ifelse(all.property$USEDESC == "VACANT LAND", "#a65628", all.property$colorval)
-all.property$colorval <- ifelse(all.property$delq == TRUE, "#e41a1c", all.property$colorval)
-all.property$nhood <- as.factor(all.property$nhood)
-colnames(all.property)[1] <- "pin"
+parcels.hoods$colorval <- "#ccc7c7"
+parcels.hoods$colorval <- ifelse(parcels.hoods$program_name == "No Abatement", parcels.hoods$colorval, "#4daf4a")
+parcels.hoods$colorval <- ifelse(parcels.hoods$cityown == TRUE, "#ffff33", parcels.hoods$colorval)
+#parcels.hoods$colorval <- ifelse(parcels.hoods$tif == TRUE, "#f781bf", parcels.hoods$colorval)
+#parcels.hoods$colorval <- ifelse(parcels.hoods$USEDESC == "VACANT LAND", "#a65628", parcels.hoods$colorval)
+parcels.hoods$colorval <- ifelse(parcels.hoods$delq == TRUE, "#e41a1c", parcels.hoods$colorval)
+parcels.final <- subset(parcels.hoods, nhood != "")
+parcels.final$nhood <- as.factor(parcels.final$nhood)
+colnames(parcels.final)[1] <- "pin"
 
 ##Function that binds geoJSON data to dataframe
 baseURL <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
-for (i in levels(all.property$nhood)){
+for (i in levels(parcels.final$nhood)){
   count <- 1
   r <- GET(paste0(baseURL,i, "/"))
   f <- fromJSON(content(r, "text", encoding = "ISO-8859-1"))$features
@@ -159,16 +132,13 @@ for (i in levels(all.property$nhood)){
     }
   }
   ##Final add data
-  final@data <- merge(final@data, all.property, by = "pin", all.x = TRUE, sort = FALSE)
+  final@data <- merge(final@data, parcels.final, by = "pin", all.x = TRUE, sort = FALSE)
   #Couch DB Function posting to DB goes here
+  ##CouchDB Connection
+  couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "neighborhood_parcels")
   couchDB$dataList <- (final)
   couchDB$id <- i
-  cdbAddDoc(couchDB)
+  #cdbAddDoc(couchDB)
+  print(paste(i, "completed"))
 }
 
-#Test get
-getcouch <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "neighborhood_parcels")
-getcouch$id <- i 
-par <- cdbGetDoc(getcouch)
-par1 <- par$res
-p <- geojson_read(par$res)

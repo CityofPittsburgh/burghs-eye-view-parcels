@@ -17,6 +17,14 @@ dollarsComma <- function(x){
   paste0("$", x)
 }
 
+##Set Couch credentials
+couchdb_un <- jsonlite::fromJSON("key.json")$couchdb_un
+couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
+
+##CouchDB Connection
+couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "neighborhood_parcels")
+
+##Set this year variable
 this_year <- as.Date(format(Sys.Date(), format="%Y-01-01"))
 
 
@@ -151,5 +159,6 @@ for (i in levels(all.property$nhood)){
     }
   }
   #Couch DB Function posting to DB goes here
+  
 }
 

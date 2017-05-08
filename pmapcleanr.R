@@ -129,10 +129,10 @@ all.property$colorval <- ifelse(all.property$cityowned == TRUE, "#ffff33", all.p
 #all.property$colorval <- ifelse(all.property$USEDESC == "VACANT LAND", "#a65628", all.property$colorval)
 all.property$colorval <- ifelse(all.property$delq == TRUE, "#e41a1c", all.property$colorval)
 all.property$nhood <- as.factor(all.property$nhood)
+colnames(all.property)[1] <- "pin"
 
 ##Function that binds geoJSON data to dataframe
 baseURL <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
-endUrl <- data$nhood
 for (i in levels(all.property$nhood)){
   count <- 1
   r <- GET(paste0(baseURL,i, "/"))
@@ -158,7 +158,17 @@ for (i in levels(all.property$nhood)){
       final <- spRbind(final, p)
     }
   }
+  ##Final add data
+  final@data <- merge(final@data, all.property, by = "pin", all.x = TRUE, sort = FALSE)
   #Couch DB Function posting to DB goes here
-  
+  couchDB$dataList <- (final)
+  couchDB$id <- i
+  cdbAddDoc(couchDB)
 }
 
+#Test get
+getcouch <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "neighborhood_parcels")
+getcouch$id <- i 
+par <- cdbGetDoc(getcouch)
+par1 <- par$res
+p <- geojson_read(par$res)

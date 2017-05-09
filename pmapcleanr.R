@@ -106,27 +106,32 @@ parcels.hoods$colorval <- ifelse(parcels.hoods$delq == TRUE, "#e41a1c", parcels.
 parcels.final <- subset(parcels.hoods, nhood != "")
 parcels.final$nhood <- as.factor(parcels.final$nhood)
 colnames(parcels.final)[1] <- "pin"
-parcels.final$pin <- as.factor(parcels.final$pin)
+#parcels.final$pin <- as.factor(parcels.final$pin)
 
 ##Function that binds geoJSON data to dataframe
 baseURL <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
+setwd("./neighborhoodparcels")
 for (i in levels(parcels.final$nhood)){ 
   r <- GET(paste0(baseURL,i, "/")) 
   f <- content(r, "text", encoding = "ISO-8859-1")
   org <- readOGR(f, "OGRGeoJSON", verbose = F)
-  ##Final add data
+  # Final add data
   org@data <- merge(org@data, parcels.final, by = "pin", all.x = TRUE, sort = FALSE)
-  setwd("./neighborhoodparcels")
-  writeOGR(org, i, layer="meuse", driver="GeoJSON")
-  g.org <- readr::read_lines(i)
-  #Couch DB Function posting to DB goes here
-  ##CouchDB Connection
-  couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "neighborhood_parcels")
-  couchDB$dataList <- (g.org)
-  couchDB$id <- i
-  cdbUpdateDoc(couchDB)
-  print(paste(i, "completed"))
-}
+  org@data$pin <- as.character(org@data$pin)
+  for (k in unique(org@data$pin)){
+    sub <- subset(org, k == pin)
+    writeOGR(sub, "parcel", layer="meuse", driver="GeoJSON")
+    g.org <- readr::read_lines("parcel")
+    # Couch DB Function posting to DB goes here
+    # CouchDB Connection
+    couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = i)
+    couchDB$dataList <- sub
+    #couchDB$id <- k
+    couchDB <- cdbAddDoc(couchDB)
+    print(paste(k, "completed"))
+    # cdbUpdateDoc(couchDB)
+  }
+}    
 
 
 ##Create neighborhood databases in CouchDB
@@ -135,6 +140,5 @@ for (i in levels(parcels.final$nhood)){
 #  couchDB$newDBName = i
 #  couchDB <- cdbMakeDB(couchDB)
 #  print(paste(i, "completed"))
-  
-#} 
+
 

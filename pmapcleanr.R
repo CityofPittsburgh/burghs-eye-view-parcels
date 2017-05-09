@@ -9,6 +9,7 @@ library(lubridate)
 library(R4CouchDB)
 library(geojsonio)
 library(maptools)
+library(rgdal)
 
 set_config(config(ssl_verifypeer = 0L))
 
@@ -84,6 +85,7 @@ parcels.liens <- merge(parcels, liens, by.x = "PARID", by.y = "pin", all.x = TRU
 parcels.hoods <- merge(parcels.liens, load.nhood, by.x = "PARID", by.y = "PIN", all.x = TRUE)
 parcels.hoods$nhood <- gsub("\\-", "_", parcels.hoods$geo_name_nhood)
 parcels.hoods$nhood <- gsub(" ", "_", parcels.hoods$nhood)
+parcels.hoods$nhood <- gsub("\\.", "", parcels.hoods$nhood)
 parcels.hoods$nhood <- tolower(parcels.hoods$nhood)
 ##General Cleaning
 parcels.hoods$abatement_amt[is.na(parcels.hoods$abatement_amt)] <- 0
@@ -106,39 +108,18 @@ colnames(parcels.final)[1] <- "pin"
 
 ##Function that binds geoJSON data to dataframe
 baseURL <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
-for (i in levels(parcels.final$nhood)){
-  count <- 1
-  r <- GET(paste0(baseURL,i, "/"))
-  f <- fromJSON(content(r, "text", encoding = "ISO-8859-1"))$features
-  for (j in 1:length(f)) {
-    # Translate Coordinates because geojsonio is dumb
-    coords <- t(as.data.frame(f[[j]]$geometry$coordinates[[1]][[1]]))
-    # Get data frame portion
-    df <- data.frame(f[[j]]$properties)
-    # This is a bunch of dumb stuff that sp requires to turn a list into a spatial polygon
-    poly <- Polygon(coords)
-    gons <- Polygons(c(poly), j)
-    spatial <- SpatialPolygons(c(gons), proj4string=CRS("+proj=utm +north +zone=16T + datum=WGS84"))
-    # Ensures unique ID for json
-    gons@ID <- as.character(j)
-    # Behold it is fixed
-    p <- SpatialPolygonsDataFrame(spatial, df, match.ID = FALSE)
-    # Bind to or create final
-    if (count == 1) {
-      final <- p
-      count <- 2
-    } else {
-      final <- spRbind(final, p)
-    }
-  }
+for (i in levels(parcels.final$nhood)[54:90]){ 
+  r <- GET(paste0(baseURL,i, "/")) 
+  f <- content(r, "text", encoding = "ISO-8859-1")
+  org <- readOGR(f, "OGRGeoJSON", verbose = F)
   ##Final add data
-  final@data <- merge(final@data, parcels.final, by = "pin", all.x = TRUE, sort = FALSE)
+  org@data <- merge(org@data, parcels.final, by = "pin", all.x = TRUE, sort = FALSE)
   #Couch DB Function posting to DB goes here
   ##CouchDB Connection
   couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "neighborhood_parcels")
-  couchDB$dataList <- (final)
+  couchDB$dataList <- (org)
   couchDB$id <- i
-  #cdbAddDoc(couchDB)
+  cdbAddDoc(couchDB)
   print(paste(i, "completed"))
 }
 

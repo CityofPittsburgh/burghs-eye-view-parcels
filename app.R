@@ -12,6 +12,12 @@ library(sp)
 library(maptools)
 library(raster)
 library(dplyr)
+library(R4CouchDB)
+
+##Set Couch credentials
+couchdb_un <- jsonlite::fromJSON("key.json")$couchdb_un
+couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
+
 
 # Determine if on mobile device
 getWidth <- '$(document).on("shiny:connected", function(e) {
@@ -98,52 +104,7 @@ icons_egg <- iconList(
 )
 
 
-##Query Ckan API for Property Assessment Data
-query <- "https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%20*%20from%20%22518b583f-7cc8-4f60-94d0-174cc98310dc%22%20WHERE%20%22SCHOOLCODE%22%20LIKE%20%2747%27&limit=9999999"
-getdata <- GET(url=query)
-assessment <- jsonlite::fromJSON(content(getdata, "text"))
-assessment <- assessment$result$records
-assessed <- subset(assessment, select = c("PARID", "PROPERTYHOUSENUM", "PROPERTYFRACTION", "PROPERTYADDRESS", "PROPERTYZIP", "MUNIDESC", "TAXDESC", "CLASSDESC", "OWNERDESC",
-                                            "USEDESC", "HOMESTEADFLAG", "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "SALEPRICE", "SALEDATE", "YEARBLT"))
-assessed$MUNIDESC <- as.factor(assessed$MUNIDESC)
-assessed <- subset(assessed, MUNIDESC != "Mt. Oliver  ")
-
-##Delinquent
-delinquent.query <- "https://data.wprdc.org/api/action/datastore_search?resource_id=ed0d1550-c300-4114-865c-82dc7c23235b&limit=99999"
-getdelqdata <- GET(url=delinquent.query, add_headers(Authorization = "74b409d8-0f6f-439a-8a97-7796b9a0fc8b"))
-delq <- jsonlite::fromJSON(content(getdelqdata, "text"))
-delq <- delq$result$records
-delq <- subset(delq, select = c("pin", "current_delq", "prior_years"))
-delq$delq <- TRUE
-
-##City Owned
-ownership.query <- "https://data.wprdc.org/api/action/datastore_search?resource_id=4ff5eb17-e2ad-4818-97c4-8f91fc6b6396&limit=99999"
-getownerdata <- GET(url=ownership.query, add_headers(Authorization = "74b409d8-0f6f-439a-8a97-7796b9a0fc8b"))
-ownership <- jsonlite::fromJSON(content(getownerdata, "text"))
-ownership <- ownership$result$records
-ownership <- subset(ownership, select = c("pin"))
-ownership$cityowned <- TRUE
-
-##Property Tax Abatements
-abatement.query <- "https://data.wprdc.org/api/action/datastore_search?resource_id=fd924520-d568-4da2-967c-60b3a305e681&limit=99999"
-getabatedata <- GET(url=abatement.query, add_headers(Authorization = "74b409d8-0f6f-439a-8a97-7796b9a0fc8b"))
-abatement <- jsonlite::fromJSON(content(getabatedata, "text"))
-abatement <- abatement$result$records
-abatement <- subset(abatement, select = c("pin", "program_name", "start_year", "num_years", "abatement_amt"))
-abatement$abatement <- TRUE
-
-##Merge all datasets together
-all.property <- merge(assessed, delq, by.x = "PARID", by.y = "pin", all.x = TRUE)
-all.property <- merge(all.property, ownership, by.x = "PARID", "pin", all.x = TRUE)
-all.property <- merge(all.property, abatement, by.x = "PARID", "pin", all.x = TRUE)
-all.property$ADDRESS <- paste(all.property$PROPERTYHOUSENUM, all.property$PROPERTYADDRESS)
-all.property$SALEDATE <- gsub("-", "/", all.property$SALEDATE)
-all.property$SALEDATE <- as.Date(all.property$SALEDATE, "%m/%d/%Y")
-
-##Call and Merge main file with shapefiles
-
-
-
+value_list <- fromJSON("hoodlist.json")
 
 ##Application
 ui <- shinyUI(navbarPage(id = "navbar",
@@ -218,7 +179,7 @@ ui <- shinyUI(navbarPage(id = "navbar",
                                                   selectize = TRUE),
                                       textInput("search",
                                                 label = NULL,
-                                                placeholder = "Parcel Search")
+                                                placeholder = "Search")
                             ), style = "opacity: 0.88"
                           )
                                   ),
@@ -260,55 +221,20 @@ ui <- shinyUI(navbarPage(id = "navbar",
 
 # Define server logic required to draw a histogram
 server <- shinyServer(function(input, output) {
+
   
-  
-  east_data <- reactive({
-    east_data <- east_end
+  hoodinput <- reactive({
+    hoodname <- gsub("\\-", "_", input$neigh_select)
+    hoodname <- gsub(" ", "_", hoodname)
+    hoodname <- gsub("\\.", "", hoodname)
+    hoodname <- tolower(hoodname)
+    c <- GET(paste0("http://webhost.pittsburghpa.gov:5984/neighborhood_parcels/", hoodname), add_headers(`Content-Type`= "application/json"))
+    r <- content(c)
     
-    if(nchar(input$search) > 14){
-      east_data <- subset(east_data, pin == input$search | CITY_PIN == input$search)
-    } else {
-      east_data <- subset(east_data, Neighborho == input$neigh_select)
-    }
-    
-    return(east_data)
-  })
-  
-  west_data <- reactive({
-    west_data <- west_end
-    
-    if(nchar(input$search) > 14){
-      west_data <- subset(west_data, pin == input$search | CITY_PIN == input$search)
-    } else {
-      west_data <- subset(west_data, Neighborho == input$neigh_select)
-    }
-    
-    return(west_data)
-  })
-  
-  north_data <- reactive({
-    north_data <- north_side
-    
-    if(nchar(input$search) > 14){
-      north_data <- subset(north_data, pin == input$search | CITY_PIN == input$search)
-    } else {
-      north_data <- subset(north_data, Neighborho == input$neigh_select)
-    }
-    
-    return(north_data)
-  })
-  
-  south_data <- reactive({
-    south_data <- south_hills
-    
-    if(nchar(input$search) > 14){
-      south_data <- subset(south_data, pin == input$search | CITY_PIN == input$search)
-    } else {
-      south_data <- subset(south_data, Neighborho == input$neigh_select)
-      
-    }
-    
-    return(south_data)
+    if(nchar(input$search) > 0){
+      hood<- subset(hood, pin == input$search | CITY_PIN == input$search)
+    } 
+    return(hood)
   })
   
   

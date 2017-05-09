@@ -6,7 +6,6 @@ library(httr)
 library(dplyr)
 library(plyr)
 library(lubridate)
-library(R4CouchDB)
 library(geojsonio)
 library(maptools)
 library(rgdal)
@@ -122,14 +121,10 @@ for (i in levels(parcels.final$nhood)){
     sub <- subset(org, k == pin)
     writeOGR(sub, "parcel", layer="meuse", driver="GeoJSON")
     g.org <- readr::read_lines("parcel")
-    # Couch DB Function posting to DB goes here
-    # CouchDB Connection
-    couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = i)
-    couchDB$dataList <- sub
-    #couchDB$id <- k
-    couchDB <- cdbAddDoc(couchDB)
-    print(paste(k, "completed"))
-    # cdbUpdateDoc(couchDB)
+    # PUT Function posting to DB goes here
+    url <- paste0("http://webhost.pittsburghpa.gov:5984/", i, "/")
+    p <- PUT(paste0(url, k), body = g.org, authenticate(couchdb_un, couchdb_pw), verbose())
+    print(paste(i, k, "completed", sep="-"))
   }
 }    
 
@@ -140,5 +135,4 @@ for (i in levels(parcels.final$nhood)){
 #  couchDB$newDBName = i
 #  couchDB <- cdbMakeDB(couchDB)
 #  print(paste(i, "completed"))
-
 

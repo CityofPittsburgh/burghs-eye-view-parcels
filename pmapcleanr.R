@@ -60,6 +60,7 @@ abatement <- subset(abatement, select = c("pin", "program_name", "start_year", "
 abatement$abatement <- TRUE
 
 ##Lien Data
+system('python pittsburghliens.py')
 liens <- read.csv("liens.csv")
 
 ##Neighborhood

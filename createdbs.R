@@ -1,0 +1,10 @@
+
+library(jsonlite)
+library(httr)
+library(dplyr)
+library(plyr)
+library(lubridate)
+library(R4CouchDB)
+library(geojsonio)
+library(maptools)
+library(rgdal)

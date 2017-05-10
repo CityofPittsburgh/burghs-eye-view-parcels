@@ -23,10 +23,6 @@ dollarsComma <- function(x){
 couchdb_un <- jsonlite::fromJSON("key.json")$couchdb_un
 couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
 
-##Set this year variable
-this_year <- as.Date(format(Sys.Date(), format="%Y-01-01"))
-
-
 ##Query Ckan API for Property Assessment Data
 query <- "https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%20%22PARID%22%2C%22PROPERTYHOUSENUM%22%2C%22PROPERTYFRACTION%22%2C%22PROPERTYADDRESS%22%2C%22PROPERTYZIP%22%2C%22MUNIDESC%22%2C%22TAXDESC%22%2C%22CLASSDESC%22%2C%22OWNERDESC%22%2C%22USEDESC%22%2C%22HOMESTEADFLAG%22%2C%22COUNTYLAND%22%2C%22COUNTYBUILDING%22%2C%22COUNTYTOTAL%22%2C%22SALEPRICE%22%2C%22SALEDATE%22%2C%22YEARBLT%22%20from%20%22518b583f-7cc8-4f60-94d0-174cc98310dc%22%20WHERE%20%22SCHOOLCODE%22%20LIKE%20%2747%27&limit=9999999"
 getdata <- GET(url=query)

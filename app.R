@@ -12,6 +12,8 @@ library(sp)
 library(maptools)
 library(raster)
 library(dplyr)
+library(shinythemes)
+library(leaflet)
 
 
 ##Set Couch credentials
@@ -228,62 +230,57 @@ server <- shinyServer(function(input, output) {
     hoodname <- gsub(" ", "_", hoodname)
     hoodname <- gsub("\\.", "", hoodname)
     hoodname <- tolower(hoodname)
-    c <- GET(paste0("http://webhost.pittsburghpa.gov:5984/", hoodname, "/_design/parcels/_view/FeatureCollection"), add_headers(`Content-Type`= "application/json"))
-    r <- content(c)
-    
-    if(nchar(input$search) > 0){
-      hood<- subset(hood, pin == input$search | CITY_PIN == input$search)
-    } 
-    return(hood)
-  })
-  
+    url <- paste0("http://webhost.pittsburghpa.gov:5984/neighborhood_parcels/", hoodname)
+    g <- GET(url, authenticate(couchdb_un, couchdb_pw))
+    c <- content(g, "text")
+    p <- readOGR(c, "OGRGeoJSON", verbose = F) 
+    hood_parcel <- p
+    return(hoodinput)
+  }
+)
   
   output$map <- renderLeaflet({
-    east_parcel <- east_data()
-    west_parcel <- west_data()
-    north_parcel <- north_data()
-    south_parcel <- south_data()
+    hood_parcel <- hoodinput()
     
     map <- leaflet() %>%
       addProviderTiles("OpenStreetMap.Mapnik",
                        options = providerTileOptions(noWrap = TRUE, minZoom = 1
                        )
       ) %>%
-      addLegend("bottomright", colors = c("#4daf4a", "#ffff33", "#e41a1c", "#f781bf", "#984ea3"), labels = c("Abated Properties", "City Owned", "Delinquent",
-                                                                                                             "TIF District", "URA Owned"))
+      addLegend("bottomright", colors = c("#4daf4a", "#ffff33", "#e41a1c"), labels = c("Abated Properties", "City Owned", "Delinquent"))
     
     
-    if(nrow(east_parcel) > 0){ 
-      print(nrow(east_parcel))
-      map <- addPolygons(map, data = east_parcel,
+    if(nrow(hood_parcel) > 0){ 
+      print(nrow(hood_parcel))
+      map <- addPolygons(map, data = hood_parcel,
                          stroke = TRUE, smoothFactor = 0.5, weight = 0.5, color = "#000000",
                          fill = TRUE, fillColor = ~color_val, fillOpacity = .75,
-                         popup = ~(paste("<font color='black'><b>Parcel ID:</b>", east_parcel$CITY_PIN,
-                                         "<br><b>Address:</b>", east_parcel$ADDRESS,
-                                         "<br><b>Neighborhood:</b>", east_parcel$Neighborho,
-                                         "<br><b>Ward:</b>", east_parcel$MUNIDESC,
-                                         "<br><b>Owner Description:</b>", east_parcel$OWNERDESC,
-                                         "<br><b>Class Description:</b>", east_parcel$CLASSDESC,
-                                         "<br><b>Use Description:</b>", east_parcel$USEDESC,
-                                         "<br><b>Most Recent Sale Date:</b>", east_parcel$SALEDATE,
-                                         "<br><b>Most Recent Sale Price:</b>", east_parcel$tt_SALE_PR,
-                                         "<br><b>County Land Value:</b>", east_parcel$tt_COUNTYL,
-                                         "<br><b>County Building Value:</b>", east_parcel$tt_COUNTYB,
-                                         "<br><b>County Total Value:</b>", east_parcel$tt_COUNTYT,
-                                         "<br><b>Total Lien Amount:</b>", east_parcel$tt_amount,
-                                         "<br><b>Number of Liens:</b>", east_parcel$owedto,
-                                         #"<br><b>'17 City Taxes</b>", east_parcel$tt_city_ta,
-                                         #"<br><b>'17 School Taxes</b>", east_parcel$tt_school_,
-                                         #"<br><b>'17 Library Taxes</b>", east_parcel$tt_lib_tax,
-                                         #"<br><b>Current Delinquent Taxes</b>", east_parcel$CURRENT_DE,
-                                         "<br><b>Abatement Program:</b>", east_parcel$PROGRAM_NA,
-                                         "<br><b>Abatement Start Year:</b>", east_parcel$START_YEAR,
-                                         "<br><b>Abatement Period:</b>", east_parcel$ABATEMENT_,
-                                         "<br><b>Abatement Approved By:</b>", east_parcel$APPROVE_U,
-                                         "<br><b>County Identifier:</b>", east_parcel$URL, "</font><br>",
-                                         paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=',east_parcel$pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>'))))
+                         popup = ~(paste("<font color='black'><b>Parcel ID:</b>", hood_parcel$CITY_PIN,
+                                         "<br><b>Address:</b>", hood_parcel$ADDRESS,
+                                         "<br><b>Neighborhood:</b>", hood_parcel$Neighborho,
+                                         "<br><b>Ward:</b>", hood_parcel$MUNIDESC,
+                                         "<br><b>Owner Description:</b>", hood_parcel$OWNERDESC,
+                                         "<br><b>Class Description:</b>", hood_parcel$CLASSDESC,
+                                         "<br><b>Use Description:</b>", hood_parcel$USEDESC,
+                                         "<br><b>Most Recent Sale Date:</b>", hood_parcel$SALEDATE,
+                                         "<br><b>Most Recent Sale Price:</b>", hood_parcel$tt_SALE_PR,
+                                         "<br><b>County Land Value:</b>", hood_parcel$tt_COUNTYL,
+                                         "<br><b>County Building Value:</b>", hood_parcel$tt_COUNTYB,
+                                         "<br><b>County Total Value:</b>", hood_parcel$tt_COUNTYT,
+                                         "<br><b>Total Lien Amount:</b>", hood_parcel$tt_amount,
+                                         "<br><b>Number of Liens:</b>", hood_parcel$owedto,
+                                         #"<br><b>'17 City Taxes</b>", hood_parcel$tt_city_ta,
+                                         #"<br><b>'17 School Taxes</b>", hood_parcel$tt_school_,
+                                         #"<br><b>'17 Library Taxes</b>", hood_parcel$tt_lib_tax,
+                                         #"<br><b>Current Delinquent Taxes</b>", hood_parcel$CURRENT_DE,
+                                         "<br><b>Abatement Program:</b>", hood_parcel$PROGRAM_NA,
+                                         "<br><b>Abatement Start Year:</b>", hood_parcel$START_YEAR,
+                                         "<br><b>Abatement Period:</b>", hood_parcel$ABATEMENT_,
+                                         "<br><b>Abatement Approved By:</b>", hood_parcel$APPROVE_U,
+                                         "<br><b>County Identifier:</b>", hood_parcel$URL, "</font><br>",
+                                         paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=',hood_parcel$pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>'))))
     }
-    if (nrow(south_parcel) + nrow(north_parcel) + nrow(west_parcel) + nrow(east_parcel) == 0) {
+    if (nrow(hood_parcel) == 0) {
       if (Sys.Date() >= as.Date(paste0(this_year,"-11-01")) & Sys.Date() <= as.Date(paste0(this_year,"-11-08"))) {
         egg <- load.egg
       } else {

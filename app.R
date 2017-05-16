@@ -235,7 +235,7 @@ server <- shinyServer(function(input, output) {
     c <- content(g, "text")
     p <- readOGR(c, "OGRGeoJSON", verbose = F) 
     hood_parcel <- p
-    return(hoodinput)
+    #return(hoodinput)
   }
 )
   
@@ -254,8 +254,8 @@ server <- shinyServer(function(input, output) {
       print(nrow(hood_parcel))
       map <- addPolygons(map, data = hood_parcel,
                          stroke = TRUE, smoothFactor = 0.5, weight = 0.5, color = "#000000",
-                         fill = TRUE, fillColor = ~color_val, fillOpacity = .75,
-                         popup = ~(paste("<font color='black'><b>Parcel ID:</b>", hood_parcel$CITY_PIN,
+                         fill = TRUE, fillColor = ~colorval, fillOpacity = .75,
+                         popup = ~(paste("<font color='black'><b>Parcel ID:</b>", hood_parcel$pin,
                                          "<br><b>Address:</b>", hood_parcel$ADDRESS,
                                          "<br><b>Neighborhood:</b>", hood_parcel$Neighborho,
                                          "<br><b>Ward:</b>", hood_parcel$MUNIDESC,

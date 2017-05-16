@@ -104,34 +104,52 @@ parcels.final$nhood <- as.factor(parcels.final$nhood)
 colnames(parcels.final)[1] <- "pin"
 #parcels.final$pin <- as.factor(parcels.final$pin)
 
-##Function that binds geoJSON data to dataframe
-baseURL <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
-setwd("./neighborhoodparcels")
-for (i in levels(parcels.final$nhood)){ 
-  r <- GET(paste0(baseURL,i, "/")) 
-  f <- content(r, "text", encoding = "ISO-8859-1")
-  org <- readOGR(f, "OGRGeoJSON", verbose = F)
-  # Final add data
-  org@data <- merge(org@data, parcels.final, by = "pin", sort = FALSE)
-  org@data$pin <- as.character(org@data$pin)
-  org <- org["mapblocklo" != "Not Assessed" | "mapblocklo" != "COMMON GROUND",]
-  for (k in unique(org@data$pin)){
-    sub.1 <- subset(org, pin != "")
-    sub <- subset(org, k == pin)
-    writeOGR(sub, "parcel", layer="meuse", driver="GeoJSON")
-    g.org <- readr::read_lines("parcel")
-    # PUT Function posting to DB goes here
-    url <- paste0("http://webhost.pittsburghpa.gov:5984/", i, "/")
-    p <- PUT(paste0(url, k), body = g.org, authenticate(couchdb_un, couchdb_pw), verbose())
-    print(paste(i, k, "completed", sep="-"))
-  }
-}    
+##Function that binds geoJSON data to dataframe making each neighborhood a database
+#baseURL <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
+#setwd("./neighborhoodparcels")
+#for (i in levels(parcels.final$nhood)){ 
+#  r <- GET(paste0(baseURL,i, "/")) 
+#  f <- content(r, "text", encoding = "ISO-8859-1")
+#  org <- readOGR(f, "OGRGeoJSON", verbose = F)
+#  # Final add data
+#  org@data <- merge(org@data, parcels.final, by = "pin", sort = FALSE)
+#  org@data$pin <- as.character(org@data$pin)
+#  org <- org["mapblocklo" != "Not Assessed" | "mapblocklo" != "COMMON GROUND",]
+#  for (k in unique(org@data$pin)){
+#    sub.1 <- subset(org, pin != "")
+#   sub <- subset(org, k == pin)
+#    writeOGR(sub, "parcel", layer="meuse", driver="GeoJSON")
+#    g.org <- readr::read_lines("parcel")
+#    # PUT Function posting to DB goes here
+#    url <- paste0("http://webhost.pittsburghpa.gov:5984/", i, "/")
+#    p <- PUT(paste0(url, k), body = g.org, authenticate(couchdb_un, couchdb_pw), verbose())
+#    print(paste(i, k, "completed", sep="-"))
+#  }
+#}    
 
 
 ##Create neighborhood databases in CouchDB
-for (i in levels(parcels.final$nhood)){ 
-  couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, newDBName = i)
-  couchDB$newDBName = i
-  couchDB <- cdbMakeDB(couchDB)
-  print(paste(i, "completed"))
-} 
+#for (i in levels(parcels.final$nhood)){ 
+#  couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, newDBName = i)
+#  couchDB$newDBName = i
+#  couchDB <- cdbMakeDB(couchDB)
+#  print(paste(i, "completed"))
+#} 
+
+
+##Creates documents in Neighborhood Parcels' database containing all nhood parcels
+baseURL <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
+for (i in levels(parcels.final$nhood)[10:90]){ 
+  r <- GET(paste0(baseURL,i, "/")) 
+  f <- content(r, "text", encoding = "ISO-8859-1")
+  org <- readOGR(f, "OGRGeoJSON", verbose = F)
+  ##Final add data
+  org@data <- merge(org@data, parcels.final, by = "pin", all.x = TRUE, sort = FALSE)
+  org <- org["mapblocklo" != "Not Assessed" | "mapblocklo" != "COMMON GROUND",]
+  #setwd("./neighborhoodparcels")
+  writeOGR(org, i, layer="meuse", driver="GeoJSON")
+  g.org <- readr::read_lines(i)
+  url <- paste0("http://webhost.pittsburghpa.gov:5984/neighborhood_parcels/")
+  p <- PUT(paste0(url, i), body = g.org, authenticate(couchdb_un, couchdb_pw), verbose())
+  print(paste(i, "complete"))
+}

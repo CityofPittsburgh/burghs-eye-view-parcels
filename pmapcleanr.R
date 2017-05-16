@@ -107,7 +107,7 @@ colnames(parcels.final)[1] <- "pin"
 ##Function that binds geoJSON data to dataframe
 baseURL <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
 setwd("./neighborhoodparcels")
-for (i in levels(parcels.final$nhood)[17:90]){ 
+for (i in levels(parcels.final$nhood)){ 
   r <- GET(paste0(baseURL,i, "/")) 
   f <- content(r, "text", encoding = "ISO-8859-1")
   org <- readOGR(f, "OGRGeoJSON", verbose = F)

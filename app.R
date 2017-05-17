@@ -293,19 +293,8 @@ server <- shinyServer(function(input, output) {
   
   ##Data Table
   output$datatable <- DT::renderDataTable({
-    df.ee <- as.data.frame(east_end)
-    df.we <- as.data.frame(west_end)
-    df.ns <- as.data.frame(north_side)
-    df.sh <- as.data.frame(south_hills)
-    table_data <- rbind(df.ee, df.we, df.ns, df.sh)
-    table_data <- subset(table_data, !(is.na(CITY_PIN)))
-    table_data <- subset(table_data, select = c("pin", "CITY_PIN", "ADDRESS", "PROP_ZIP", "Neighborho", "MUNIDESC", "TAXDESC", "OWNERDESC", "CLASSDESC", "USEDESC",
-                                                "SALEDATE", "SALEPRICE", "COUNTYLAND", "COUNTYBUIL", "COUNTYTOTA", "delq", "PROGRAM_NA",
-                                                "ABATEMENT_", "START_YEAR", "APPROVED_U", "lien", "owedto", "tif", "URL"))
-    colnames(table_data) <- c("COUNTY_PIN", "CITY_PIN", "ADDRESS", "ZIP", "NEIGHBORHOOD", "MUNIDESC", "TAXDESC", "OWNERDESC", "CLASSDESC", "USEDESC",
-                              "SALEDATE", "SALEPRICE", "LANDVAL", "BUILDINGVAL", "TOTALVAL", "DELINQUENT", "ABATE_PROG", "ABATE_AMT", "ABATE_START", "APPROVED_USER",
-                              "LIENS", "TOTAL_LIENS", "TIF", "URL")
-    table_data
+    hood_parcel <- hoodinput()
+    hood_parcel@data
   }, filter = "top",
   extensions = 'Buttons',
   options = list(pageLength = 6443,

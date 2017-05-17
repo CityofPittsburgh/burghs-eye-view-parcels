@@ -1,6 +1,6 @@
 ##Public Parcel Map
 ##Created by: Max Cercone
-##Last Update: 4/3/2017
+##Last Update: 5/17/2017
 library(httr)
 library(jsonlite)
 library(plyr)
@@ -14,8 +14,15 @@ library(raster)
 library(dplyr)
 library(shinythemes)
 library(leaflet)
+library(rgdal)
 
 
+options(scipen = 999)
+
+dollarsComma <- function(x){
+  x <- prettyNum(x, big.mark = ",")
+  paste0("$", x)
+}
 ##Set Couch credentials
 couchdb_un <- jsonlite::fromJSON("key.json")$couchdb_un
 couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
@@ -222,7 +229,7 @@ ui <- shinyUI(navbarPage(id = "navbar",
 
 
 # Define server logic required to draw a histogram
-server <- shinyServer(function(input, output) {
+server <- shinyServer(function(input, output) { 
 
   
   hoodinput <- reactive({
@@ -239,7 +246,7 @@ server <- shinyServer(function(input, output) {
   }
 )
   
-  output$map <- renderLeaflet({
+  output$map <- renderLeaflet({ 
     hood_parcel <- hoodinput()
     
     map <- leaflet() %>%
@@ -252,33 +259,33 @@ server <- shinyServer(function(input, output) {
     
     if(nrow(hood_parcel) > 0){ 
       print(nrow(hood_parcel))
-      map <- addPolygons(map, data = hood_parcel,
+      map <- addPolygons(map, data = hood_parcel, 
                          stroke = TRUE, smoothFactor = 0.5, weight = 0.5, color = "#000000",
                          fill = TRUE, fillColor = ~colorval, fillOpacity = .75,
-                         popup = ~paste("<font color='black'><b>Parcel ID:</b>", pin,
-                                         "<br><b>Address:</b>", ADDRESS,
-                                         "<br><b>Neighborhood:</b>", geo_name_nhood,
-                                         "<br><b>Ward:</b>", MUNIDESC,
-                                         "<br><b>Owner Description:</b>", OWNERDESC,
-                                         "<br><b>Class Description:</b>", CLASSDESC,
-                                         "<br><b>Use Description:</b>", USEDESC,
-                                         "<br><b>Most Recent Sale Date:</b>", SALEDATE,
-                                         "<br><b>Most Recent Sale Price:</b>", SALEPRICE,
-                                         "<br><b>County Land Value:</b>", COUNTYLAND,
-                                         "<br><b>County Building Value:</b>", COUNTYBUILDING,
-                                         "<br><b>County Total Value:</b>", COUNTYTOTAL,
-                                         "<br><b>Total Lien Amount:</b>", amount,
-                                         "<br><b>Number of Liens:</b>", owedto,
+                         popup = ~paste("<font color='black'><b>Parcel ID:</b>", pin, 
+                                         ifelse(is.na(ADDRESS), "", paste0("<br><b>Address:</b>", ADDRESS)), 
+                                        ifelse(is.na(geo_name_nhood), "", paste0("<br><b>Neighborhood:</b>", geo_name_nhood)),
+                                        ifelse(is.na(MUNIDESC), "", paste0("<br><b>MUNIDESC:</b>", MUNIDESC)),
+                                        ifelse(is.na(OWNERDESC), "", paste0("<br><b>OWNERDESC:</b>", OWNERDESC)),
+                                        ifelse(is.na(CLASSDESC), "", paste0("<br><b>CLASSDESC:</b>", CLASSDESC)),
+                                        ifelse(is.na(USEDESC), "", paste0("<br><b>USEDESC:</b>", USEDESC)),
+                                        ifelse(is.na(SALEDATE), "", paste0("<br><b>Last Sale Date:</b>", SALEDATE)),
+                                        ifelse(is.na(SALEPRICE), "", paste0("<br><b>Last Sale Price:</b>", dollarsComma(SALEPRICE))),
+                                        ifelse(is.na(COUNTYLAND), "", paste0("<br><b>County Land Value:</b>", dollarsComma(COUNTYLAND))),
+                                        ifelse(is.na(COUNTYBUILDING), "", paste0("<br><b>County Building Value:</b>", dollarsComma(COUNTYBUILDING))),
+                                        ifelse(is.na(COUNTYTOTAL), "", paste0("<br><b>County Total Value:</b>", dollarsComma(COUNTYTOTAL))),
+                                        ifelse(is.na(amount), "", paste0("<br><b>Total Lien Amount:</b>", dollarsComma(amount))),
+                                        ifelse(is.na(ADDRESS), "", paste0("<br><b>NUmber of Liens:</b>", owedto)),
                                          #"<br><b>'17 City Taxes</b>", tt_city_ta,
                                          #"<br><b>'17 School Taxes</b>", tt_school_,
                                          #"<br><b>'17 Library Taxes</b>", tt_lib_tax,
                                          #"<br><b>Current Delinquent Taxes</b>", CURRENT_DE,
-                                         "<br><b>Abatement Program:</b>", program_name,
-                                         "<br><b>Abatement Start Year:</b>", start_year,
-                                         "<br><b>Abatement Period:</b>", num_years,
-                                         "<br><b>Abatement Amount:</b>", abatement_amt,
+                                        ifelse(is.na(program_name), "", paste0("<br><b>Abatement Program:</b>", program_name)),
+                                        ifelse(is.na(start_year), "", paste0("<br><b>Abatement Start Year:</b>", start_year)),
+                                        ifelse(is.na(num_years), "", paste0("<br><b>Abatement Length:</b>", num_years)),
+                                        ifelse(is.na(abatement_amt), "", paste0("<br><b>Abatement Amount:</b>", dollarsComma(abatement_amt))),
                                          paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=',pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>')))
-    }
+    } 
     if (nrow(hood_parcel) == 0) {
       if (Sys.Date() >= as.Date(paste0(this_year,"-11-01")) & Sys.Date() <= as.Date(paste0(this_year,"-11-08"))) {
         egg <- load.egg
@@ -289,7 +296,7 @@ server <- shinyServer(function(input, output) {
         setView(-79.9959, 40.4406, zoom = 10)
     }
     map
-  })
+  }) 
   
   ##Data Table
   output$datatable <- DT::renderDataTable({
@@ -311,9 +318,9 @@ server <- shinyServer(function(input, output) {
   rownames = FALSE,
   escape = FALSE
   )  
-})
+}) 
 
 # Run the application 
-shinyApp(ui = ui, server = server)
+shinyApp(ui = ui, server = server) 
 
 

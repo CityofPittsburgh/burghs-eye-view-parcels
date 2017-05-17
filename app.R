@@ -1,6 +1,8 @@
-##Public Parcel Map
-##Created by: Max Cercone
-##Last Update: 5/17/2017
+# Burgh's Eye View Parcels
+# Organization: City of Pittsburgh
+# Dept: Innovation & Performance
+# Team: Analytics & Strategy
+# Author: Max Cercone
 library(httr)
 library(jsonlite)
 library(plyr)
@@ -301,6 +303,9 @@ server <- shinyServer(function(input, output) {
   ##Data Table
   output$datatable <- DT::renderDataTable({
     hood_parcel <- hoodinput()
+    hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "ADDRESS", "geo_name_nhood", "MUNIDESC", "OWNERDESC", "CLASSDESC", "USEDESC",
+                                                            "SALEDATE", "SALEPRICE", "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "amount",
+                                                            "owedto", "program_name", "start_year", "num_years", "abatement_amt"))
     hood_parcel@data
   }, filter = "top",
   extensions = 'Buttons',

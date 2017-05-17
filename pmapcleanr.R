@@ -102,7 +102,7 @@ parcels.hoods$colorval <- ifelse(parcels.hoods$delq == TRUE, "#e41a1c", parcels.
 parcels.final <- subset(parcels.hoods, nhood != "")
 parcels.final$nhood <- as.factor(parcels.final$nhood)
 colnames(parcels.final)[1] <- "pin"
-#parcels.final$pin <- as.factor(parcels.final$pin)
+parcels.final$pin <- as.character(parcels.final$pin)
 
 ##Function that binds geoJSON data to dataframe making each neighborhood a database
 #baseURL <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
@@ -139,12 +139,15 @@ colnames(parcels.final)[1] <- "pin"
 
 ##Creates documents in Neighborhood Parcels' database containing all nhood parcels
 baseURL <- "http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/"
-for (i in levels(parcels.final$nhood)[10:90]){ 
+for (i in levels(parcels.final$nhood)){ 
   r <- GET(paste0(baseURL,i, "/")) 
   f <- content(r, "text", encoding = "ISO-8859-1")
   org <- readOGR(f, "OGRGeoJSON", verbose = F)
   ##Final add data
+  hood <- subset(parcels.final, nhood == i)
+  org$rowname <- 1:nrow(org)
   org@data <- merge(org@data, parcels.final, by = "pin", all.x = TRUE, sort = FALSE)
+  org@data <- org@data[order(org@data$rowname),]
   org <- org["mapblocklo" != "Not Assessed" | "mapblocklo" != "COMMON GROUND",]
   #setwd("./neighborhoodparcels")
   writeOGR(org, i, layer="meuse", driver="GeoJSON")

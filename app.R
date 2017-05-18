@@ -187,10 +187,7 @@ ui <- shinyUI(navbarPage(id = "navbar",
                                                   choices = hood_list,
                                                   selected = "Central Business District",
                                                   multiple = FALSE,
-                                                  selectize = TRUE),
-                                      textInput("search",
-                                                label = NULL,
-                                                placeholder = "Search")
+                                                  selectize = TRUE)
                             ), style = "opacity: 0.88"
                           )
                                   ),

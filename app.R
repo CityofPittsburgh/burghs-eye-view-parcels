@@ -267,7 +267,7 @@ server <- shinyServer(function(input, output) {
                          popup = ~paste("<font color='black'><b>Parcel ID:</b>", pin, 
                                          ifelse(is.na(ADDRESS), "", paste0("<br><b>Address:</b>", ADDRESS)), 
                                         ifelse(is.na(geo_name_nhood), "", paste0("<br><b>Neighborhood:</b>", geo_name_nhood)),
-                                        ifelse(is.na(MUNIDESC), "", paste0("<br><b>MUNIDESC:</b>", MUNIDESC)),
+                                        ifelse(is.na(MUNIDESC), "", paste0("<br><b>Ward:</b>", MUNIDESC)),
                                         ifelse(is.na(OWNERDESC), "", paste0("<br><b>OWNERDESC:</b>", OWNERDESC)),
                                         ifelse(is.na(CLASSDESC), "", paste0("<br><b>CLASSDESC:</b>", CLASSDESC)),
                                         ifelse(is.na(USEDESC), "", paste0("<br><b>USEDESC:</b>", USEDESC)),

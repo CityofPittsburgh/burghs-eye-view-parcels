@@ -1,0 +1,4302 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": "urn:ogc:def:crs:OGC:1.3:CRS84"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": 0,
+      "properties": {
+        "pin": "0008D00020000001",
+        "mapblocklo": "8-D-20-0-1",
+        "shapearea": 7325.266039,
+        "objectid": 546292697,
+        "shapelen": 574.351237,
+        "pk": "75910",
+        "rowname": 1,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 5500,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 11900,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2004-05-05",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "UNION AVE",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "COMM AUX BUILDING",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 1,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 6400,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 UNION AVE",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0029942564693, 40.4513242782922],
+              [-80.0020900028507, 40.4514916439271],
+              [-80.0020647859997, 40.451415272976],
+              [-80.0029693103863, 40.4512500896129],
+              [-80.0029942564693, 40.4513242782922]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "properties": {
+        "pin": "0008D00020000002",
+        "mapblocklo": "8-D-20-0-2",
+        "shapearea": 17559.235848,
+        "objectid": 546292698,
+        "shapelen": 653.925607,
+        "pk": "75911",
+        "rowname": 2,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 109600,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 863000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2004-05-05",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "E COMMONS ST",
+        "PROPERTYHOUSENUM": "412",
+        "USEDESC": "OFFICE-ELEVATOR -3 + STORIES",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 350000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 753400,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "412 E COMMONS ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0029693103863, 40.4512500896129],
+              [-80.0020647859997, 40.451415272976],
+              [-80.002006530235, 40.4512388418285],
+              [-80.0021115071286, 40.4512206635239],
+              [-80.0029064566573, 40.4510631616836],
+              [-80.0029693103863, 40.4512500896129]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "properties": {
+        "pin": "0023S00034000000",
+        "mapblocklo": "23-S-34",
+        "shapearea": 51966.018226,
+        "objectid": 546373918,
+        "shapelen": 915.242334,
+        "pk": "157131",
+        "rowname": 3,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 152300,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 2838800,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1969-11-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "E OHIO ST",
+        "PROPERTYHOUSENUM": "250",
+        "USEDESC": "CHURCHES, PUBLIC WORSHIP",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 2686500,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "250 E OHIO ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.003685379638, 40.4533844700015],
+              [-80.003793090518, 40.4537165662691],
+              [-80.0035358369396, 40.4537633909275],
+              [-80.0034929672458, 40.4537712749727],
+              [-80.0034824839831, 40.4537399705819],
+              [-80.0031882644945, 40.4537919715438],
+              [-80.0029880051431, 40.4538273655059],
+              [-80.0028733127587, 40.4534741017976],
+              [-80.0028487634427, 40.453398287969],
+              [-80.0028032924197, 40.4532594585431],
+              [-80.0027942210534, 40.4532317608607],
+              [-80.0034042244913, 40.4531190508583],
+              [-80.0034430307259, 40.4531104906383],
+              [-80.0034756304976, 40.453104523091],
+              [-80.0035195432409, 40.453100919543],
+              [-80.0035548503826, 40.4531087226244],
+              [-80.0035840893724, 40.4531231861819],
+              [-80.0036053467376, 40.4531407812583],
+              [-80.0036188745196, 40.4531557098499],
+              [-80.003685379638, 40.4533844700015]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "properties": {
+        "pin": "0023S00032000000",
+        "mapblocklo": "23-S-32",
+        "shapearea": 1633.495755,
+        "objectid": 546374350,
+        "shapelen": 306.275412,
+        "pk": "157563",
+        "rowname": 4,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 800,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 800,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "UNION AVE",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 UNION AVE",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0029880051431, 40.4538273655059],
+              [-80.0031882644945, 40.4537919715438],
+              [-80.0034824839831, 40.4537399705819],
+              [-80.0034929672458, 40.4537712749727],
+              [-80.0034410454913, 40.4537803153613],
+              [-80.0029956435641, 40.4538578647702],
+              [-80.0029880051431, 40.4538273655059]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "properties": {
+        "pin": "0023R00340000000",
+        "mapblocklo": "23-R-340",
+        "shapearea": 7176.163197,
+        "objectid": 546374431,
+        "shapelen": 353.357954,
+        "pk": "157644",
+        "rowname": 5,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 66800,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 361900,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1999-03-11",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "SANDUSKY ST",
+        "PROPERTYHOUSENUM": "800",
+        "USEDESC": "CHURCHES, PUBLIC WORSHIP",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 10,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 295100,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "800 SANDUSKY ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0038685034863, 40.4539486481499],
+              [-80.0035252140021, 40.4540125441427],
+              [-80.0034639621306, 40.4538421311574],
+              [-80.0038551347543, 40.4537717637971],
+              [-80.0039190125005, 40.4539421272026],
+              [-80.0038685034863, 40.4539486481499]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "properties": {
+        "pin": "0023S00033000000",
+        "mapblocklo": "23-S-33",
+        "shapearea": 1501.142737,
+        "objectid": 546374432,
+        "shapelen": 275.105755,
+        "pk": "157645",
+        "rowname": 6,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 300,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 300,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "DIAMOND ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 DIAMOND ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.003685379638, 40.4533844700015],
+              [-80.0037258513993, 40.4533720143952],
+              [-80.0037584247654, 40.4534727941927],
+              [-80.0038346164534, 40.4537090071285],
+              [-80.003793090518, 40.4537165662691],
+              [-80.003685379638, 40.4533844700015]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6,
+      "properties": {
+        "pin": "0023R00330000000",
+        "mapblocklo": "23-R-330",
+        "shapearea": 14407.851522,
+        "objectid": 546374517,
+        "shapelen": 490.299768,
+        "pk": "157730",
+        "rowname": 7,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 16600,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 28100,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2004-04-01",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "E COMMONS ",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "PARKING GARAGE/LOTS",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 200000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 11500,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 E COMMONS ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.003986262539, 40.4543424114213],
+              [-80.003644822425, 40.4544057175649],
+              [-80.0035252140021, 40.4540125441427],
+              [-80.0038685034863, 40.4539486481499],
+              [-80.0039062487537, 40.4540777801349],
+              [-80.0039243945753, 40.4541367147964],
+              [-80.0039405886538, 40.4541910647399],
+              [-80.0039582499229, 40.4542489795464],
+              [-80.0039724385319, 40.4542970300181],
+              [-80.003986262539, 40.4543424114213]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "properties": {
+        "pin": "0023R00080000000",
+        "mapblocklo": "23-R-80",
+        "shapearea": 140516.642334,
+        "objectid": 546374527,
+        "shapelen": 1622.454306,
+        "pk": "157740",
+        "rowname": 8,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 659100,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 14507800,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1971-12-18",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "N COMMONS ",
+        "PROPERTYHOUSENUM": "50",
+        "USEDESC": "OWNED BY BOARD OF EDUCATION",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 13848700,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "50 N COMMONS ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0040153869392, 40.4544393221307],
+              [-80.0049891128947, 40.4542523949798],
+              [-80.0050015697571, 40.4542486278444],
+              [-80.0050163801669, 40.4542481801895],
+              [-80.0050416730372, 40.4542520569326],
+              [-80.0050676014532, 40.4542615026107],
+              [-80.0050866464081, 40.4542802610308],
+              [-80.0053003138213, 40.4549054272636],
+              [-80.0034563314259, 40.4552568272728],
+              [-80.003211911279, 40.4544851947696],
+              [-80.0036062373504, 40.4544132260885],
+              [-80.003644822425, 40.4544057175649],
+              [-80.003986262539, 40.4543424114213],
+              [-80.0040153869392, 40.4544393221307]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8,
+      "properties": {
+        "pin": "0023S00019000000",
+        "mapblocklo": "23-S-19",
+        "shapearea": 9102.00584,
+        "objectid": 546380414,
+        "shapelen": 946.449686,
+        "pk": "163627",
+        "rowname": 9,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 14000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 22900,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2007-03-14",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "UNION AVE",
+        "PROPERTYHOUSENUM": "801",
+        "USEDESC": "CHURCHES, PUBLIC WORSHIP",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 1,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 8900,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "801 UNION AVE",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0031833566292, 40.4544160719956],
+              [-80.003574084252, 40.454343400004],
+              [-80.0034174904318, 40.4538522863772],
+              [-80.0030208583095, 40.453923078785],
+              [-80.0029956435641, 40.4538578647702],
+              [-80.0034410454913, 40.4537803153613],
+              [-80.0034639621306, 40.4538421311574],
+              [-80.0035252140021, 40.4540125441427],
+              [-80.003644822425, 40.4544057175649],
+              [-80.0036062373504, 40.4544132260885],
+              [-80.003211911279, 40.4544851947696],
+              [-80.0031833566292, 40.4544160719956]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "properties": {
+        "pin": "0008C00145000000",
+        "mapblocklo": "8-C-145",
+        "shapearea": 24790.384693,
+        "objectid": 546468543,
+        "shapelen": 647.755095,
+        "pk": "251756",
+        "rowname": 10,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 72500,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 72500,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "CHILDRENS WAY",
+        "PROPERTYHOUSENUM": "124",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "124 CHILDRENS WAY",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0057857071132, 40.4524370140476],
+              [-80.0056686211235, 40.4521067039159],
+              [-80.0063716236509, 40.45198074265],
+              [-80.006479241428, 40.4523101156443],
+              [-80.0057857071132, 40.4524370140476]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "properties": {
+        "pin": "0023R00032000000",
+        "mapblocklo": "23-R-32",
+        "shapearea": 41266.937019,
+        "objectid": 546468837,
+        "shapelen": 835.312544,
+        "pk": "252050",
+        "rowname": 11,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 818000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 818000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2014-02-28",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "N COMMONS ",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "VACANT COMMERCIAL LAND",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 44925000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 N COMMONS ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0045186632558, 40.4533919050177],
+              [-80.0047605013648, 40.4541208428274],
+              [-80.0043943859318, 40.4541904528854],
+              [-80.0043720824724, 40.454195350621],
+              [-80.0043501338876, 40.4541974931572],
+              [-80.0043339027714, 40.4541957484158],
+              [-80.0043185863217, 40.4541945172589],
+              [-80.0042991539233, 40.4541911894329],
+              [-80.0042750762138, 40.4541833530072],
+              [-80.0042572372738, 40.4541739062691],
+              [-80.0042411813818, 40.4541640130332],
+              [-80.0042314490196, 40.4541551876404],
+              [-80.0042221844802, 40.4541468795616],
+              [-80.0042120803077, 40.4541403027511],
+              [-80.0042013761466, 40.45412925407],
+              [-80.0039901667215, 40.4534830321738],
+              [-80.0045186632558, 40.4533919050177]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 11,
+      "properties": {
+        "pin": "0023P00078000000",
+        "mapblocklo": "23-P-78",
+        "shapearea": 46411.155753,
+        "objectid": 546469146,
+        "shapelen": 1001.485354,
+        "pk": "252359",
+        "rowname": 12,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 249400,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 8949300,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1936-05-04",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "ARCH ST",
+        "PROPERTYHOUSENUM": "810",
+        "USEDESC": "OWNED BY BOARD OF EDUCATION",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 8699900,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "810 ARCH ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0081340629956, 40.4532095916988],
+              [-80.0084756350131, 40.4531450937451],
+              [-80.0084912873036, 40.4531966152032],
+              [-80.008567168223, 40.453181563344],
+              [-80.0084733693172, 40.4528761999761],
+              [-80.0088680692794, 40.4528016469865],
+              [-80.0090906791206, 40.4534648927025],
+              [-80.0082866025159, 40.4536186792371],
+              [-80.0081542841213, 40.4532632679896],
+              [-80.0081340629956, 40.4532095916988]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 12,
+      "properties": {
+        "pin": "0023S00018000000",
+        "mapblocklo": "23-S-18",
+        "shapearea": 20798.717015,
+        "objectid": 546470028,
+        "shapelen": 594.607909,
+        "pk": "253241",
+        "rowname": 13,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 60100,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 2325900,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2004-04-01",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "UNION AVE",
+        "PROPERTYHOUSENUM": "801",
+        "USEDESC": "OFFICE-ELEVATOR -3 + STORIES",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 2240000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 2265800,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "801 UNION AVE",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.003574084252, 40.454343400004],
+              [-80.0031833566292, 40.4544160719956],
+              [-80.0030208583095, 40.453923078785],
+              [-80.0034174904318, 40.4538522863772],
+              [-80.003574084252, 40.454343400004]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 13,
+      "properties": {
+        "pin": "0008C00155000000",
+        "mapblocklo": "8-C-155",
+        "shapearea": 22894.525187,
+        "objectid": 546471553,
+        "shapelen": 739.834545,
+        "pk": "254766",
+        "rowname": 14,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 349400,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 1950000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2015-01-27",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "ALLEGHENY CTR",
+        "PROPERTYHOUSENUM": "1",
+        "USEDESC": "OFFICE-ELEVATOR -3 + STORIES",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 10,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 1600600,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "1 ALLEGHENY CTR",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0053591058627, 40.4518396881787],
+              [-80.005339521919, 40.4517915145987],
+              [-80.0054109254951, 40.4517769851911],
+              [-80.0055436264059, 40.4517413545774],
+              [-80.0063891375329, 40.45159098936],
+              [-80.0063509869459, 40.4516210995894],
+              [-80.0063166006424, 40.4516549342992],
+              [-80.0063077968442, 40.4516867637159],
+              [-80.0063052650465, 40.4517290212404],
+              [-80.006305486686, 40.4517766875564],
+              [-80.0063130273332, 40.4518006595197],
+              [-80.0063265456127, 40.4518420863413],
+              [-80.0056209860562, 40.4519720548551],
+              [-80.0054247860265, 40.4520033460864],
+              [-80.0053591058627, 40.4518396881787]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 14,
+      "properties": {
+        "pin": "0008C00150000000",
+        "mapblocklo": "8-C-150",
+        "shapearea": 10358.712412,
+        "objectid": 546479198,
+        "shapelen": 505.793643,
+        "pk": "262411",
+        "rowname": 15,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 38500,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 38500,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2011-08-17",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "DIAMOND ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL URBAN RENEWAL",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 1,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 DIAMOND ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0056209860562, 40.4519720548551],
+              [-80.0063265456127, 40.4518420863413],
+              [-80.0063716236509, 40.45198074265],
+              [-80.0056686211235, 40.4521067039159],
+              [-80.0056209860562, 40.4519720548551]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 15,
+      "properties": {
+        "pin": "0023P00060000000",
+        "mapblocklo": "23-P-60",
+        "shapearea": 16944.294481,
+        "objectid": 546482284,
+        "shapelen": 530.220308,
+        "pk": "265497",
+        "rowname": 16,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 108700,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 1583200,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1973-06-27",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "N COMMONS ",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "OWNED BY BOARD OF EDUCATION",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 1474500,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 N COMMONS ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.007568566727, 40.4537565928983],
+              [-80.0081418217378, 40.4536465462583],
+              [-80.0082462173083, 40.4539569227638],
+              [-80.0078055675134, 40.4540404218373],
+              [-80.007568566727, 40.4537565928983]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 16,
+      "properties": {
+        "pin": "0008B00123000000",
+        "mapblocklo": "8-B-123",
+        "shapearea": 19832.612585,
+        "objectid": 546485145,
+        "shapelen": 574.543498,
+        "pk": "268358",
+        "rowname": 17,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 121300,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 4619500,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1963-06-27",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "W COMMONS ST",
+        "PROPERTYHOUSENUM": "711",
+        "USEDESC": "CHURCHES, PUBLIC WORSHIP",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 4498200,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "711 W COMMONS ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.008209119434, 40.4522035630694],
+              [-80.0083668803918, 40.4526614489031],
+              [-80.0079596551045, 40.4527375240285],
+              [-80.0078118283605, 40.4522811639691],
+              [-80.008209119434, 40.4522035630694]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 17,
+      "properties": {
+        "pin": "0008D00200000000",
+        "mapblocklo": "8-D-200",
+        "shapearea": 14034.211248,
+        "objectid": 546485652,
+        "shapelen": 842.927883,
+        "pk": "268865",
+        "rowname": 18,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 15900,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 15900,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2007-07-27",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "S CANAL ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL URBAN RENEWAL",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 1,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 S CANAL ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0027565703355, 40.4504039746659],
+              [-80.0014184858552, 40.450662861776],
+              [-80.0013870599796, 40.4505694268857],
+              [-80.0027286692315, 40.4503024251812],
+              [-80.0027565703355, 40.4504039746659]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 18,
+      "properties": {
+        "pin": "0023P00072000000",
+        "mapblocklo": "23-P-72",
+        "shapearea": 11315.095077,
+        "objectid": 546487950,
+        "shapelen": 425.926697,
+        "pk": "271163",
+        "rowname": 19,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 232600,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 232600,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1965-03-17",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "ARCH ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "OWNED BY BOARD OF EDUCATION",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 ARCH ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0080338471805, 40.4529405765898],
+              [-80.0084302781226, 40.4528639998028],
+              [-80.008435724135, 40.452882754069],
+              [-80.0085100131075, 40.4531385871598],
+              [-80.0084756350131, 40.4531450937451],
+              [-80.0081340629956, 40.4532095916988],
+              [-80.0080338471805, 40.4529405765898]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 19,
+      "properties": {
+        "pin": "0008D00015000000",
+        "mapblocklo": "8-D-15",
+        "shapearea": 48917.565963,
+        "objectid": 546487969,
+        "shapelen": 903.11078,
+        "pk": "271182",
+        "rowname": 20,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 447100,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 484500,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2007-07-27",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "E COMMONS ",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL URBAN RENEWAL",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 1,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 37400,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 E COMMONS ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0019708576729, 40.450816327794],
+              [-80.0019287590357, 40.4506589149173],
+              [-80.0027621806575, 40.4504966373537],
+              [-80.0028187775707, 40.4506442252639],
+              [-80.0027687855789, 40.4506541237743],
+              [-80.0029064566573, 40.4510631616836],
+              [-80.0021115071286, 40.4512206635239],
+              [-80.0019708576729, 40.450816327794]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 20,
+      "properties": {
+        "pin": "0008C00025000000",
+        "mapblocklo": "8-C-25",
+        "shapearea": 88998.610491,
+        "objectid": 546495301,
+        "shapelen": 1193.723384,
+        "pk": "278514",
+        "rowname": 21,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 100000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 1125000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1999-03-08",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "W COMMONS ",
+        "PROPERTYHOUSENUM": "401",
+        "USEDESC": "INDEPENDENT LIVING (SENIORS)",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 250000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 1025000,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "401 W COMMONS ",
+        "amount": 211346.09,
+        "owedto": 3,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0071170913296, 40.4501646047962],
+              [-80.0079541452189, 40.450012571802],
+              [-80.0081853901858, 40.4499684030269],
+              [-80.008435499362, 40.4507416460114],
+              [-80.0082061796532, 40.4507872476561],
+              [-80.0077668954551, 40.4508716848088],
+              [-80.0073771605513, 40.4509465703171],
+              [-80.0073586982888, 40.4508916710847],
+              [-80.0073397024547, 40.4508342180886],
+              [-80.0073212250042, 40.4507787922541],
+              [-80.0073027398276, 40.4507232055977],
+              [-80.0072657811134, 40.4506123063778],
+              [-80.0072507914539, 40.4505672015459],
+              [-80.0072328103166, 40.4505132287897],
+              [-80.0072158125401, 40.4504618223194],
+              [-80.0071978231791, 40.4504076021423],
+              [-80.0071798306171, 40.4503532854431],
+              [-80.0071653547449, 40.450310068197],
+              [-80.0071468583095, 40.4502540487043],
+              [-80.0071170913296, 40.4501646047962]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 21,
+      "properties": {
+        "pin": "0008G00320000000",
+        "mapblocklo": "8-G-320",
+        "shapearea": 48151.684967,
+        "objectid": 546495395,
+        "shapelen": 873.171786,
+        "pk": "278608",
+        "rowname": 22,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 230000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 500000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1964-12-23",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "FEDERAL ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "SMALL DETACHED RET(UNDER 10000)",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 270000,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 FEDERAL ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0048520100916, 40.4496629105725],
+              [-80.0050168512563, 40.4496286693886],
+              [-80.0052530748125, 40.4495852677028],
+              [-80.0057156655006, 40.4495145508974],
+              [-80.0058657931493, 40.4500356128873],
+              [-80.0050572580084, 40.4501893037613],
+              [-80.0049551995185, 40.4499856967194],
+              [-80.0048520100916, 40.4496629105725]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 22,
+      "properties": {
+        "pin": "0008G00250000000",
+        "mapblocklo": "8-G-250",
+        "shapearea": 40269.587849,
+        "objectid": 546495457,
+        "shapelen": 856.777045,
+        "pk": "278670",
+        "rowname": 23,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 367100,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 367100,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2007-07-27",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "W COMMONS ",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "VACANT COMMERCIAL LAND",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 1,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 1,
+        "ADDRESS": "0 W COMMONS ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ffff33"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.007019563934, 40.4498013108993],
+              [-80.0077067671856, 40.4496725969514],
+              [-80.0078318656368, 40.4496491177428],
+              [-80.0079007137573, 40.4496492735892],
+              [-80.0079399796214, 40.4496525329823],
+              [-80.0080032772912, 40.4496577886343],
+              [-80.0080865134757, 40.449672196811],
+              [-80.0080905773671, 40.4496939830245],
+              [-80.0081487927406, 40.4498552597402],
+              [-80.0081853901858, 40.4499684030269],
+              [-80.0079541452189, 40.450012571802],
+              [-80.0071170913296, 40.4501646047962],
+              [-80.0070762709399, 40.4499817602819],
+              [-80.007019563934, 40.4498013108993]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 23,
+      "properties": {
+        "pin": "0008G00206000000",
+        "mapblocklo": "8-G-206",
+        "shapearea": 4365.132528,
+        "objectid": 546503635,
+        "shapelen": 302.411625,
+        "pk": "286848",
+        "rowname": 24,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 6100,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 6100,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2015-07-07",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "FEDERAL ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "VACANT COMMERCIAL LAND",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 10,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 FEDERAL ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.004509683355, 40.4499493081137],
+              [-80.0044496200295, 40.4497625300817],
+              [-80.0045868189518, 40.4497343946495],
+              [-80.0046794341022, 40.4500377127064],
+              [-80.0045449355926, 40.4500589332579],
+              [-80.004509683355, 40.4499493081137]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 24,
+      "properties": {
+        "pin": "0008G00300000000",
+        "mapblocklo": "8-G-300",
+        "shapearea": 78981.634117,
+        "objectid": 546503706,
+        "shapelen": 2056.469094,
+        "pk": "286919",
+        "rowname": 25,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 500000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 578550,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1974-03-25",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "S COMMONS ",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "INDUSTRIAL/UTILITY",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "UTILITIES",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 78550,
+        "PROPERTYFRACTION": {},
+        "delq": 1,
+        "cityown": 0,
+        "ADDRESS": "0 S COMMONS ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#e41a1c"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0057156655006, 40.4495145508974],
+              [-80.0060011310938, 40.4494865211552],
+              [-80.0063860419032, 40.4494684886673],
+              [-80.0065510539726, 40.4494622602158],
+              [-80.0071275346764, 40.4494675331091],
+              [-80.0075694926175, 40.4495084887109],
+              [-80.0078242162542, 40.4495380714108],
+              [-80.0079233490761, 40.4495616799766],
+              [-80.0081454124377, 40.4496144439999],
+              [-80.0083859174921, 40.4496893812232],
+              [-80.008578893739, 40.4497547297803],
+              [-80.008724350981, 40.4498104879],
+              [-80.0088517725446, 40.4498698317992],
+              [-80.0089933956168, 40.449947715147],
+              [-80.0088551141076, 40.4498824477501],
+              [-80.0087626505001, 40.449838289565],
+              [-80.0086350881402, 40.4497881902653],
+              [-80.0084918558241, 40.44973990064],
+              [-80.0083926693405, 40.4497147922737],
+              [-80.0082538668285, 40.4496814426836],
+              [-80.0081607810852, 40.4496622234028],
+              [-80.0080915780681, 40.4496515558254],
+              [-80.0080403202471, 40.4496480492297],
+              [-80.0079399796214, 40.4496525329823],
+              [-80.0079007137573, 40.4496492735892],
+              [-80.0078318656368, 40.4496491177428],
+              [-80.0077067671856, 40.4496725969514],
+              [-80.007019563934, 40.4498013108993],
+              [-80.0058657931493, 40.4500356128873],
+              [-80.0057156655006, 40.4495145508974]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 25,
+      "properties": {
+        "pin": "0008C00518000000",
+        "mapblocklo": "8-C-518",
+        "shapearea": 14998.078024,
+        "objectid": 546504193,
+        "shapelen": 628.615152,
+        "pk": "287406",
+        "rowname": 26,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 14400,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 14400,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "CHILDRENS WAY",
+        "PROPERTYHOUSENUM": "124",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "124 CHILDRENS WAY",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0054989629571, 40.452482423209],
+              [-80.0053090531793, 40.4518791724815],
+              [-80.0053001761275, 40.4518509742152],
+              [-80.0053591058627, 40.4518396881787],
+              [-80.0054247860265, 40.4520033460864],
+              [-80.0056209860562, 40.4519720548551],
+              [-80.0056686211235, 40.4521067039159],
+              [-80.0057857071132, 40.4524370140476],
+              [-80.0054989629571, 40.452482423209]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 26,
+      "properties": {
+        "pin": "0008C00236000S01",
+        "mapblocklo": "8-C-236-S-1",
+        "shapearea": 543759.046814,
+        "objectid": 546504221,
+        "shapelen": 3502.224499,
+        "pk": "287434",
+        "rowname": 27,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 300000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 2300000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2015-01-27",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "S COMMONS ",
+        "PROPERTYHOUSENUM": "100",
+        "USEDESC": "REGIONAL SHOPPING CENTER",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 10,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 2000000,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "100 S COMMONS ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0032736969943, 40.4513907501195],
+              [-80.0031001588787, 40.4508764411791],
+              [-80.0030911898073, 40.4508500052437],
+              [-80.0030956404308, 40.4508218639584],
+              [-80.0031098881803, 40.4507910373314],
+              [-80.003130522753, 40.4507766524675],
+              [-80.0031685923095, 40.4507595294812],
+              [-80.0046240216276, 40.4504816129404],
+              [-80.0048302815946, 40.4504422364756],
+              [-80.0051164545302, 40.450387570349],
+              [-80.0053137870898, 40.4503499909568],
+              [-80.005473166132, 40.4503195140639],
+              [-80.0055691522281, 40.4503011638698],
+              [-80.0056477265639, 40.4502861528976],
+              [-80.0057419274377, 40.4502681833717],
+              [-80.0058481824396, 40.4502479176225],
+              [-80.0059535435086, 40.4502278297399],
+              [-80.0060321153394, 40.4502127487225],
+              [-80.0062432850051, 40.4501724032671],
+              [-80.0065513334713, 40.4501136236762],
+              [-80.0066620528244, 40.4500924928141],
+              [-80.0067129467981, 40.4500827577225],
+              [-80.0067402029532, 40.4500782638414],
+              [-80.0067734115504, 40.4500771152556],
+              [-80.0067992963965, 40.4500852813257],
+              [-80.0068244499744, 40.4500985202048],
+              [-80.0068418441376, 40.4501215878355],
+              [-80.006915790257, 40.4503442093959],
+              [-80.0069362727308, 40.4504057510807],
+              [-80.0069622524032, 40.4504840283027],
+              [-80.0069822220055, 40.4505437036757],
+              [-80.0070062237138, 40.4506165070894],
+              [-80.0070236976544, 40.4506687726185],
+              [-80.0070596534285, 40.4507765305896],
+              [-80.0070961248404, 40.4508862491137],
+              [-80.0071146110777, 40.4509418357784],
+              [-80.0071321305099, 40.450995473408],
+              [-80.0071491169449, 40.4510466275448],
+              [-80.0071690729297, 40.4511058683067],
+              [-80.0071860593232, 40.4511569308449],
+              [-80.0072040781788, 40.4512121153567],
+              [-80.0072195543332, 40.45125830982],
+              [-80.0072380280777, 40.4513135525513],
+              [-80.0072540229402, 40.4513618897949],
+              [-80.007274532122, 40.4514242996832],
+              [-80.0070342831565, 40.4514683947741],
+              [-80.0064751753289, 40.4515707758802],
+              [-80.0063891375329, 40.45159098936],
+              [-80.0055436264059, 40.4517413545774],
+              [-80.0054109254951, 40.4517769851911],
+              [-80.005339521919, 40.4517915145987],
+              [-80.0047821312242, 40.451891539564],
+              [-80.0047472941838, 40.4518978023439],
+              [-80.0046735998159, 40.451911071943],
+              [-80.0045373795404, 40.4519355345058],
+              [-80.0045179166349, 40.451938644298],
+              [-80.0045133597852, 40.4519393707169],
+              [-80.0043729114129, 40.4519618079891],
+              [-80.0042803109166, 40.4519873918679],
+              [-80.004247568564, 40.4519890575166],
+              [-80.0035230940966, 40.4521313028563],
+              [-80.0033091082509, 40.4514958453862],
+              [-80.0032736969943, 40.4513907501195]
+            ],
+            [
+              [-80.0054528592705, 40.4506255720687],
+              [-80.0054411433684, 40.4505902916721],
+              [-80.0054084763752, 40.4505956634864],
+              [-80.0054183813442, 40.4506323998409],
+              [-80.0054528592705, 40.4506255720687]
+            ],
+            [
+              [-80.0060146445005, 40.4508763802281],
+              [-80.0059246033691, 40.4506302369958],
+              [-80.0058676886441, 40.4506407226961],
+              [-80.0058424360963, 40.4505787193939],
+              [-80.0057761225404, 40.4505935546702],
+              [-80.0058818775703, 40.4509018865795],
+              [-80.0060146445005, 40.4508763802281]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 27,
+      "properties": {
+        "pin": "0008C00236000A00",
+        "mapblocklo": "8-C-236-A",
+        "shapearea": 543759.046814,
+        "objectid": 546504244,
+        "shapelen": 3502.224499,
+        "pk": "287457",
+        "rowname": 28,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 4500000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 40000000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2015-01-27",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "S COMMONS ",
+        "PROPERTYHOUSENUM": "100",
+        "USEDESC": "OFFICE-ELEVATOR -3 + STORIES",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 10,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 35500000,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "100 S COMMONS ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0032736969943, 40.4513907501195],
+              [-80.0031001588787, 40.4508764411791],
+              [-80.0030911898073, 40.4508500052437],
+              [-80.0030956404308, 40.4508218639584],
+              [-80.0031098881803, 40.4507910373314],
+              [-80.003130522753, 40.4507766524675],
+              [-80.0031685923095, 40.4507595294812],
+              [-80.0046240216276, 40.4504816129404],
+              [-80.0048302815946, 40.4504422364756],
+              [-80.0051164545302, 40.450387570349],
+              [-80.0053137870898, 40.4503499909568],
+              [-80.005473166132, 40.4503195140639],
+              [-80.0055691522281, 40.4503011638698],
+              [-80.0056477265639, 40.4502861528976],
+              [-80.0057419274377, 40.4502681833717],
+              [-80.0058481824396, 40.4502479176225],
+              [-80.0059535435086, 40.4502278297399],
+              [-80.0060321153394, 40.4502127487225],
+              [-80.0062432850051, 40.4501724032671],
+              [-80.0065513334713, 40.4501136236762],
+              [-80.0066620528244, 40.4500924928141],
+              [-80.0067129467981, 40.4500827577225],
+              [-80.0067402029532, 40.4500782638414],
+              [-80.0067734115504, 40.4500771152556],
+              [-80.0067992963965, 40.4500852813257],
+              [-80.0068244499744, 40.4500985202048],
+              [-80.0068418441376, 40.4501215878355],
+              [-80.006915790257, 40.4503442093959],
+              [-80.0069362727308, 40.4504057510807],
+              [-80.0069622524032, 40.4504840283027],
+              [-80.0069822220055, 40.4505437036757],
+              [-80.0070062237138, 40.4506165070894],
+              [-80.0070236976544, 40.4506687726185],
+              [-80.0070596534285, 40.4507765305896],
+              [-80.0070961248404, 40.4508862491137],
+              [-80.0071146110777, 40.4509418357784],
+              [-80.0071321305099, 40.450995473408],
+              [-80.0071491169449, 40.4510466275448],
+              [-80.0071690729297, 40.4511058683067],
+              [-80.0071860593232, 40.4511569308449],
+              [-80.0072040781788, 40.4512121153567],
+              [-80.0072195543332, 40.45125830982],
+              [-80.0072380280777, 40.4513135525513],
+              [-80.0072540229402, 40.4513618897949],
+              [-80.007274532122, 40.4514242996832],
+              [-80.0070342831565, 40.4514683947741],
+              [-80.0064751753289, 40.4515707758802],
+              [-80.0063891375329, 40.45159098936],
+              [-80.0055436264059, 40.4517413545774],
+              [-80.0054109254951, 40.4517769851911],
+              [-80.005339521919, 40.4517915145987],
+              [-80.0047821312242, 40.451891539564],
+              [-80.0047472941838, 40.4518978023439],
+              [-80.0046735998159, 40.451911071943],
+              [-80.0045373795404, 40.4519355345058],
+              [-80.0045179166349, 40.451938644298],
+              [-80.0045133597852, 40.4519393707169],
+              [-80.0043729114129, 40.4519618079891],
+              [-80.0042803109166, 40.4519873918679],
+              [-80.004247568564, 40.4519890575166],
+              [-80.0035230940966, 40.4521313028563],
+              [-80.0033091082509, 40.4514958453862],
+              [-80.0032736969943, 40.4513907501195]
+            ],
+            [
+              [-80.0054528592705, 40.4506255720687],
+              [-80.0054411433684, 40.4505902916721],
+              [-80.0054084763752, 40.4505956634864],
+              [-80.0054183813442, 40.4506323998409],
+              [-80.0054528592705, 40.4506255720687]
+            ],
+            [
+              [-80.0060146445005, 40.4508763802281],
+              [-80.0059246033691, 40.4506302369958],
+              [-80.0058676886441, 40.4506407226961],
+              [-80.0058424360963, 40.4505787193939],
+              [-80.0057761225404, 40.4505935546702],
+              [-80.0058818775703, 40.4509018865795],
+              [-80.0060146445005, 40.4508763802281]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 28,
+      "properties": {
+        "pin": "0008C00287000000",
+        "mapblocklo": "8-C-287",
+        "shapearea": 48310.145091,
+        "objectid": 546504245,
+        "shapelen": 882.849218,
+        "pk": "287458",
+        "rowname": 29,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 555000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 11040000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2014-02-28",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "ALLEGHENY CTR",
+        "PROPERTYHOUSENUM": "3",
+        "USEDESC": "APART:40+ UNITS",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 44925000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 10485000,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "3 ALLEGHENY CTR",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0046413682975, 40.4521137168065],
+              [-80.0046112204345, 40.4520164965347],
+              [-80.0053090531793, 40.4518791724815],
+              [-80.0054989629571, 40.452482423209],
+              [-80.0055150618, 40.4525335617762],
+              [-80.0048062345132, 40.4526459584081],
+              [-80.0046413682975, 40.4521137168065]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 29,
+      "properties": {
+        "pin": "0008C00514000000",
+        "mapblocklo": "8-C-514",
+        "shapearea": 15525.303251,
+        "objectid": 546518359,
+        "shapelen": 552.935606,
+        "pk": "301572",
+        "rowname": 30,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 410500,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 410500,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "CHILDRENS WAY",
+        "PROPERTYHOUSENUM": "124",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "124 CHILDRENS WAY",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0057857071132, 40.4524370140476],
+              [-80.006479241428, 40.4523101156443],
+              [-80.0065323879334, 40.4524730971942],
+              [-80.0065473362829, 40.4525189383831],
+              [-80.0065045828929, 40.4525267528295],
+              [-80.005856473613, 40.4526452581134],
+              [-80.0057857071132, 40.4524370140476]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 30,
+      "properties": {
+        "pin": "0008B00100000000",
+        "mapblocklo": "8-B-100",
+        "shapearea": 126713.583608,
+        "objectid": 546537329,
+        "shapelen": 1443.19681,
+        "pk": "320542",
+        "rowname": 31,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 280000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 1747200,
+        "HOMESTEADFLAG": "HOM",
+        "SALEDATE": "1969-09-03",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "FOSTER SQ",
+        "PROPERTYHOUSENUM": "1",
+        "USEDESC": "APART:40+ UNITS",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 1467200,
+        "PROPERTYFRACTION": "-50",
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "1 FOSTER SQ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0082061796532, 40.4507872476561],
+              [-80.008435499362, 40.4507416460114],
+              [-80.0087974631135, 40.451860661868],
+              [-80.0085696314406, 40.4519037461614],
+              [-80.0077468929723, 40.4520593273164],
+              [-80.0073771605513, 40.4509465703171],
+              [-80.0077668954551, 40.4508716848088],
+              [-80.0082061796532, 40.4507872476561]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 31,
+      "properties": {
+        "pin": "0023R00030000000",
+        "mapblocklo": "23-R-30",
+        "shapearea": 91051.737838,
+        "objectid": 546554067,
+        "shapelen": 1308.099162,
+        "pk": "337280",
+        "rowname": 32,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 500000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 5777600,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2014-02-28",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "N COMMONS ST",
+        "PROPERTYHOUSENUM": "7",
+        "USEDESC": "APART:40+ UNITS",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 44925000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 5277600,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "7 N COMMONS ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0045186632558, 40.4533919050177],
+              [-80.0049207924204, 40.4533160259374],
+              [-80.0049748030635, 40.4534480419988],
+              [-80.0050504748728, 40.4534344289528],
+              [-80.0059024538945, 40.4532811547641],
+              [-80.0060968235525, 40.4538666044753],
+              [-80.0047605013648, 40.4541208428274],
+              [-80.0045186632558, 40.4533919050177]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 32,
+      "properties": {
+        "pin": "0008C00515000000",
+        "mapblocklo": "8-C-515",
+        "shapearea": 13208.366029,
+        "objectid": 546554184,
+        "shapelen": 534.188805,
+        "pk": "337397",
+        "rowname": 33,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 145600,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 145600,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "DIAMOND ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 DIAMOND ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0055150618, 40.4525335617762],
+              [-80.0055672022977, 40.4526991846667],
+              [-80.0048633649901, 40.4528303925056],
+              [-80.0048062345132, 40.4526459584081],
+              [-80.0055150618, 40.4525335617762]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 33,
+      "properties": {
+        "pin": "0008C00300000000",
+        "mapblocklo": "8-C-300",
+        "shapearea": 45035.43428,
+        "objectid": 546554185,
+        "shapelen": 840.828152,
+        "pk": "337398",
+        "rowname": 34,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 703500,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 3399500,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2006-12-28",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "ALLEGHENY CTR",
+        "PROPERTYHOUSENUM": "4",
+        "USEDESC": "PARKING GARAGE/LOTS",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 14500000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 2696000,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "4 ALLEGHENY CTR",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0045336950654, 40.4526891727132],
+              [-80.0037527418085, 40.4528129988037],
+              [-80.0037515317233, 40.4528092924381],
+              [-80.0037280101377, 40.4527373990885],
+              [-80.0035837654283, 40.4523200903917],
+              [-80.0035763302248, 40.4522992290503],
+              [-80.0035826796913, 40.4522875952351],
+              [-80.0035986496071, 40.4522814481303],
+              [-80.0042742080813, 40.4521543195006],
+              [-80.0043022742027, 40.4521470893494],
+              [-80.0043275625462, 40.4521508733679],
+              [-80.0043499631241, 40.4521623627153],
+              [-80.0043695299799, 40.4521831918822],
+              [-80.0044635401776, 40.4524729473074],
+              [-80.0045236292623, 40.4526581495536],
+              [-80.0045336950654, 40.4526891727132]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 34,
+      "properties": {
+        "pin": "0023R00104000000",
+        "mapblocklo": "23-R-104",
+        "shapearea": 37471.700755,
+        "objectid": 546554352,
+        "shapelen": 810.210488,
+        "pk": "337565",
+        "rowname": 35,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 198200,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 4013000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "CHILDRENS WAY",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 3814800,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 CHILDRENS WAY",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0067341441749, 40.453052832663],
+              [-80.0060372199079, 40.4531854996591],
+              [-80.005856473613, 40.4526452581134],
+              [-80.0065045828929, 40.4525267528295],
+              [-80.0066297622797, 40.4529726432606],
+              [-80.0067008835794, 40.4529594934076],
+              [-80.0067341441749, 40.453052832663]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 35,
+      "properties": {
+        "pin": "0023R00500000000",
+        "mapblocklo": "23-R-500",
+        "shapearea": 34979.134874,
+        "objectid": 546554408,
+        "shapelen": 1591.282022,
+        "pk": "337621",
+        "rowname": 36,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 70800,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 70800,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1970-03-30",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "CHILDRENS WAY",
+        "PROPERTYHOUSENUM": "124",
+        "USEDESC": "PUBLIC PARK",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "124 CHILDRENS WAY",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0057563001227, 40.4532389743298],
+              [-80.0055672022977, 40.4526991846667],
+              [-80.0055150618, 40.4525335617762],
+              [-80.0054989629571, 40.452482423209],
+              [-80.0057857071132, 40.4524370140476],
+              [-80.005856473613, 40.4526452581134],
+              [-80.0060372199079, 40.4531854996591],
+              [-80.0067341441749, 40.453052832663],
+              [-80.0067583253523, 40.4531206919654],
+              [-80.0059024538945, 40.4532811547641],
+              [-80.0050504748728, 40.4534344289528],
+              [-80.0050326016908, 40.4533767310867],
+              [-80.0057563001227, 40.4532389743298]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 36,
+      "properties": {
+        "pin": "0023R00157000000",
+        "mapblocklo": "23-R-157",
+        "shapearea": 41740.473652,
+        "objectid": 546555244,
+        "shapelen": 817.269901,
+        "pk": "338457",
+        "rowname": 37,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 210000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 8041900,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "ALLEGHENY SQ",
+        "PROPERTYHOUSENUM": "5",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 7831900,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "5 ALLEGHENY SQ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0048633649901, 40.4528303925056],
+              [-80.0055672022977, 40.4526991846667],
+              [-80.0057563001227, 40.4532389743298],
+              [-80.0050326016908, 40.4533767310867],
+              [-80.0048633649901, 40.4528303925056]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 37,
+      "properties": {
+        "pin": "0023R00510000000",
+        "mapblocklo": "23-R-510",
+        "shapearea": 3639.405187,
+        "objectid": 546555261,
+        "shapelen": 301.958302,
+        "pk": "338474",
+        "rowname": 38,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 20000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 23100,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1984-02-07",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "FEDERAL ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL URBAN RENEWAL",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 3100,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 FEDERAL ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0058196063338, 40.4548053054867],
+              [-80.0062406639162, 40.4547279729124],
+              [-80.0062670671703, 40.4548081337142],
+              [-80.0058435418756, 40.4548859194553],
+              [-80.0058196063338, 40.4548053054867]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 38,
+      "properties": {
+        "pin": "0008C00273000000",
+        "mapblocklo": "8-C-273",
+        "shapearea": 5404.223285,
+        "objectid": 546555262,
+        "shapelen": 630.86291,
+        "pk": "338475",
+        "rowname": 39,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 14900,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 14900,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2015-01-27",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "DIAMOND ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "VACANT COMMERCIAL LAND",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 10,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 DIAMOND ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0042803109166, 40.4519873918679],
+              [-80.0043729114129, 40.4519618079891],
+              [-80.0045133597852, 40.4519393707169],
+              [-80.0045179166349, 40.451938644298],
+              [-80.0045373795404, 40.4519355345058],
+              [-80.0046735998159, 40.451911071943],
+              [-80.0047472941838, 40.4518978023439],
+              [-80.0047821312242, 40.451891539564],
+              [-80.005339521919, 40.4517915145987],
+              [-80.0053591058627, 40.4518396881787],
+              [-80.0053001761275, 40.4518509742152],
+              [-80.0045155079898, 40.4520017560452],
+              [-80.0044695810112, 40.4519890916567],
+              [-80.0044225871977, 40.4519812650619],
+              [-80.0043750347016, 40.451978360891],
+              [-80.0043274377164, 40.4519804105475],
+              [-80.0042803109166, 40.4519873918679]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 39,
+      "properties": {
+        "pin": "0023R00050000001",
+        "mapblocklo": "23-R-50-0-1",
+        "shapearea": 33220.839471,
+        "objectid": 546555299,
+        "shapelen": 745.312094,
+        "pk": "338512",
+        "rowname": 40,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 523100,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 20000000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2006-12-28",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "ALLEGHENY CTR",
+        "PROPERTYHOUSENUM": "4",
+        "USEDESC": "OFFICE-ELEVATOR -3 + STORIES",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 14500000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 19476900,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "4 ALLEGHENY CTR",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0038006927864, 40.452954638452],
+              [-80.0045979847353, 40.4528210886426],
+              [-80.0047190754625, 40.4532041804367],
+              [-80.0039450759007, 40.4533572864248],
+              [-80.0038006927864, 40.452954638452]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 40,
+      "properties": {
+        "pin": "0023R00003000000",
+        "mapblocklo": "23-R-3",
+        "shapearea": 38070.349079,
+        "objectid": 546560894,
+        "shapelen": 805.838353,
+        "pk": "344107",
+        "rowname": 41,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 184000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 184000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2014-02-28",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "ALLLEGHENY CTR",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "COMM AUX BUILDING",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 44925000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 ALLLEGHENY CTR",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0072247642651, 40.4528908204645],
+              [-80.0073862310861, 40.4528595543718],
+              [-80.0074883900736, 40.4528397721122],
+              [-80.0076984178352, 40.4527991018528],
+              [-80.007929938985, 40.4534068213819],
+              [-80.0079330370288, 40.4534188653383],
+              [-80.0079365514322, 40.4534298709537],
+              [-80.0079372971743, 40.4534386893217],
+              [-80.0079375529245, 40.4534463288058],
+              [-80.0079309168995, 40.453462841547],
+              [-80.0079206262162, 40.4534776169265],
+              [-80.0079058088882, 40.453491292732],
+              [-80.007886567094, 40.4535071162892],
+              [-80.0078628521201, 40.4535234552704],
+              [-80.0078425128628, 40.4535333058328],
+              [-80.0078260293069, 40.4535375654745],
+              [-80.0074478648403, 40.4536094802131],
+              [-80.0072247642651, 40.4528908204645]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 41,
+      "properties": {
+        "pin": "0008C00128000000",
+        "mapblocklo": "8-C-128",
+        "shapearea": 53896.517051,
+        "objectid": 546631327,
+        "shapelen": 917.727878,
+        "pk": "414540",
+        "rowname": 42,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 600000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 16100000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2014-02-28",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "ALLEGHENY CTR",
+        "PROPERTYHOUSENUM": "10",
+        "USEDESC": "APART:40+ UNITS",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 44925000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 15500000,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "10 ALLEGHENY CTR",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0067128660171, 40.4523229693866],
+              [-80.0066260797985, 40.4520708693589],
+              [-80.0065207629521, 40.4517649341075],
+              [-80.0065173808529, 40.4517444962114],
+              [-80.0065241537628, 40.4517186215025],
+              [-80.0065362580092, 40.4517043132427],
+              [-80.0065614391665, 40.451691534843],
+              [-80.0072746386455, 40.4515482997172],
+              [-80.0072788314923, 40.4515484749271],
+              [-80.0072984862807, 40.4515492962906],
+              [-80.0073032552079, 40.4515575332271],
+              [-80.007331908685, 40.4516351401124],
+              [-80.007407768616, 40.4518654183444],
+              [-80.0074734438199, 40.4520647783962],
+              [-80.0075099523461, 40.4521756001843],
+              [-80.0067128660171, 40.4523229693866]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 42,
+      "properties": {
+        "pin": "0008G00203000000",
+        "mapblocklo": "8-G-203",
+        "shapearea": 15934.823008,
+        "objectid": 546631390,
+        "shapelen": 1042.774176,
+        "pk": "414603",
+        "rowname": 43,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 28400,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 28400,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2015-07-07",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "FEDERAL ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "VACANT COMMERCIAL LAND",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 10,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 FEDERAL ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0029743289347, 40.4503617973504],
+              [-80.0045165893941, 40.4500634043524],
+              [-80.0045449355926, 40.4500589332579],
+              [-80.0046794341022, 40.4500377127064],
+              [-80.0047066672881, 40.4501179533424],
+              [-80.0029988629994, 40.4504505461792],
+              [-80.0029743289347, 40.4503617973504]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 43,
+      "properties": {
+        "pin": "0008C00135000000",
+        "mapblocklo": "8-C-135",
+        "shapearea": 47841.654278,
+        "objectid": 546631455,
+        "shapelen": 978.426306,
+        "pk": "414668",
+        "rowname": 44,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 242500,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 4869400,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2003-10-01",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "CHILDRENS WAY",
+        "PROPERTYHOUSENUM": "10",
+        "USEDESC": "CHARITABLE EXEMPTION/HOS/HOMES",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 1,
+        "CLASSDESC": "OTHER",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 4626900,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "10 CHILDRENS WAY",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0071632914658, 40.4523321126131],
+              [-80.007539767832, 40.4522609181308],
+              [-80.0076696325647, 40.4526506083229],
+              [-80.007664830253, 40.4526682074869],
+              [-80.0076570200243, 40.4526765060292],
+              [-80.0074514215307, 40.4527165990924],
+              [-80.0073440939586, 40.4527375360552],
+              [-80.0069548319216, 40.4528134417739],
+              [-80.0069317041109, 40.4528205063083],
+              [-80.0069411221745, 40.4528468434232],
+              [-80.0066854454739, 40.452916157966],
+              [-80.0067008835794, 40.4529594934076],
+              [-80.0066297622797, 40.4529726432606],
+              [-80.0065045828929, 40.4525267528295],
+              [-80.0065473362829, 40.4525189383831],
+              [-80.0065323879334, 40.4524730971942],
+              [-80.0067373351345, 40.4524321202199],
+              [-80.0071669459658, 40.4523446494889],
+              [-80.0071632914658, 40.4523321126131]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 44,
+      "properties": {
+        "pin": "0008C00130000000",
+        "mapblocklo": "8-C-130",
+        "shapearea": 1195.703904,
+        "objectid": 546631456,
+        "shapelen": 158.965495,
+        "pk": "414669",
+        "rowname": 45,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 1700,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 1700,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1962-08-31",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "ARCH ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL URBAN RENEWAL",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 ARCH ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0074514215307, 40.4527165990924],
+              [-80.0076570200243, 40.4526765060292],
+              [-80.0076751103779, 40.45273007892],
+              [-80.0074676116387, 40.4527705424029],
+              [-80.0074514215307, 40.4527165990924]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 45,
+      "properties": {
+        "pin": "0023R00005000000",
+        "mapblocklo": "23-R-5",
+        "shapearea": 90969.489342,
+        "objectid": 546631699,
+        "shapelen": 1314.652052,
+        "pk": "414912",
+        "rowname": 46,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 600000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 7360000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2014-02-28",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "ALLEGHENY CTR",
+        "PROPERTYHOUSENUM": "8",
+        "USEDESC": "APART:40+ UNITS",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 44925000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 6760000,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "8 ALLEGHENY CTR",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0059024538945, 40.4532811547641],
+              [-80.0067583253523, 40.4531206919654],
+              [-80.0068660370498, 40.453100497139],
+              [-80.0068276462612, 40.4529737450858],
+              [-80.0072247642651, 40.4528908204645],
+              [-80.0074478648403, 40.4536094802131],
+              [-80.0060968235525, 40.4538666044753],
+              [-80.0059024538945, 40.4532811547641]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 46,
+      "properties": {
+        "pin": "0008C00600000000",
+        "mapblocklo": "8-C-600",
+        "shapearea": 1760.046256,
+        "objectid": 546631719,
+        "shapelen": 471.744485,
+        "pk": "414932",
+        "rowname": 47,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 312400,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 312400,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "W COMMONS ",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 W COMMONS ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0075099523461, 40.4521756001843],
+              [-80.0075175313424, 40.4521959864608],
+              [-80.0067210134771, 40.4523432507497],
+              [-80.0067128660171, 40.4523229693866],
+              [-80.0075099523461, 40.4521756001843]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 47,
+      "properties": {
+        "pin": "0008B00500000000",
+        "mapblocklo": "8-B-500",
+        "shapearea": 9400.1422,
+        "objectid": 546631725,
+        "shapelen": 546.374058,
+        "pk": "414938",
+        "rowname": 48,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 73500,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 84900,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1967-04-13",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "SHERMAN AVE",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "COMM AUX BUILDING",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 11400,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 SHERMAN AVE",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0089878674045, 40.4527121392613],
+              [-80.0088466009492, 40.4527375412079],
+              [-80.0086372075188, 40.4521199376657],
+              [-80.0087777752478, 40.4520924778531],
+              [-80.0089878674045, 40.4527121392613]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 48,
+      "properties": {
+        "pin": "0008C00188000000",
+        "mapblocklo": "8-C-188",
+        "shapearea": 3939.818253,
+        "objectid": 546631734,
+        "shapelen": 306.501771,
+        "pk": "414947",
+        "rowname": 49,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 3900,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 3900,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "W PARK WAY",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL URBAN RENEWAL",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 W PARK WAY",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0060146445005, 40.4508763802281],
+              [-80.0058818775703, 40.4509018865795],
+              [-80.0057761225404, 40.4505935546702],
+              [-80.0058424360963, 40.4505787193939],
+              [-80.0058676886441, 40.4506407226961],
+              [-80.0059246033691, 40.4506302369958],
+              [-80.0060146445005, 40.4508763802281]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 49,
+      "properties": {
+        "pin": "0008G00208000900",
+        "mapblocklo": "8-G-208-9",
+        "shapearea": 448201.424516,
+        "objectid": 546631771,
+        "shapelen": 11520.65779,
+        "pk": "414984",
+        "rowname": 50,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 39900,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 39900,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1977-12-31",
+        "TAXDESC": "12 - Public Utility Realty Tax - PURTA",
+        "PROPERTYADDRESS": "FEDERAL ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "R.R. - USED IN OPERATION",
+        "OWNERDESC": "CORPORATION-RAILROAD",
+        "SALEPRICE": 0,
+        "CLASSDESC": "UTILITIES",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 FEDERAL ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0013870599796, 40.4505694268857],
+              [-80.0012944471177, 40.4502931212317],
+              [-80.0012478435315, 40.4501540770434],
+              [-80.0016836095748, 40.4500717945816],
+              [-80.0016775565011, 40.450052483248],
+              [-80.002568680261, 40.4498716263607],
+              [-80.0025657411422, 40.4498614282886],
+              [-80.0027852042422, 40.4498272924034],
+              [-80.00279182345, 40.4498372083436],
+              [-80.0045101643458, 40.4494986073669],
+              [-80.0045511471581, 40.4496295455782],
+              [-80.0045868189518, 40.4497343946495],
+              [-80.0044496200295, 40.4497625300817],
+              [-80.004509683355, 40.4499493081137],
+              [-80.0044792565228, 40.4499546405061],
+              [-80.0029430372152, 40.4502601072393],
+              [-80.0029743289347, 40.4503617973504],
+              [-80.0027565703355, 40.4504039746659],
+              [-80.0027286692315, 40.4503024251812],
+              [-80.0013870599796, 40.4505694268857]
+            ]
+          ],
+          [
+            [
+              [-80.0101584723911, 40.451132979274],
+              [-80.0099547229129, 40.4508867635498],
+              [-80.009907693538, 40.4508957942214],
+              [-80.0098714827135, 40.4509027465388],
+              [-80.0097045282852, 40.450661333788],
+              [-80.0096393028889, 40.4505860607798],
+              [-80.0095075034915, 40.4504339762143],
+              [-80.0094351796576, 40.4503520761442],
+              [-80.0093535125906, 40.4502729659416],
+              [-80.0092011263529, 40.4501527002992],
+              [-80.0091195531183, 40.4500906595386],
+              [-80.0090927306165, 40.450071998023],
+              [-80.0090406483952, 40.4500379690244],
+              [-80.0089815560828, 40.4499952635739],
+              [-80.0089098951179, 40.4499552237416],
+              [-80.0088736200361, 40.4499358931073],
+              [-80.0088551141076, 40.4498824477501],
+              [-80.0089933956168, 40.449947715147],
+              [-80.0088517725446, 40.4498698317992],
+              [-80.008724350981, 40.4498104879],
+              [-80.008578893739, 40.4497547297803],
+              [-80.0083859174921, 40.4496893812232],
+              [-80.0081454124377, 40.4496144439999],
+              [-80.0079233490761, 40.4495616799766],
+              [-80.0078242162542, 40.4495380714108],
+              [-80.0075694926175, 40.4495084887109],
+              [-80.0071275346764, 40.4494675331091],
+              [-80.0065510539726, 40.4494622602158],
+              [-80.0063860419032, 40.4494684886673],
+              [-80.0060011310938, 40.4494865211552],
+              [-80.0057156655006, 40.4495145508974],
+              [-80.0052530748125, 40.4495852677028],
+              [-80.0050168512563, 40.4496286693886],
+              [-80.0048520100916, 40.4496629105725],
+              [-80.0048283906715, 40.4495926739031],
+              [-80.0047735079161, 40.4494294253115],
+              [-80.0048092060658, 40.4494220252555],
+              [-80.0051297251128, 40.4493600737323],
+              [-80.0052500228444, 40.4493433111645],
+              [-80.0055281876556, 40.4493045888257],
+              [-80.0057301170688, 40.449283576823],
+              [-80.0059011452171, 40.4492656642591],
+              [-80.0061804616804, 40.4492479228389],
+              [-80.0064862900237, 40.449243852046],
+              [-80.0069582223137, 40.4492625300542],
+              [-80.0073659327508, 40.4493222536628],
+              [-80.0073462117437, 40.4492431899883],
+              [-80.0075758648744, 40.449204978075],
+              [-80.0076093936732, 40.4493072006027],
+              [-80.0081529464778, 40.4494253869848],
+              [-80.0084852755453, 40.4493672490675],
+              [-80.0087598823314, 40.4495615469379],
+              [-80.008772571504, 40.4496065954418],
+              [-80.0088206531092, 40.4496300537862],
+              [-80.0089183116689, 40.4496725251707],
+              [-80.0090625851879, 40.449758099963],
+              [-80.0091759034359, 40.4498360430057],
+              [-80.0092526302806, 40.4498846216139],
+              [-80.0093418653733, 40.4499590092136],
+              [-80.0093801148491, 40.4499953534974],
+              [-80.0095504472699, 40.4500840883851],
+              [-80.0095674858496, 40.4501876190133],
+              [-80.0096736003622, 40.4502633667735],
+              [-80.0098101820567, 40.4503919244951],
+              [-80.0099592360232, 40.450570013283],
+              [-80.010138081138, 40.4508174451402],
+              [-80.0103515962779, 40.4510840818883],
+              [-80.0103598487705, 40.4510943091795],
+              [-80.0101584723911, 40.451132979274]
+            ]
+          ],
+          [
+            [
+              [-80.0106349496377, 40.4517343957335],
+              [-80.0108945540875, 40.4516913791085],
+              [-80.0109365200412, 40.451736987823],
+              [-80.011127586704, 40.4519144768601],
+              [-80.0113113751521, 40.4520357276742],
+              [-80.0114693035124, 40.4521361359489],
+              [-80.0115562068291, 40.4521973416982],
+              [-80.0116096574218, 40.4522349875567],
+              [-80.0118699469473, 40.4523730911149],
+              [-80.0121193313157, 40.45250749665],
+              [-80.0125830798771, 40.4527234897992],
+              [-80.0126109558674, 40.4527374513512],
+              [-80.0127234929167, 40.4527943637032],
+              [-80.0135387928267, 40.4532066783633],
+              [-80.0135450169571, 40.4532098230279],
+              [-80.0143085306857, 40.453595936303],
+              [-80.014391763239, 40.4538534499137],
+              [-80.0131505313358, 40.4532179738465],
+              [-80.0131476190456, 40.4532164819312],
+              [-80.012211963979, 40.4527374364998],
+              [-80.0121854842964, 40.4527249125781],
+              [-80.0118334725971, 40.4525582144684],
+              [-80.0116155379645, 40.4524370386179],
+              [-80.0114152354142, 40.452318798901],
+              [-80.0113666324135, 40.452290107344],
+              [-80.0111450495103, 40.4521539656011],
+              [-80.0109465161271, 40.452021767714],
+              [-80.0106530822095, 40.4517525771049],
+              [-80.0106349496377, 40.4517343957335]
+            ]
+          ],
+          [
+            [
+              [-80.0147734171862, 40.4540414706094],
+              [-80.0150764518939, 40.4539842268516],
+              [-80.015524055037, 40.4542063076198],
+              [-80.0159757242421, 40.4544070793291],
+              [-80.0159931966596, 40.4544150165441],
+              [-80.016184726044, 40.4545168742026],
+              [-80.016447255511, 40.4546242306743],
+              [-80.0164830702, 40.4546336404822],
+              [-80.0165848812464, 40.4546548250657],
+              [-80.01668330904, 40.4546688431326],
+              [-80.0168205481249, 40.4546747343139],
+              [-80.0166115737948, 40.4547166265621],
+              [-80.0166811715477, 40.4547463638686],
+              [-80.0170813694065, 40.4549568721541],
+              [-80.017479401934, 40.4551570496499],
+              [-80.017483826952, 40.4551991347758],
+              [-80.0180614347486, 40.4555000652049],
+              [-80.0177624385046, 40.4555596569945],
+              [-80.0161373247108, 40.4547343062164],
+              [-80.0147734171862, 40.4540414706094]
+            ]
+          ],
+          [
+            [
+              [-80.0102517322878, 40.4512815522605],
+              [-80.0104819656087, 40.4512452572519],
+              [-80.010502130784, 40.4512704471105],
+              [-80.0106648193431, 40.451472769814],
+              [-80.0106954090422, 40.451500659093],
+              [-80.0104643846315, 40.4515402220302],
+              [-80.0104602036885, 40.4515361163141],
+              [-80.0102517322878, 40.4512815522605]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 50,
+      "properties": {
+        "pin": "0008C00210000000",
+        "mapblocklo": "8-C-210",
+        "shapearea": 129.248986,
+        "objectid": 546636988,
+        "shapelen": 46.135687,
+        "pk": "420201",
+        "rowname": 51,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 200,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 200,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1966-04-20",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "SLUSH WAY",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL URBAN RENEWAL",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 SLUSH WAY",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0054183813442, 40.4506323998409],
+              [-80.0054084763752, 40.4505956634864],
+              [-80.0054411433684, 40.4505902916721],
+              [-80.0054528592705, 40.4506255720687],
+              [-80.0054183813442, 40.4506323998409]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 51,
+      "properties": {
+        "pin": "0008G00207000000",
+        "mapblocklo": "8-G-207",
+        "shapearea": 17815.140275,
+        "objectid": 546636989,
+        "shapelen": 980.470361,
+        "pk": "420202",
+        "rowname": 52,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 241000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 249000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2015-07-07",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "FEDERAL ST",
+        "PROPERTYHOUSENUM": "320",
+        "USEDESC": "PARKING GARAGE/LOTS",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 10,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 8000,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "320 FEDERAL ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0045449355926, 40.4500589332579],
+              [-80.0045165893941, 40.4500634043524],
+              [-80.0029743289347, 40.4503617973504],
+              [-80.0029430372152, 40.4502601072393],
+              [-80.0044792565228, 40.4499546405061],
+              [-80.004509683355, 40.4499493081137],
+              [-80.0045449355926, 40.4500589332579]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 52,
+      "properties": {
+        "pin": "0008B00128000001",
+        "mapblocklo": "8-B-128-0-1",
+        "shapearea": 33645.946145,
+        "objectid": 546645974,
+        "shapelen": 940.207238,
+        "pk": "429187",
+        "rowname": 53,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 26900,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 144192,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1924-08-26",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "ARCH ST",
+        "PROPERTYHOUSENUM": "720",
+        "USEDESC": "CHURCHES, PUBLIC WORSHIP",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 117292,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "720 ARCH ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0088466009492, 40.4527375412079],
+              [-80.0080140909402, 40.4528872349011],
+              [-80.0079696495957, 40.4527677167107],
+              [-80.008380343553, 40.4526909933785],
+              [-80.0083668803918, 40.4526614489031],
+              [-80.008209119434, 40.4522035630694],
+              [-80.0086372075188, 40.4521199376657],
+              [-80.0088466009492, 40.4527375412079]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 53,
+      "properties": {
+        "pin": "0008C00116000000",
+        "mapblocklo": "8-C-116",
+        "shapearea": 1329.232037,
+        "objectid": 546649447,
+        "shapelen": 257.070505,
+        "pk": "432660",
+        "rowname": 54,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 900,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 900,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "W COMMONS ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 W COMMONS ST",
+        "amount": 102.6,
+        "owedto": 5,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.008380343553, 40.4526909933785],
+              [-80.0079696495957, 40.4527677167107],
+              [-80.0079596551045, 40.4527375240285],
+              [-80.0083668803918, 40.4526614489031],
+              [-80.008380343553, 40.4526909933785]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 54,
+      "properties": {
+        "pin": "0023R00037000000",
+        "mapblocklo": "23-R-37",
+        "shapearea": 6589.021534,
+        "objectid": 546658390,
+        "shapelen": 591.412667,
+        "pk": "441603",
+        "rowname": 55,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 20500,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 20500,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1974-02-15",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "ERIE ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 ERIE ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0082551949517, 40.4539836125427],
+              [-80.0076322823138, 40.4541116983452],
+              [-80.0074890864469, 40.4537718508695],
+              [-80.007568566727, 40.4537565928983],
+              [-80.0078055675134, 40.4540404218373],
+              [-80.0082462173083, 40.4539569227638],
+              [-80.0082551949517, 40.4539836125427]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 55,
+      "properties": {
+        "pin": "0008G00300000001",
+        "mapblocklo": "8-G-300-0-1",
+        "shapearea": 78981.634117,
+        "objectid": 546658491,
+        "shapelen": 2056.469094,
+        "pk": "441704",
+        "rowname": 56,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 100900,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 1074450,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1980-06-11",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "S COMMONS ",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "INDUSTRIAL/UTILITY",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "UTILITIES",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 973550,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 S COMMONS ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0057156655006, 40.4495145508974],
+              [-80.0060011310938, 40.4494865211552],
+              [-80.0063860419032, 40.4494684886673],
+              [-80.0065510539726, 40.4494622602158],
+              [-80.0071275346764, 40.4494675331091],
+              [-80.0075694926175, 40.4495084887109],
+              [-80.0078242162542, 40.4495380714108],
+              [-80.0079233490761, 40.4495616799766],
+              [-80.0081454124377, 40.4496144439999],
+              [-80.0083859174921, 40.4496893812232],
+              [-80.008578893739, 40.4497547297803],
+              [-80.008724350981, 40.4498104879],
+              [-80.0088517725446, 40.4498698317992],
+              [-80.0089933956168, 40.449947715147],
+              [-80.0088551141076, 40.4498824477501],
+              [-80.0087626505001, 40.449838289565],
+              [-80.0086350881402, 40.4497881902653],
+              [-80.0084918558241, 40.44973990064],
+              [-80.0083926693405, 40.4497147922737],
+              [-80.0082538668285, 40.4496814426836],
+              [-80.0081607810852, 40.4496622234028],
+              [-80.0080915780681, 40.4496515558254],
+              [-80.0080403202471, 40.4496480492297],
+              [-80.0079399796214, 40.4496525329823],
+              [-80.0079007137573, 40.4496492735892],
+              [-80.0078318656368, 40.4496491177428],
+              [-80.0077067671856, 40.4496725969514],
+              [-80.007019563934, 40.4498013108993],
+              [-80.0058657931493, 40.4500356128873],
+              [-80.0057156655006, 40.4495145508974]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 56,
+      "properties": {
+        "pin": "0008B00128000002",
+        "mapblocklo": "8-B-128-0-2",
+        "shapearea": 33645.946145,
+        "objectid": 546661428,
+        "shapelen": 940.207238,
+        "pk": "444641",
+        "rowname": 57,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 70700,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 1057408,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1924-08-26",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "ARCH ST",
+        "PROPERTYHOUSENUM": "720",
+        "USEDESC": "CHURCHES, PUBLIC WORSHIP",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 986708,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "720 ARCH ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0088466009492, 40.4527375412079],
+              [-80.0080140909402, 40.4528872349011],
+              [-80.0079696495957, 40.4527677167107],
+              [-80.008380343553, 40.4526909933785],
+              [-80.0083668803918, 40.4526614489031],
+              [-80.008209119434, 40.4522035630694],
+              [-80.0086372075188, 40.4521199376657],
+              [-80.0088466009492, 40.4527375412079]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 57,
+      "properties": {
+        "pin": "0023R00220000000",
+        "mapblocklo": "23-R-220",
+        "shapearea": 124324.33487,
+        "objectid": 546673796,
+        "shapelen": 1614.26184,
+        "pk": "457009",
+        "rowname": 58,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 548800,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 548800,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1974-01-18",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "N COMMONS ",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 N COMMONS ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0065234689722, 40.4546661629627],
+              [-80.0063032776106, 40.4540042703903],
+              [-80.0074890864469, 40.4537718508695],
+              [-80.0076322823138, 40.4541116983452],
+              [-80.0082551949517, 40.4539836125427],
+              [-80.0083665210474, 40.4543145868999],
+              [-80.0082620530734, 40.4543348031466],
+              [-80.0082875429159, 40.4544148467123],
+              [-80.0065526863863, 40.4547525402369],
+              [-80.0065234689722, 40.4546661629627]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 58,
+      "properties": {
+        "pin": "0008D00050000000",
+        "mapblocklo": "8-D-50",
+        "shapearea": 149871.666549,
+        "objectid": 546673923,
+        "shapelen": 1662.891836,
+        "pk": "457136",
+        "rowname": 59,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 624000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 4220000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2003-07-01",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "E OHIO ST",
+        "PROPERTYHOUSENUM": "255",
+        "USEDESC": "HUD PROJ #236",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 167333,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 3596000,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "255 E OHIO ST",
+        "amount": 83915.93,
+        "owedto": 2,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0020900028507, 40.4514916439271],
+              [-80.0029942564693, 40.4513242782922],
+              [-80.0034692048747, 40.4527373863747],
+              [-80.0034791827296, 40.452767052838],
+              [-80.003483983021, 40.452816568278],
+              [-80.0034788614302, 40.4528381106527],
+              [-80.0034683308281, 40.4528590910303],
+              [-80.0034552202622, 40.4528701492987],
+              [-80.0034281803458, 40.4528811549376],
+              [-80.0026025516585, 40.4530270822008],
+              [-80.0020900028507, 40.4514916439271]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 59,
+      "properties": {
+        "pin": "0023P00501000000",
+        "mapblocklo": "23-P-501",
+        "shapearea": 7553.06254,
+        "objectid": 546676747,
+        "shapelen": 562.629787,
+        "pk": "459960",
+        "rowname": 60,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 2300,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 2300,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2015-01-27",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "DIAMOND ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "VACANT COMMERCIAL LAND",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 1,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 DIAMOND ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0081607067731, 40.4536429202605],
+              [-80.0082456837449, 40.4536265582263],
+              [-80.0084721264394, 40.4542941451929],
+              [-80.0083843761951, 40.4543111324403],
+              [-80.0083665210474, 40.4543145868999],
+              [-80.0082551949517, 40.4539836125427],
+              [-80.0082462173083, 40.4539569227638],
+              [-80.0081418217378, 40.4536465462583],
+              [-80.0081607067731, 40.4536429202605]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 60,
+      "properties": {
+        "pin": "0023P00090000000",
+        "mapblocklo": "23-P-90",
+        "shapearea": 60740.953721,
+        "objectid": 546676807,
+        "shapelen": 985.974969,
+        "pk": "460020",
+        "rowname": 61,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 400000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 5400000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2015-01-27",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "ARCH ST",
+        "PROPERTYHOUSENUM": "1004",
+        "USEDESC": "NURSING HOME/PRIVATE HOS",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 999999,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 5000000,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "1004 ARCH ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0082456837449, 40.4536265582263],
+              [-80.0082866025159, 40.4536186792371],
+              [-80.0090906791206, 40.4534648927025],
+              [-80.0093142898118, 40.4541311102074],
+              [-80.0084721264394, 40.4542941451929],
+              [-80.0082456837449, 40.4536265582263]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 61,
+      "properties": {
+        "pin": "0023P00500000002",
+        "mapblocklo": "23-P-500-0-2",
+        "shapearea": 6758.490819,
+        "objectid": 546676904,
+        "shapelen": 776.930598,
+        "pk": "460117",
+        "rowname": 62,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 2900,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 2900,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "DIAMOND ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "VACANT LAND",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "RESIDENTIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 DIAMOND ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.008435724135, 40.452882754069],
+              [-80.0084302781226, 40.4528639998028],
+              [-80.0080338471805, 40.4529405765898],
+              [-80.0080140909402, 40.4528872349011],
+              [-80.0088466009492, 40.4527375412079],
+              [-80.008854580646, 40.4527611580152],
+              [-80.0088680692794, 40.4528016469865],
+              [-80.0084733693172, 40.4528761999761],
+              [-80.008567168223, 40.453181563344],
+              [-80.0084912873036, 40.4531966152032],
+              [-80.0084756350131, 40.4531450937451],
+              [-80.0085100131075, 40.4531385871598],
+              [-80.008435724135, 40.452882754069]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 62,
+      "properties": {
+        "pin": "0023R00202000002",
+        "mapblocklo": "23-R-202-0-2",
+        "shapearea": 58596.815457,
+        "objectid": 546677982,
+        "shapelen": 954.220519,
+        "pk": "461195",
+        "rowname": 63,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 63800,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 1235000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1964-12-30",
+        "TAXDESC": "12 - Public Utility Realty Tax - PURTA",
+        "PROPERTYADDRESS": "MONTGOMERY PL",
+        "PROPERTYHOUSENUM": "15",
+        "USEDESC": "COMMERCIAL/UTILITY",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "UTILITIES",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 1171200,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "15 MONTGOMERY PL",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.005780187645, 40.4541010560443],
+              [-80.0059606275143, 40.4540666253849],
+              [-80.0059866934288, 40.4540667106186],
+              [-80.0060094932813, 40.4540767463117],
+              [-80.0060236268728, 40.4540828085667],
+              [-80.0060316139794, 40.4540932916325],
+              [-80.0060325488585, 40.4540961304841],
+              [-80.0062406639162, 40.4547279729124],
+              [-80.0058196063338, 40.4548053054867],
+              [-80.005419842055, 40.4548787254677],
+              [-80.0052683588566, 40.4543965518085],
+              [-80.005223731916, 40.4542545018946],
+              [-80.0052237887498, 40.4542440236992],
+              [-80.0052237947053, 40.4542430124213],
+              [-80.0052300046409, 40.4542271021669],
+              [-80.0052426510504, 40.4542156192715],
+              [-80.005255387866, 40.4542068579456],
+              [-80.005266924975, 40.4542025147267],
+              [-80.0052824340615, 40.4541960326847],
+              [-80.005780187645, 40.4541010560443]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 63,
+      "properties": {
+        "pin": "0023R00202000001",
+        "mapblocklo": "23-R-202-0-1",
+        "shapearea": 58596.815457,
+        "objectid": 546678043,
+        "shapelen": 954.220519,
+        "pk": "461256",
+        "rowname": 64,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 158700,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 555300,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1964-12-30",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "MONTGOMERY PL",
+        "PROPERTYHOUSENUM": "15",
+        "USEDESC": "INDUSTRIAL/UTILITY",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "UTILITIES",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 396600,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "15 MONTGOMERY PL",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.005780187645, 40.4541010560443],
+              [-80.0059606275143, 40.4540666253849],
+              [-80.0059866934288, 40.4540667106186],
+              [-80.0060094932813, 40.4540767463117],
+              [-80.0060236268728, 40.4540828085667],
+              [-80.0060316139794, 40.4540932916325],
+              [-80.0060325488585, 40.4540961304841],
+              [-80.0062406639162, 40.4547279729124],
+              [-80.0058196063338, 40.4548053054867],
+              [-80.005419842055, 40.4548787254677],
+              [-80.0052683588566, 40.4543965518085],
+              [-80.005223731916, 40.4542545018946],
+              [-80.0052237887498, 40.4542440236992],
+              [-80.0052237947053, 40.4542430124213],
+              [-80.0052300046409, 40.4542271021669],
+              [-80.0052426510504, 40.4542156192715],
+              [-80.005255387866, 40.4542068579456],
+              [-80.005266924975, 40.4542025147267],
+              [-80.0052824340615, 40.4541960326847],
+              [-80.005780187645, 40.4541010560443]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 64,
+      "properties": {
+        "pin": "0023R00500000002",
+        "mapblocklo": "23-R-500-0-2",
+        "shapearea": 9297.217312,
+        "objectid": 546696906,
+        "shapelen": 775.212979,
+        "pk": "480119",
+        "rowname": 65,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 96000,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 96000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1976-03-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "SANDUSKY ST",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL URBAN RENEWAL",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 SANDUSKY ST",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0037527418085, 40.4528129988037],
+              [-80.0045336950654, 40.4526891727132],
+              [-80.004549356645, 40.4527374433326],
+              [-80.0045568905017, 40.452761138933],
+              [-80.0037815629165, 40.4529012893324],
+              [-80.0037527418085, 40.4528129988037]
+            ]
+          ],
+          [
+            [
+              [-80.003793090518, 40.4537165662691],
+              [-80.0038346164534, 40.4537090071285],
+              [-80.0038551347543, 40.4537717637971],
+              [-80.0034639621306, 40.4538421311574],
+              [-80.0034410454913, 40.4537803153613],
+              [-80.0034929672458, 40.4537712749727],
+              [-80.0035358369396, 40.4537633909275],
+              [-80.003793090518, 40.4537165662691]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 65,
+      "properties": {
+        "pin": "0008C00275000000",
+        "mapblocklo": "8-C-275",
+        "shapearea": 2624.471537,
+        "objectid": 546750071,
+        "shapelen": 527.984147,
+        "pk": "533284",
+        "rowname": 66,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 50600,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 50600,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "2014-02-28",
+        "TAXDESC": "20 - Taxable",
+        "PROPERTYADDRESS": "ALLEGHENY SQ",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "VACANT COMMERCIAL LAND",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 44925000,
+        "CLASSDESC": "COMMERCIAL",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 0,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 ALLEGHENY SQ",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0045155079898, 40.4520017560452],
+              [-80.0053001761275, 40.4518509742152],
+              [-80.0053090531793, 40.4518791724815],
+              [-80.0046112204345, 40.4520164965347],
+              [-80.0046413682975, 40.4521137168065],
+              [-80.0046244016181, 40.4520835203417],
+              [-80.0046026804131, 40.4520565410172],
+              [-80.004576801362, 40.4520335199526],
+              [-80.00454747536, 40.4520150895347],
+              [-80.0045155079898, 40.4520017560452]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 66,
+      "properties": {
+        "pin": "0008B00150000000",
+        "mapblocklo": "8-B-150",
+        "shapearea": 2421550.297727,
+        "objectid": 546763312,
+        "shapelen": 21652.456036,
+        "pk": "546525",
+        "rowname": 67,
+        "MUNIDESC": "22nd Ward - PITTSBURGH",
+        "COUNTYLAND": 14279300,
+        "YEARBLT": {},
+        "COUNTYTOTAL": 16943000,
+        "HOMESTEADFLAG": {},
+        "SALEDATE": "1950-05-05",
+        "TAXDESC": "10 - Exempt",
+        "PROPERTYADDRESS": "W NORTH AVE",
+        "PROPERTYHOUSENUM": "0",
+        "USEDESC": "MUNICIPAL GOVERNMENT",
+        "OWNERDESC": "CORPORATION",
+        "SALEPRICE": 0,
+        "CLASSDESC": "GOVERNMENT",
+        "PROPERTYZIP": "15212",
+        "COUNTYBUILDING": 2663700,
+        "PROPERTYFRACTION": {},
+        "delq": 0,
+        "cityown": 0,
+        "ADDRESS": "0 W NORTH AVE",
+        "amount": {},
+        "owedto": 0,
+        "geo_name_nhood": "Allegheny Center",
+        "nhood": "allegheny_center",
+        "tt": "",
+        "colorval": "#ccc7c7"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-80.0088600119094, 40.4520780801109],
+              [-80.0106349496377, 40.4517343957335],
+              [-80.0106530822095, 40.4517525771049],
+              [-80.0109465161271, 40.452021767714],
+              [-80.0111450495103, 40.4521539656011],
+              [-80.0113666324135, 40.452290107344],
+              [-80.0114152354142, 40.452318798901],
+              [-80.0116155379645, 40.4524370386179],
+              [-80.0118334725971, 40.4525582144684],
+              [-80.0121854842964, 40.4527249125781],
+              [-80.012211963979, 40.4527374364998],
+              [-80.0131476190456, 40.4532164819312],
+              [-80.0131505313358, 40.4532179738465],
+              [-80.014391763239, 40.4538534499137],
+              [-80.014407297134, 40.4539011985662],
+              [-80.0144029061055, 40.4539176677247],
+              [-80.0143870980337, 40.4539286191398],
+              [-80.0143554507487, 40.4539361930581],
+              [-80.0142934288644, 40.4539490795844],
+              [-80.0087095029959, 40.4550032654704],
+              [-80.008519863353, 40.4544524614521],
+              [-80.0095748554996, 40.4542506122222],
+              [-80.0090923760935, 40.4527375412844],
+              [-80.0088600119094, 40.4520780801109]
+            ]
+          ],
+          [
+            [
+              [-80.0026702564829, 40.4560716119459],
+              [-80.0018133714966, 40.4534068872442],
+              [-80.0025688497201, 40.4532641376254],
+              [-80.0029964069189, 40.4545247573259],
+              [-80.003211911279, 40.4544851947696],
+              [-80.0034563314259, 40.4552568272728],
+              [-80.0053003138213, 40.4549054272636],
+              [-80.0053541006049, 40.4550626757741],
+              [-80.0062864751876, 40.4548885834185],
+              [-80.0064449763068, 40.4554094141493],
+              [-80.002750173377, 40.4561369179592],
+              [-80.0027183374771, 40.4561389118914],
+              [-80.0027000312179, 40.456128971612],
+              [-80.0026813926848, 40.4561090830879],
+              [-80.0026702564829, 40.4560716119459]
+            ]
+          ],
+          [
+            [
+              [-80.0110603837293, 40.4514645943878],
+              [-80.0109318746912, 40.4514643637223],
+              [-80.0108036887871, 40.4514872137762],
+              [-80.0106954090422, 40.451500659093],
+              [-80.0106648193431, 40.451472769814],
+              [-80.010502130784, 40.4512704471105],
+              [-80.0104819656087, 40.4512452572519],
+              [-80.0133691309957, 40.4506943320006],
+              [-80.0139259855713, 40.4523591971012],
+              [-80.0137039090451, 40.452355904656],
+              [-80.0135121874709, 40.4523464323264],
+              [-80.0133156088842, 40.4523128004494],
+              [-80.0131407291073, 40.452269707267],
+              [-80.0129301640705, 40.4521941984748],
+              [-80.0127349565793, 40.452107657607],
+              [-80.0125569805907, 40.4520392462184],
+              [-80.012368957593, 40.4519659481998],
+              [-80.0121899697765, 40.4518941929239],
+              [-80.0120126731336, 40.4518191549504],
+              [-80.0118329632423, 40.4517391720529],
+              [-80.0115890008323, 40.4516456197053],
+              [-80.0113826701858, 40.4515623830773],
+              [-80.0111844661574, 40.4514934948068],
+              [-80.0110603837293, 40.4514645943878]
+            ]
+          ],
+          [
+            [
+              [-80.001750408306, 40.4531898151682],
+              [-80.0015843339898, 40.452737303553],
+              [-80.0009803350665, 40.4509161905373],
+              [-80.0017314290317, 40.4507640154102],
+              [-80.0017633936849, 40.4508601839099],
+              [-80.0018740453421, 40.4508369305819],
+              [-80.0019708576729, 40.450816327794],
+              [-80.0021115071286, 40.4512206635239],
+              [-80.002006530235, 40.4512388418285],
+              [-80.0020647859997, 40.451415272976],
+              [-80.0020900028507, 40.4514916439271],
+              [-80.0026025516585, 40.4530270822008],
+              [-80.001750408306, 40.4531898151682]
+            ]
+          ],
+          [
+            [
+              [-80.0125830798771, 40.4527234897992],
+              [-80.0121193313157, 40.45250749665],
+              [-80.0118699469473, 40.4523730911149],
+              [-80.0116096574218, 40.4522349875567],
+              [-80.0115562068291, 40.4521973416982],
+              [-80.0114693035124, 40.4521361359489],
+              [-80.0113113751521, 40.4520357276742],
+              [-80.011127586704, 40.4519144768601],
+              [-80.0109365200412, 40.451736987823],
+              [-80.0108945540875, 40.4516913791085],
+              [-80.0109782873629, 40.4516828760746],
+              [-80.0110939177469, 40.4516875706226],
+              [-80.0112460204173, 40.4517214121106],
+              [-80.011439104089, 40.4517848177611],
+              [-80.0116411370138, 40.4518740412386],
+              [-80.0119328626435, 40.4519983503464],
+              [-80.0121707666869, 40.4520986330449],
+              [-80.0124467574853, 40.4522091533226],
+              [-80.0127641701874, 40.4523356128811],
+              [-80.0129566471447, 40.4524210858226],
+              [-80.0131598767326, 40.4524921825339],
+              [-80.0133570903482, 40.4525313174013],
+              [-80.0135537751552, 40.4525545820231],
+              [-80.013775934167, 40.4525605960429],
+              [-80.013983298172, 40.4525540640039],
+              [-80.0140312381922, 40.4527374430053],
+              [-80.0143085306857, 40.453595936303],
+              [-80.0135450169571, 40.4532098230279],
+              [-80.0135387928267, 40.4532066783633],
+              [-80.0127234929167, 40.4527943637032],
+              [-80.0126109558674, 40.4527374513512],
+              [-80.0125830798771, 40.4527234897992]
+            ]
+          ],
+          [
+            [
+              [-80.0079399796214, 40.4496525329823],
+              [-80.0080403202471, 40.4496480492297],
+              [-80.0080915780681, 40.4496515558254],
+              [-80.0081607810852, 40.4496622234028],
+              [-80.0082538668285, 40.4496814426836],
+              [-80.0083926693405, 40.4497147922737],
+              [-80.0084918558241, 40.44973990064],
+              [-80.0086350881402, 40.4497881902653],
+              [-80.0087626505001, 40.449838289565],
+              [-80.0088551141076, 40.4498824477501],
+              [-80.0088736200361, 40.4499358931073],
+              [-80.0090912375187, 40.4506377346653],
+              [-80.0093655174238, 40.4513145443924],
+              [-80.0095042905364, 40.4517284290107],
+              [-80.0087974631135, 40.451860661868],
+              [-80.008435499362, 40.4507416460114],
+              [-80.0081853901858, 40.4499684030269],
+              [-80.0081487927406, 40.4498552597402],
+              [-80.0080905773671, 40.4496939830245],
+              [-80.0080865134757, 40.449672196811],
+              [-80.0080032772912, 40.4496577886343],
+              [-80.0079399796214, 40.4496525329823]
+            ]
+          ],
+          [
+            [
+              [-80.0065526863863, 40.4547525402369],
+              [-80.0082875429159, 40.4544148467123],
+              [-80.008314273331, 40.4544987878024],
+              [-80.0084921929439, 40.4550485175044],
+              [-80.006761169514, 40.4553780387453],
+              [-80.0065798156538, 40.4548327443866],
+              [-80.0065526863863, 40.4547525402369]
+            ]
+          ],
+          [
+            [
+              [-80.0029988629994, 40.4504505461792],
+              [-80.0047066672881, 40.4501179533424],
+              [-80.0047598445585, 40.4502571423579],
+              [-80.0028187775707, 40.4506442252639],
+              [-80.0027621806575, 40.4504966373537],
+              [-80.0029988629994, 40.4504505461792]
+            ]
+          ],
+          [
+            [
+              [-80.0096083969675, 40.4514043073097],
+              [-80.0102517322878, 40.4512815522605],
+              [-80.0104602036885, 40.4515361163141],
+              [-80.0104643846315, 40.4515402220302],
+              [-80.0104469825414, 40.4515438339262],
+              [-80.0101314941623, 40.4515952186851],
+              [-80.0096887002404, 40.4516823176549],
+              [-80.0096083969675, 40.4514043073097]
+            ]
+          ]
+        ]
+      }
+    }
+  ],
+  "_rev": "2-ec74bc549437a8df51c75f869aa6d717"
+}

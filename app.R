@@ -279,10 +279,7 @@ server <- shinyServer(function(input, output) {
                                          #"<br><b>'17 School Taxes</b>", tt_school_,
                                          #"<br><b>'17 Library Taxes</b>", tt_lib_tax,
                                          #"<br><b>Current Delinquent Taxes</b>", CURRENT_DE,
-                                        ifelse(is.na(program_name), "", paste0("<br><b>Abatement Program:</b>", program_name)),
-                                        ifelse(is.na(start_year), "", paste0("<br><b>Abatement Start Year:</b>", start_year)),
-                                        ifelse(is.na(num_years), "", paste0("<br><b>Abatement Length:</b>", num_years)),
-                                        ifelse(is.na(abatement_amt), "", paste0("<br><b>Abatement Amount:</b>", dollarsComma(abatement_amt))),
+                                        ifelse(is.na(tt), "", tt),
                                          paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=',pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>')))
     } 
     if (nrow(hood_parcel) == 0) {

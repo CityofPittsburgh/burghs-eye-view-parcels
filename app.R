@@ -21,9 +21,12 @@ library(rgdal)
 
 options(scipen = 999)
 
+
 dollarsComma <- function(x){
+  #x <- round(x, 2)
   x <- prettyNum(x, big.mark = ",")
-  paste0("$", x)
+  x <- paste0("$", x)
+  return(x)
 }
 ##Set Couch credentials
 couchdb_un <- jsonlite::fromJSON("key.json")$couchdb_un
@@ -274,12 +277,12 @@ server <- shinyServer(function(input, output) {
                                         ifelse(is.na(COUNTYBUILDING), "", paste0("<br><b>County Building Value:</b>", dollarsComma(COUNTYBUILDING))),
                                         ifelse(is.na(COUNTYTOTAL), "", paste0("<br><b>County Total Value:</b>", dollarsComma(COUNTYTOTAL))),
                                         ifelse(is.na(amount), "", paste0("<br><b>Total Lien Amount:</b>", dollarsComma(amount))),
-                                        ifelse(is.na(ADDRESS), "", paste0("<br><b>NUmber of Liens:</b>", owedto)),
+                                        ifelse(is.na(ADDRESS), "", paste0("<br><b>Number of Liens:</b>", owedto)),
                                          #"<br><b>'17 City Taxes</b>", tt_city_ta,
                                          #"<br><b>'17 School Taxes</b>", tt_school_,
                                          #"<br><b>'17 Library Taxes</b>", tt_lib_tax,
                                          #"<br><b>Current Delinquent Taxes</b>", CURRENT_DE,
-                                        ifelse(is.na(tt), "", tt),
+                                        hood_parcel$tt,
                                          paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=',pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>')))
     } 
     if (nrow(hood_parcel) == 0) {

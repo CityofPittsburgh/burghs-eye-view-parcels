@@ -94,8 +94,8 @@ parcels.hoods$owedto[is.na(parcels.hoods$owed)] <- 0
 #parcels.hoods$program_name[is.na(parcels.hoods$program_name)] <- "No Abatement"
 #parcels.hoods$abatement[is.na(parcels.hoods$abatement)] <- FALSE
 colnames(parcels.hoods)[1] <- "pin"
+
 ##Append abatements
-#Append abatements
 abt <- abatement
 abt <- abt[abt$pin %in% parcels.hoods$pin,]
 abt$pin <- as.factor(abt$pin)
@@ -198,7 +198,7 @@ for (i in levels(parcels.final$nhood)){
   rg <- GET(rurl, authenticate(couchdb_un, couchdb_pw), timeout(60))
   rev <- rg$header$etag
   rev <- gsub('\"', "", rev)
-  #Add _revid to JSON for CouchDB updates
+  #Add _revid to JSON for CouchDB updates and PUT updates to Couch docs
   j.org$`_rev` <- as.character(rev)
   write(jsonlite::toJSON(j.org, digits = NA, pretty = TRUE, auto_unbox = TRUE), file =  paste0(i, ".json")) 
   b <- readr::read_lines(paste0(i, ".json"))

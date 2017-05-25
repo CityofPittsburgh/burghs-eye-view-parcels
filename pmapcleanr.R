@@ -17,6 +17,7 @@ set_config(config(ssl_verifypeer = 0L))
 options(scipen = 999)
 
 dollarsComma <- function(x){
+  x <- round(x, 2)
   x <- prettyNum(x, big.mark = ",")
   paste0("$", x)
 }
@@ -55,15 +56,19 @@ abatement <- jsonlite::fromJSON(content(getabatedata, "text"))
 abatement <- abatement$result$records
 abatement <- subset(abatement, select = c("pin", "program_name", "start_year", "num_years", "abatement_amt"))
 abatement$abatement <- TRUE
-abatement$tool <- paste0("<dt>", abatement$program_name, ":", abatement$num_years, "</dt>", "<dd>", abatement$start_year, ":", abatement$abatement_amt, "/<dd>")
+abatement$num_years <- paste(abatement$num_years, "years")
+abatement$abatement_amt <- dollarsComma(abatement$abatement_amt)
+abatement$tool <- paste0("<dt>", abatement$program_name, ":", abatement$num_years, "</dt>", "<dd>", abatement$start_year, ":", abatement$abatement_amt, "</dd>")
 
 
 ##Lien Data
 #system('python pittsburghliens.py')
 liens <- read.csv("liens.csv")
+liens$amount <- dollarsComma(liens$amount)
+colnames(liens)[3] <- "lien_num"
 
 ##Neighborhood
-#system('python pghhoods.py')
+system('python pghhoods.py')
 load.nhood <- jsonlite::fromJSON("./pghnhoods.txt")
 load.nhood <- load.nhood$result$records
 load.nhood$geo_name_nhood <- as.factor(load.nhood$geo_name_nhood)
@@ -76,8 +81,7 @@ hood_list <- gsub("\\.", "", hood_list)
 hood_list <- tolower(hood_list)
 write_json(hood_list, "hoodlist.json")
 
-##Merge all datasets together
-#parcels <- merge(assessment, abatement, by.x = "PARID", "pin", all.x = TRUE)
+##General Cleaning and merging to assessment file
 assessment$ADDRESS <- paste(assessment$PROPERTYHOUSENUM, assessment$PROPERTYADDRESS)
 assessment$SALEDATE <- gsub("-", "/", assessment$SALEDATE)
 assessment$SALEDATE <- as.Date(assessment$SALEDATE, "%m/%d/%Y")
@@ -87,12 +91,8 @@ parcels.hoods$nhood <- gsub("\\-", "_", parcels.hoods$geo_name_nhood)
 parcels.hoods$nhood <- gsub(" ", "_", parcels.hoods$nhood)
 parcels.hoods$nhood <- gsub("\\.", "", parcels.hoods$nhood)
 parcels.hoods$nhood <- tolower(parcels.hoods$nhood)
-##General Cleaning
-#parcels.hoods$abatement_amt[is.na(parcels.hoods$abatement_amt)] <- 0
-#parcels.hoods$amount[is.na(parcels.hoods$amount)] <- 0
-parcels.hoods$owedto[is.na(parcels.hoods$owed)] <- 0
-#parcels.hoods$program_name[is.na(parcels.hoods$program_name)] <- "No Abatement"
-#parcels.hoods$abatement[is.na(parcels.hoods$abatement)] <- FALSE
+parcels.hoods$lien_num[is.na(parcels.hoods$lien_num)] <- 0
+parcels.hoods$amount[is.na(parcels.hoods$amount)] <- 0
 colnames(parcels.hoods)[1] <- "pin"
 
 ##Append abatements
@@ -191,6 +191,7 @@ for (i in levels(parcels.final$nhood)){
   org <- sp::merge(org, parcels.final, by = "pin", all.x = TRUE, duplicateGeoms = TRUE)
   org@data <- org@data[order(org@data$rowname),]
   org <- org[!org@data$mapblocklo %in% c("Not Assessed", "COMMON GROUND"),]
+  org@data$colorval <- ifelse(is.na(org@data$colorval), "#ccc7c7", org@data$colorval)
   writeOGR(org, i, layer="meuse", driver="GeoJSON")
   j.org <- fromJSON(i)
   #call CouchDB to get last revision ID

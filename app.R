@@ -277,7 +277,7 @@ server <- shinyServer(function(input, output) {
                                         ifelse(is.na(COUNTYBUILDING), "", paste0("<br><b>County Building Value:</b>", dollarsComma(COUNTYBUILDING))),
                                         ifelse(is.na(COUNTYTOTAL), "", paste0("<br><b>County Total Value:</b>", dollarsComma(COUNTYTOTAL))),
                                         ifelse(is.na(amount), "", paste0("<br><b>Total Lien Amount:</b>", dollarsComma(amount))),
-                                        ifelse(is.na(ADDRESS), "", paste0("<br><b>Number of Liens:</b>", owedto)),
+                                        ifelse(is.na(lien_num), "", paste0("<br><b>Number of Liens:</b>", lien_num)),
                                          #"<br><b>'17 City Taxes</b>", tt_city_ta,
                                          #"<br><b>'17 School Taxes</b>", tt_school_,
                                          #"<br><b>'17 Library Taxes</b>", tt_lib_tax,

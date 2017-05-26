@@ -17,6 +17,7 @@ library(dplyr)
 library(shinythemes)
 library(leaflet)
 library(rgdal)
+library(htmltools)
 
 
 options(scipen = 999)
@@ -28,6 +29,10 @@ dollarsComma <- function(x){
   x <- paste0("$", x)
   return(x)
 }
+
+# Function to read backslashes correctly
+chartr0 <- function(foo) chartr('\\','\\/',foo)
+
 ##Set Couch credentials
 couchdb_un <- jsonlite::fromJSON("key.json")$couchdb_un
 couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
@@ -179,21 +184,9 @@ ui <- shinyUI(navbarPage(id = "navbar",
                           tags$style(type= "text/css", ".form-group {
                                      margin-bottom: 0px;
                                      }"),
-                          leafletOutput("map"),
-                          tags$style(type = "text/css", "#map {height: calc(100vh - 60px) !important;}"),
-                          absolutePanel(
-                            top = 70, left = 50, width = '300px',
-                            wellPanel(id = "tPanel", style = "overflow-y:scroll; max-height: calc(100vh - 85px) !important; overflow: visible;",
-                                      HTML("<br>"),
-                                      selectInput("neigh_select",
-                                                  label = "Neighborhood",
-                                                  choices = hood_list,
-                                                  selected = "Central Business District",
-                                                  multiple = FALSE,
-                                                  selectize = TRUE)
-                            ), style = "opacity: 0.88"
-                          )
-                                  ),
+                          # Generate layer panel & Map (checks for mobile devices)
+                          uiOutput("mapPanel")
+                         ),
                          tabPanel("Data", class = "data", value = "Data",
                                   div(style = 'overflow-x: scroll', DT::dataTableOutput("datatable"))
                          ),
@@ -223,16 +216,112 @@ ui <- shinyUI(navbarPage(id = "navbar",
                                  }(document, 'script', 'facebook-jssdk'));")),
                 tags$script(HTML('header.append(\'<div class="fb-share-button" style="float:right;margin-top: 15px;margin-right: 5px;" data-href="http://pittsburghpa.shinyapps.io/BurghsEyeView/?utm_source=facebook_button&amp;utm_campaign=facebook_button&amp;utm_medium=facebook%2Fsocial\" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpittsburghpa.shinyapps.io%2FBurghsEyeView%2F%23utm_source%3Dfacebook_button%26utm_campaign%3Dfacebook_button%26utm_medium%3Dfacebook%252Fsocial&amp;src=sdkpreparse">Share</a></div>\');
                                  console.log(header)'))
-                )
-                         )
-                )
+                  )
+                ) 
+) 
 
 
 
 
 # Define server logic required to draw a histogram
-server <- shinyServer(function(input, output) { 
-
+server <- shinyServer(function(input, output) {  
+  
+  # Map Tab UI
+  output$mapPanel <- renderUI({  
+    # UI for Desktop Users
+    if (as.numeric(input$GetScreenWidth) > 800) {
+      tagList(
+        # Generate Map
+        leafletOutput("map"),
+        # Map size for Desktop CSS
+        tags$style(type = "text/css", "#map {height: calc(100vh - 60px) !important;}"),
+        absolutePanel(
+          # Input panel for Desktops (alpha'd)
+          top = 70, left = 50, width = '300px',
+          wellPanel(id = "tPanel", style = "max-height: calc(100vh - 90px) !important;",
+                    # Add background image
+                    tags$head(tags$style(type="text/css", '.Points {
+                                         background-image: url("loading.png");
+                                         background-repeat: no-repeat;
+                                         background-position: center;
+                                         background-size: contain;
+    }')),
+                    textInput("search", 
+                              value = NULL,
+                              label = NULL, 
+                              placeholder = "Search"),
+                    selectInput("neigh_select",
+                                label = "Neighborhood",
+                                choices = hood_list,
+                                selected = "Central Business District",
+                                multiple = FALSE,
+                                selectize = TRUE),
+                    selectInput("basemap_select",
+                                label = "Basemap",
+                                choices = c(`OSM Mapnik` = "OpenStreetMap.Mapnik", `OSM France` = "OpenStreetMap.France", `OSM Humanitarian` = "OpenStreetMap.HOT", `Stamen Toner` = "Stamen.Toner", `Esri Satellite` = "Esri.WorldImagery", Esri = "Esri.WorldStreetMap", Pioneer = "Thunderforest.Pioneer"),
+                                selected = ifelse(Sys.Date() == as.Date(paste0(this_year,"-07-06")) | Sys.Date() == as.Date(paste0(this_year,"-08-31")), "Thunderforest.Pioneer", "OpenStreetMap.Mapnik"))
+                    ), style = "opacity: 0.88"
+          )
+        )
+  } else {
+    tagList(
+      # Input panel for Mobile (stationary at top)
+      absolutePanel(top = 65, left = 0, width = '100%' ,
+                    wellPanel(id = "tPanel", style ="padding-left: 5px; padding-right: 5px;",
+                              # Remove padding from Search Bar
+                              tags$style(type= "text/css", "#tPanel {margin-bottom:0px; padding:0px; overflow-y:scroll; max-height: calc(100vh - 60px); !important; min-height: 55px;}"),
+                              # Set background color to match panels
+                              tags$style(type = "text/css", "body {background-color: #ecf0f1}"),
+                              tags$style(type= "text/css", "{width:100%;
+                                         margin-bottom:5px;
+                                         text-align: center;}
+                                         .inner
+                                         {display: inline-block;}"),
+                              # Div for Search Bar and Expansion
+                              HTML('<div id="outer" style="position:absolute;z-index: 9; background-color:#ecf0f1; width:100%;">'),
+                              # Set Searchvar width optimal for device
+                              tags$style(type = "text/css", paste0('#search {width: ', input$GetScreenWidth - 84, 'px; margin-left:10px;}')),
+                              # Inputs
+                              div(style="display:inline-block;", 
+                                  textInput("search", 
+                                            value = NULL,
+                                            label = NULL, 
+                                            placeholder = "Search")),
+                              tags$style(style="text/css", chartr0('#mapPanel button .fa:before { content: "\\f056";  }
+                                                                   #mapPanel button.collapsed .fa:before { content: "\\f055";  }')),
+                              HTML('<button class="btn collapsed" data-toggle="collapse" data-target="#mobile"><i class="fa fa-search-plus" aria-hidden="true"></i></button></div>
+                                   <div id="mobile" class="collapse" style="margin-top:55px;">
+                                   <small style="font-size:11px;margin-left:3px">Not all locations are exact. (See &rsquo;About&rsquo; for details.)</small>
+                                   <br>'),
+                              selectInput("neigh_select",
+                                          label = "Neighborhood",
+                                          choices = hood_list,
+                                          selected = "Central Business District",
+                                          multiple = FALSE,
+                                          selectize = TRUE),
+                              selectInput("basemap_select",
+                                          label = "Basemap",
+                                          choices = c(`OSM Mapnik` = "OpenStreetMap.Mapnik", `OSM France` = "OpenStreetMap.France", `OSM Humanitarian` = "OpenStreetMap.HOT", `Stamen Toner` = "Stamen.Toner", `Esri Satellite` = "Esri.WorldImagery", Esri = "Esri.WorldStreetMap", Pioneer = "Thunderforest.Pioneer"),
+                                          selected = ifelse(Sys.Date() == as.Date(paste0(this_year,"-07-06")) | Sys.Date() == as.Date(paste0(this_year,"-08-31")), "Thunderforest.Pioneer", "OpenStreetMap.Mapnik")),
+                              HTML('</div>')
+                              ),
+                    # Generate Map
+                    div(class="mapBack", style="position: absolute;
+                        width: 100%;z-index: -1;
+                        left: 0px;
+                        top: 55px;", leafletOutput("map")),
+                    # Set map to style for Mobile
+                    tags$style(type = "text/css", "#map {height: calc(100vh - 115px) !important;}"),
+                    tags$head(tags$style(type="text/css", '.mapBack {
+                                         background-image: url("loading.png");
+                                         background-repeat: no-repeat;
+                                         background-position: center;
+                                         background-size: contain;}'))
+                    )
+                    )
+}
+}
+  )  
   
   hoodinput <- reactive({
     hoodname <- gsub("\\-", "_", input$neigh_select)
@@ -242,11 +331,16 @@ server <- shinyServer(function(input, output) {
     url <- paste0("http://webhost.pittsburghpa.gov:5984/neighborhood_parcels/", hoodname)
     g <- GET(url, authenticate(couchdb_un, couchdb_pw))
     c <- content(g, "text")
-    p <- readOGR(c, "OGRGeoJSON", verbose = F) 
-    hood_parcel <- p
-    #return(hoodinput)
+    hood_parcel <- readOGR(c, "OGRGeoJSON", verbose = F) 
+
+    # Search Filter
+    if (!is.null(input$search) && input$search != "") {
+      hood_parcel <- hood_parcel[apply(hood_parcel@data, 1, function(row){any(grepl(input$search, row, ignore.case = TRUE))}), ]
+    }
+    
+    return(hood_parcel)
   }
-)
+  )
   
   output$map <- renderLeaflet({ 
     hood_parcel <- hoodinput()
@@ -266,7 +360,7 @@ server <- shinyServer(function(input, output) {
                          fill = TRUE, fillColor = ~colorval, fillOpacity = .75,
                          popup = ~paste("<font color='black'><b>Parcel ID:</b>", paste0('<a href="http://www2.county.allegheny.pa.us/RealEstate/GeneralInfo.aspx?ParcelID=',pin, '" target="_blank">', 
                                                                                         pin, '</a>'), 
-                                         ifelse(is.na(ADDRESS), "", paste0("<br><b>Address:</b>", ADDRESS)), 
+                                        ifelse(is.na(ADDRESS), "", paste0("<br><b>Address:</b>", ADDRESS)), 
                                         ifelse(is.na(geo_name_nhood), "", paste0("<br><b>Neighborhood:</b>", geo_name_nhood)),
                                         ifelse(is.na(MUNIDESC), "", paste0("<br><b>Ward:</b>", MUNIDESC)),
                                         ifelse(is.na(OWNERDESC), "", paste0("<br><b>Owner Code:</b>", OWNERDESC)),
@@ -280,12 +374,12 @@ server <- shinyServer(function(input, output) {
                                         ifelse(is.na(COUNTYTOTAL), "", paste0("<br><b>County Total Value:</b>", dollarsComma(COUNTYTOTAL))),
                                         ifelse(is.na(amount), "", paste0("<br><b>Total Lien Amount:</b>", dollarsComma(amount))),
                                         ifelse(is.na(lien_num), "", paste0("<br><b>Number of Liens:</b>", lien_num)),
-                                         #"<br><b>'17 City Taxes</b>", tt_city_ta,
-                                         #"<br><b>'17 School Taxes</b>", tt_school_,
-                                         #"<br><b>'17 Library Taxes</b>", tt_lib_tax,
-                                         #"<br><b>Current Delinquent Taxes</b>", CURRENT_DE,
+                                        #"<br><b>'17 City Taxes</b>", tt_city_ta,
+                                        #"<br><b>'17 School Taxes</b>", tt_school_,
+                                        #"<br><b>'17 Library Taxes</b>", tt_lib_tax,
+                                        #"<br><b>Current Delinquent Taxes</b>", CURRENT_DE,
                                         hood_parcel$tt,
-                                         paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=',pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>')))
+                                        paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=',pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>')))
     } 
     if (nrow(hood_parcel) == 0) {
       if (Sys.Date() >= as.Date(paste0(this_year,"-11-01")) & Sys.Date() <= as.Date(paste0(this_year,"-11-08"))) {
@@ -322,9 +416,7 @@ server <- shinyServer(function(input, output) {
   rownames = FALSE,
   escape = FALSE
   )  
-}) 
+})  
 
 # Run the application 
 shinyApp(ui = ui, server = server) 
-
-

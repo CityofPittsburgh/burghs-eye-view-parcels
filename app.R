@@ -302,7 +302,7 @@ server <- shinyServer(function(input, output) {
     hood_parcel <- hoodinput()
     hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "ADDRESS", "geo_name_nhood", "MUNIDESC", "OWNERDESC", "CLASSDESC", "USEDESC",
                                                             "SALEDATE", "SALEPRICE", "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "amount",
-                                                            "owedto", "program_name", "start_year", "num_years", "abatement_amt"))
+                                                            "lien_num"))
     hood_parcel@data
   }, filter = "top",
   extensions = 'Buttons',

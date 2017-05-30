@@ -129,7 +129,7 @@ hood_list <- jsonlite::fromJSON("hoods.json")
 ui <- shinyUI(navbarPage(id = "navbar",
                          windowTitle = "Burgh's Eye View Parcels",
                          selected = "Parcels",
-                         title = HTML('<img src="finance.png" alt="Burghs Eye View" height="85%">'),
+                         title = HTML('<img src="burghs_eyeview_logo_small.png" alt="Burghs Eye View" height="85%">'),
                          collapsible = TRUE,
                          position = "static-top",
                          theme = shinytheme("flatly"),

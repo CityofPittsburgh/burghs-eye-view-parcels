@@ -391,6 +391,8 @@ server <- shinyServer(function(input, output) {
     hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "ADDRESS", "geo_name_nhood", "MUNIDESC", "OWNERDESC", "CLASSDESC", "USEDESC",
                                                             "SALEDATE", "SALEPRICE", "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "amount",
                                                             "lien_num", "tt"))
+    colnames(hood_parcel@data) <- c("pin", "address", "neighborhood", "munidesc", "ownerdesc", "classdesc", "usedesc", "saledate", "saleprice", "countyland",
+                                    "countybuilding", "countytotal", "lien_amt", "lien_num", "abatements")
     hood_parcel@data
   }, filter = "top",
   extensions = 'Buttons',

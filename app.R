@@ -255,11 +255,7 @@ server <- shinyServer(function(input, output) {
                                 choices = hood_list,
                                 selected = "Central Business District",
                                 multiple = FALSE,
-                                selectize = TRUE),
-                    selectInput("basemap_select",
-                                label = "Basemap",
-                                choices = c(`OSM Mapnik` = "OpenStreetMap.Mapnik", `OSM France` = "OpenStreetMap.France", `OSM Humanitarian` = "OpenStreetMap.HOT", `Stamen Toner` = "Stamen.Toner", `Esri Satellite` = "Esri.WorldImagery", Esri = "Esri.WorldStreetMap", Pioneer = "Thunderforest.Pioneer"),
-                                selected = ifelse(Sys.Date() == as.Date(paste0(this_year,"-07-06")) | Sys.Date() == as.Date(paste0(this_year,"-08-31")), "Thunderforest.Pioneer", "OpenStreetMap.Mapnik"))
+                                selectize = TRUE)
                     ), style = "opacity: 0.88"
           )
         )
@@ -299,10 +295,6 @@ server <- shinyServer(function(input, output) {
                                           selected = "Central Business District",
                                           multiple = FALSE,
                                           selectize = TRUE),
-                              selectInput("basemap_select",
-                                          label = "Basemap",
-                                          choices = c(`OSM Mapnik` = "OpenStreetMap.Mapnik", `OSM France` = "OpenStreetMap.France", `OSM Humanitarian` = "OpenStreetMap.HOT", `Stamen Toner` = "Stamen.Toner", `Esri Satellite` = "Esri.WorldImagery", Esri = "Esri.WorldStreetMap", Pioneer = "Thunderforest.Pioneer"),
-                                          selected = ifelse(Sys.Date() == as.Date(paste0(this_year,"-07-06")) | Sys.Date() == as.Date(paste0(this_year,"-08-31")), "Thunderforest.Pioneer", "OpenStreetMap.Mapnik")),
                               HTML('</div>')
                               ),
                     # Generate Map
@@ -350,7 +342,7 @@ server <- shinyServer(function(input, output) {
                        options = providerTileOptions(noWrap = TRUE, minZoom = 1
                        )
       ) %>%
-      addLegend("bottomright", colors = c("#4daf4a", "#ffff33", "#e41a1c"), labels = c("Abated Properties", "City Owned", "Delinquent"))
+      addLegend("topright", colors = c("#4daf4a", "#ffff33", "#e41a1c"), labels = c("Abated Properties", "City Owned", "Delinquent"))
     
     
     if(nrow(hood_parcel) > 0){ 

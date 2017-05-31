@@ -9,7 +9,6 @@ library(lubridate)
 library(geojsonio)
 library(maptools)
 library(rgdal)
-library(R4CouchDB)
 library(sp)
 
 set_config(config(ssl_verifypeer = 0L))
@@ -23,8 +22,8 @@ dollarsComma <- function(x){
 }
 
 ##Set Couch credentials
-couchdb_un <- jsonlite::fromJSON("key.json")$couchdb_un
-couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
+couchdb_un <- jsonlite::fromJSON("/home/odsp/ETL/COUCH/key.json")$couchdb_un
+couchdb_pw <- jsonlite::fromJSON("/home/odsp/ETL/COUCH/key.json")$couchdb_pw
 
 ##Query Ckan API for Property Assessment Data
 query <- "https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%20%22PARID%22%2C%22PROPERTYHOUSENUM%22%2C%22PROPERTYFRACTION%22%2C%22PROPERTYADDRESS%22%2C%22PROPERTYZIP%22%2C%22MUNIDESC%22%2C%22TAXDESC%22%2C%22CLASSDESC%22%2C%22OWNERDESC%22%2C%22USEDESC%22%2C%22HOMESTEADFLAG%22%2C%22COUNTYLAND%22%2C%22COUNTYBUILDING%22%2C%22COUNTYTOTAL%22%2C%22SALEPRICE%22%2C%22SALEDATE%22%2C%22YEARBLT%22%20from%20%22518b583f-7cc8-4f60-94d0-174cc98310dc%22%20WHERE%20%22SCHOOLCODE%22%20LIKE%20%2747%27&limit=9999999"
@@ -63,13 +62,13 @@ abatement$tool <- paste0("<dt>", abatement$program_name, ":", abatement$num_year
 
 ##Lien Data
 #system('python pittsburghliens.py')
-liens <- read.csv("liens.csv")
+liens <- read.csv("/home/odsp/ETL/COUCH/liens.csv")
 liens$amount <- dollarsComma(liens$amount)
 colnames(liens)[3] <- "lien_num"
 
 ##Neighborhood
-system('python pghhoods.py')
-load.nhood <- jsonlite::fromJSON("./pghnhoods.txt")
+#system('python pghhoods.py')
+load.nhood <- jsonlite::fromJSON("/home/odsp/ETL/COUCH/pghnhoods.txt")
 load.nhood <- load.nhood$result$records
 load.nhood$geo_name_nhood <- as.factor(load.nhood$geo_name_nhood)
 
@@ -178,7 +177,7 @@ parcels.final$pin <- as.character(parcels.final$pin)
 
 ##Creates documents in Neighborhood Parcels' database containing all nhood parcels
 ##Url from WPRDC's geojson API
-setwd("./neighborhoodparcels")
+setwd("/home/odsp/ETL/COUCH/neighborhoodparcels")
 for (i in levels(parcels.final$nhood)){ 
   r <- GET(paste0("http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/" ,i, "/"), timeout(60)) 
   f <- content(r, "text", encoding = "ISO-8859-1")

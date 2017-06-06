@@ -187,7 +187,7 @@ ui <- shinyUI(navbarPage(id = "navbar",
                           # Generate layer panel & Map (checks for mobile devices)
                           uiOutput("mapPanel")
                          ),
-                         tabPanel("Data", class = "data", value = "Data",
+                         tabPanel("Data: Parcels", class = "data", value = "Data",
                                   div(style = 'overflow-x: scroll', DT::dataTableOutput("datatable"))
                          ),
                          tabPanel('About', class = "About", value = "About",
@@ -391,9 +391,9 @@ server <- shinyServer(function(input, output) {
     hood_parcel <- hoodinput()
     hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "mapblocklo", "ADDRESS", "geo_name_nhood", "MUNIDESC", "OWNERDESC", "CLASSDESC", "USEDESC", "TAXDESC",
                                                             "SALEDATE", "SALEPRICE", "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "amount",
-                                                            "lien_num", "delq", "tt"))
+                                                            "lien_num", "delq", "cityown", "tt"))
     colnames(hood_parcel@data) <- c("Parcel ID", "Lot & Block", "Address", "Neighborhood", "Ward", "Owner Code", "Class", "Use Code", "Tax Code", "Last Sale Date", "Last Sale Price",
-                                    "County Land Value", "County Building Value", "County Total Value", "Total Lien Amount", "Number of Liens", "Delinquent", "Abatements")
+                                    "County Land Value", "County Building Value", "County Total Value", "Total Lien Amount", "Number of Liens", "Delinquent", "City Owned", "Abatements")
     hood_parcel@data
   }, filter = "top",
   extensions = 'Buttons',

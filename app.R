@@ -388,11 +388,11 @@ server <- shinyServer(function(input, output) {
   ##Data Table
   output$datatable <- DT::renderDataTable({
     hood_parcel <- hoodinput()
-    hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "ADDRESS", "geo_name_nhood", "MUNIDESC", "OWNERDESC", "CLASSDESC", "USEDESC",
+    hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "ADDRESS", "geo_name_nhood", "MUNIDESC", "OWNERDESC", "CLASSDESC", "USEDESC", "TAXDESC",
                                                             "SALEDATE", "SALEPRICE", "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "amount",
                                                             "lien_num", "tt"))
-    colnames(hood_parcel@data) <- c("pin", "address", "neighborhood", "munidesc", "ownerdesc", "classdesc", "usedesc", "saledate", "saleprice", "countyland",
-                                    "countybuilding", "countytotal", "lien_amt", "lien_num", "abatements")
+    colnames(hood_parcel@data) <- c("Parcel ID", "Address", "Neighborhood", "Ward", "Owner Code", "Class", "Use Code", "Tax Code", "Last Sale Date", "Last Sale Price",
+                                    "County Land Value", "County Building Value", "County Total Value", "Total Lien Amount", "Number of Liens", "Abatements")
     hood_parcel@data
   }, filter = "top",
   extensions = 'Buttons',

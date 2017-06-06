@@ -352,6 +352,7 @@ server <- shinyServer(function(input, output) {
                          fill = TRUE, fillColor = ~colorval, fillOpacity = .75,
                          popup = ~paste("<font color='black'><b>Parcel ID:</b>", paste0('<a href="http://www2.county.allegheny.pa.us/RealEstate/GeneralInfo.aspx?ParcelID=',pin, '" target="_blank">', 
                                                                                         pin, '</a>'), 
+                                        ifelse(is.na(mapblocklo), "", paste0("<br><b>Lot & Block:</b>", mapblocklo)),
                                         ifelse(is.na(ADDRESS), "", paste0("<br><b>Address:</b>", ADDRESS)), 
                                         ifelse(is.na(geo_name_nhood), "", paste0("<br><b>Neighborhood:</b>", geo_name_nhood)),
                                         ifelse(is.na(MUNIDESC), "", paste0("<br><b>Ward:</b>", MUNIDESC)),
@@ -388,11 +389,11 @@ server <- shinyServer(function(input, output) {
   ##Data Table
   output$datatable <- DT::renderDataTable({
     hood_parcel <- hoodinput()
-    hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "ADDRESS", "geo_name_nhood", "MUNIDESC", "OWNERDESC", "CLASSDESC", "USEDESC", "TAXDESC",
+    hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "mapblocklo", "ADDRESS", "geo_name_nhood", "MUNIDESC", "OWNERDESC", "CLASSDESC", "USEDESC", "TAXDESC",
                                                             "SALEDATE", "SALEPRICE", "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "amount",
-                                                            "lien_num", "tt"))
-    colnames(hood_parcel@data) <- c("Parcel ID", "Address", "Neighborhood", "Ward", "Owner Code", "Class", "Use Code", "Tax Code", "Last Sale Date", "Last Sale Price",
-                                    "County Land Value", "County Building Value", "County Total Value", "Total Lien Amount", "Number of Liens", "Abatements")
+                                                            "lien_num", "delq", "tt"))
+    colnames(hood_parcel@data) <- c("Parcel ID", "Lot & Block", "Address", "Neighborhood", "Ward", "Owner Code", "Class", "Use Code", "Tax Code", "Last Sale Date", "Last Sale Price",
+                                    "County Land Value", "County Building Value", "County Total Value", "Total Lien Amount", "Number of Liens", "Delinquent", "Abatements")
     hood_parcel@data
   }, filter = "top",
   extensions = 'Buttons',

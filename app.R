@@ -44,6 +44,12 @@ var jsWidth = screen.width;
 Shiny.onInputChange("GetScreenWidth",jsWidth);
 });'
 
+ckanGEO <- function(url) {
+  r <- GET(url, add_headers(Authorization = "74b409d8-0f6f-439a-8a97-7796b9a0fc8b"))
+  c <- content(r, as ="text")
+  readOGR(c, "OGRGeoJSON", verbose = F)
+}
+
 # Make it work when Downloading stuff
 httr::set_config(config(ssl_verifypeer = 0L))
 
@@ -99,9 +105,19 @@ if(Sys.Date() <= as.Date(paste0(this_year,"-10-31")) & Sys.Date() >= as.Date(pas
   load.egg$icon <- "patrick"
   load.egg$tt <- "<i>Your search didn't turn up anything, not even my Pot-o-Gold!</i>"
 } else if (Sys.Date() >= as.Date(paste0(this_year,"-04-01")) & Sys.Date() <= as.Date(paste0(this_year,"-04-30"))) {
-  load.egg <- read.csv("parks.csv")
+  load.egg <- read.csv("boundaries/Parks/parks.csv")
   load.egg$icon <- "easter_egg"
   load.egg$tt <- "<i>You couldn't find any results, but maybe you can find my eggs.</i>"
+} else if (Sys.Date() >= as.Date(paste0(this_year,"-07-01")) & Sys.Date() <= as.Date(paste0(this_year,"-07-07"))) {
+  load.egg <- read.csv("boundaries/Parks/parks.csv")
+  load.egg$icon <- "july_4"
+  load.egg$tt <- "<i>Happy Independence Day! Looks like you need to try another search term.</i>"
+} else if (Sys.Date() >= as.Date(paste0(this_year,"-05-01")) & Sys.Date() <= as.Date(paste0(this_year,"-08-31"))) {
+  load.pools <- ckanGEO("https://data.wprdc.org/dataset/8186cabb-aa90-488c-b894-2d4a1b019155/resource/6f836153-ada7-4b18-b9c9-7a290c569ea9/download/pools.geojson")
+  load.egg <- data.frame(coordinates(load.pools))
+  colnames(load.egg) <- c("X","Y")
+  load.egg$icon <- "summer"
+  load.egg$tt <- "<i>Ah... Summer! Chill out, relax and grab some rays with me. Or if you'd like try another search term.</i>"
 } else {
   X <- c(-79.9968604, -80.004055)
   Y <- c(40.4381098, 40.440631)
@@ -119,7 +135,9 @@ icons_egg <- iconList(
   new_year = makeIcon("./icons/egg/new_year.png", iconAnchorX = 9, iconAnchorY = 13.5, popupAnchorX = 0, popupAnchorY = -13.5),
   valentine = makeIcon("./icons/egg/valentine.png", iconAnchorX = 40, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5),
   patrick = makeIcon("./icons/egg/patrick.png", iconAnchorX = 40, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5),
-  easter_egg = makeIcon("./icons/egg/easter.png", iconAnchorX = 45, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5)
+  easter_egg = makeIcon("./icons/egg/easter.png", iconAnchorX = 45, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5),
+  summer = makeIcon("./icons/egg/summer.png", iconAnchorX = 45, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5),
+  july_4 = makeIcon("./icons/egg/july_4.png", iconAnchorX = 45, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5)               
 )
 
 

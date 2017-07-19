@@ -7,3 +7,4 @@ south_hill_parcels.shp
 .Rproj.user
 neighborhoodparcels/windgap
 *.png
+*.geojson

@@ -407,18 +407,20 @@ server <- shinyServer(function(input, output) {
   ##Data Table
   output$datatable <- DT::renderDataTable({
     hood_parcel <- hoodinput()
-    hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "mapblocklo", "ADDRESS", "geo_name_nhood", "MUNIDESC", "OWNERDESC", "CLASSDESC", "USEDESC", "TAXDESC",
-                                                            "SALEDATE", "SALEPRICE", "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "amount",
-                                                            "lien_num", "delq", "cityown", "tt"))
-    colnames(hood_parcel@data) <- c("Parcel ID", "Lot & Block", "Address", "Neighborhood", "Ward", "Owner Code", "Class", "Use Code", "Tax Code", "Last Sale Date", "Last Sale Price",
-                                    "County Land Value", "County Building Value", "County Total Value", "Total Lien Amount", "Number of Liens", "Delinquent", "City Owned", "Abatements")
     hood_parcel@data
+    hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "mapblocklo", "ADDRESS", "PROPERTYZIP", "geo_name_nhood", "MUNIDESC", "TAXDESC",
+                                                            "USEDESC", "OWNERDESC", "CLASSDESC", "YEARBLT", "SALEDATE", "SALEPRICE",
+                                                            "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "delq", "cityown", "tt"))
+    colnames(hood_parcel@data) <- c("Parcel ID", "Lot & Block", "Address", "Zip", "Neighborhood", "Ward", "Tax Code", "Use Code", "Owner Code", "Class", "Year Built",
+                                    "Last Sale Date", "Last Sale Price", "County Land Value", "County Building Value", "County Total Value", "Delinquent", "City Owned", "Abatements")
+    hood_parcel@data
+   
   }, filter = "top",
   extensions = 'Buttons',
-  options = list(pageLength = 6443,
+  options = list(pageLength = 10,
                  dom = "Bfrtip",
                  buttons = c('copy', 'csv', 'excel'),
-                 lengthMenu = c(6443, 7000),
+                 lengthMenu = c(10,20, 30),
                  #scrollX = TRUE,
                  initComplete = JS(
                    "function(settings, json) {",

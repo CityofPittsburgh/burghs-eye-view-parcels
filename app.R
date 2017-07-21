@@ -18,6 +18,8 @@ library(shinythemes)
 library(leaflet)
 library(rgdal)
 library(htmltools)
+library(R4CouchDB)
+library(stringi)
 
 
 options(scipen = 999)
@@ -37,6 +39,9 @@ chartr0 <- function(foo) chartr('\\','\\/',foo)
 couchdb_un <- jsonlite::fromJSON("key.json")$couchdb_un
 couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
 
+# CouchDB Connection
+couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
+#couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
 
 # Determine if on mobile device
 getWidth <- '$(document).on("shiny:connected", function(e) {
@@ -206,6 +211,9 @@ ui <- shinyUI(navbarPage(id = "navbar",
                           uiOutput("mapPanel")
                          ),
                          tabPanel("Data: Parcels", class = "data", value = "Data",
+                                  inputPanel(
+                                    uiOutput("buttonStyle")
+                                  ),
                                   div(style = 'overflow-x: scroll', DT::dataTableOutput("datatable"))
                          ),
                          tabPanel('About', class = "About", value = "About",
@@ -242,7 +250,49 @@ ui <- shinyUI(navbarPage(id = "navbar",
 
 
 # Define server logic required to draw a histogram
-server <- shinyServer(function(input, output) {  
+server <- shinyServer(function(input, output, session) {  
+  setBookmarkExclude(c("GetScreenWidth"))
+  #URL Bookmark 
+  sessionStart <- as.numeric(Sys.time())
+  names(sessionStart) <- "sessionStart"
+  sessionID <- paste(stri_rand_strings(1, 5), gsub("\\.", "-", sessionStart) , "parcels", sep="-")
+  names(sessionID) <- "sessionID"
+  observe({
+    # Trigger this observer every time an input changes
+    reactiveValuesToList(input)
+    # Connect to Couch DB
+    if (length(reactiveValuesToList(input)) > 0) {
+      dateTime <- Sys.time()
+      names(dateTime) <- "dateTime"
+      couchDB$dataList <- c(reactiveValuesToList(input), sessionID, dateTime, sessionStart)
+      cdbAddDoc(couchDB)
+    }
+    session$doBookmark()
+  })
+  
+  # Update page URL
+  onBookmarked(function(url) {
+    updateQueryString(url)
+  })
+  output$buttonStyle <- renderUI({
+    # Generate search & layer panel & Map (checks for mobile devices)
+    if (as.numeric(input$GetScreenWidth) > 800) {
+      div(style="margin-top: 20px", downloadButton("downloadData", "Export Parcels", class = "dlBut"))
+    } else {
+      div(downloadButton("downloadData", "Export Parcels", class = "dlBut"))
+    }
+  })
+  
+  downloadInput <- reactive({
+    report <- hoodinput()
+    report <- report@data
+    # Report Table Search Filter
+    if (!is.null(input$datatable_search) && input$datatable_search != "") {
+      report <- report[apply(report, 1, function(row){any(grepl(as.character(input$datatable_search), row, ignore.case = TRUE))}), ]
+    }
+    
+    return(report)
+  })
   
   # Map Tab UI
   output$mapPanel <- renderUI({  
@@ -415,11 +465,8 @@ server <- shinyServer(function(input, output) {
                                     "Last Sale Date", "Last Sale Price", "County Land Value", "County Building Value", "County Total Value", "Delinquent", "City Owned", "Abatements")
     hood_parcel@data
    
-  }, filter = "top",
-  extensions = 'Buttons',
-  options = list(pageLength = 10,
+  }, options = list(pageLength = 10,
                  dom = "Bfrtip",
-                 buttons = c('copy', 'csv', 'excel'),
                  lengthMenu = c(10,20, 30),
                  #scrollX = TRUE,
                  initComplete = JS(
@@ -430,8 +477,17 @@ server <- shinyServer(function(input, output) {
   class = 'cell-border stripe',
   rownames = FALSE,
   escape = FALSE
-  )  
+  )
+  
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      paste0(input$neigh_select, ".csv") },
+    content = function(file) {
+      write.csv(downloadInput(), file)
+    }
+  )
+  
 })  
 
 # Run the application 
-shinyApp(ui = ui, server = server) 
+shinyApp(ui = ui, server = server, enableBookmarking = "url") 

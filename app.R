@@ -209,7 +209,7 @@ ui <- shinyUI(navbarPage(id = "navbar",
                                      }"),
                           # Generate layer panel & Map (checks for mobile devices)
                           uiOutput("mapPanel")
-                         ),
+                                  ),
                          tabPanel("Data: Parcels", class = "data", value = "Data",
                                   inputPanel(
                                     uiOutput("buttonStyle")
@@ -242,16 +242,16 @@ ui <- shinyUI(navbarPage(id = "navbar",
                                  }(document, 'script', 'facebook-jssdk'));")),
                 tags$script(HTML('header.append(\'<div class="fb-share-button" style="float:right;margin-top: 15px;margin-right: 5px;" data-href="http://pittsburghpa.shinyapps.io/BurghsEyeView/?utm_source=facebook_button&amp;utm_campaign=facebook_button&amp;utm_medium=facebook%2Fsocial\" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpittsburghpa.shinyapps.io%2FBurghsEyeView%2F%23utm_source%3Dfacebook_button%26utm_campaign%3Dfacebook_button%26utm_medium%3Dfacebook%252Fsocial&amp;src=sdkpreparse">Share</a></div>\');
                                  console.log(header)'))
-                  )
+                )
+                         ) 
                 ) 
-) 
 
 
 
 
 # Define server logic required to draw a histogram
 server <- shinyServer(function(input, output, session) {  
-  setBookmarkExclude(c("GetScreenWidth"))
+  setBookmarkExclude(c("GetScreenWidth", "datatable_rows_all"))
   #URL Bookmark 
   sessionStart <- as.numeric(Sys.time())
   names(sessionStart) <- "sessionStart"
@@ -381,7 +381,7 @@ server <- shinyServer(function(input, output, session) {
                     )
 }
 }
-  )  
+                    )  
   
   hoodinput <- reactive({
     hoodname <- gsub("\\-", "_", input$neigh_select)
@@ -392,7 +392,7 @@ server <- shinyServer(function(input, output, session) {
     g <- GET(url, authenticate(couchdb_un, couchdb_pw))
     c <- content(g, "text")
     hood_parcel <- readOGR(c, "OGRGeoJSON", verbose = F) 
-
+    
     # Search Filter
     if (!is.null(input$search) && input$search != "") {
       hood_parcel <- hood_parcel[apply(hood_parcel@data, 1, function(row){any(grepl(input$search, row, ignore.case = TRUE))}), ]
@@ -464,16 +464,16 @@ server <- shinyServer(function(input, output, session) {
     colnames(hood_parcel@data) <- c("Parcel ID", "Lot & Block", "Address", "Zip", "Neighborhood", "Ward", "Tax Code", "Use Code", "Owner Code", "Class", "Year Built",
                                     "Last Sale Date", "Last Sale Price", "County Land Value", "County Building Value", "County Total Value", "Delinquent", "City Owned", "Abatements")
     hood_parcel@data
-   
+    
   }, options = list(pageLength = 10,
-                 dom = "Bfrtip",
-                 lengthMenu = c(10,20, 30),
-                 #scrollX = TRUE,
-                 initComplete = JS(
-                   "function(settings, json) {",
-                   "$(this.api().table().header()).css({'background-color': '#95a5a6'});",
-                   "}"),
-                 searchHighlight = TRUE), 
+                    dom = "Bfrtip",
+                    lengthMenu = c(10,20, 30),
+                    #scrollX = TRUE,
+                    initComplete = JS(
+                      "function(settings, json) {",
+                      "$(this.api().table().header()).css({'background-color': '#95a5a6'});",
+                      "}"),
+                    searchHighlight = TRUE), 
   class = 'cell-border stripe',
   rownames = FALSE,
   escape = FALSE
@@ -487,7 +487,7 @@ server <- shinyServer(function(input, output, session) {
     }
   )
   
-})  
+  })  
 
 # Run the application 
 shinyApp(ui = ui, server = server, enableBookmarking = "url") 

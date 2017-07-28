@@ -265,7 +265,7 @@ server <- shinyServer(function(input, output, session) {
       dateTime <- Sys.time()
       names(dateTime) <- "dateTime"
       couchDB$dataList <- c(reactiveValuesToList(input), sessionID, dateTime, sessionStart)
-      cdbAddDoc(couchDB)
+      #cdbAddDoc(couchDB)
     }
     session$doBookmark()
   })
@@ -426,7 +426,7 @@ server <- shinyServer(function(input, output, session) {
                                         ifelse(is.na(MUNIDESC), "", paste0("<br><b>Ward: </b>", MUNIDESC)),
                                         ifelse(is.na(OWNERDESC), "", paste0("<br><b>Owner Code: </b>", OWNERDESC)),
                                         ifelse(is.na(CLASSDESC), "", paste0("<br><b>Class: </b>", CLASSDESC)),
-                                        ifelse(is.na(USEDESC), "", paste0("<br><b>Use Code: </b>", USEDESC)),
+                                        #ifelse(is.na(USEDESC), "", paste0("<br><b>Use Code: </b>", USEDESC)),
                                         ifelse(is.na(TAXDESC), "", paste0("<br><b>Tax Code: </b>", TAXDESC)),
                                         ifelse(is.na(SALEDATE), "", paste0("<br><b>Last Sale Date: </b>", SALEDATE)),
                                         ifelse(is.na(SALEPRICE), "", paste0("<br><b>Last Sale Price: </b>", dollarsComma(SALEPRICE))),
@@ -459,10 +459,11 @@ server <- shinyServer(function(input, output, session) {
     hood_parcel <- hoodinput()
     hood_parcel@data
     hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "mapblocklo", "ADDRESS", "PROPERTYZIP", "geo_name_nhood", "MUNIDESC", "TAXDESC",
-                                                            "USEDESC", "OWNERDESC", "CLASSDESC", "YEARBLT", "SALEDATE", "SALEPRICE",
-                                                            "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "delq", "cityown", "tt"))
-    colnames(hood_parcel@data) <- c("Parcel ID", "Lot & Block", "Address", "Zip", "Neighborhood", "Ward", "Tax Code", "Use Code", "Owner Code", "Class", "Year Built",
-                                    "Last Sale Date", "Last Sale Price", "County Land Value", "County Building Value", "County Total Value", "Delinquent", "City Owned", "Abatements")
+                                                            "OWNERDESC", "CLASSDESC", "YEARBLT", "SALEDATE", "SALEPRICE",
+                                                            "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "amount", "lien_num", "delq", "cityown", "tt"))
+    colnames(hood_parcel@data) <- c("Parcel ID", "Lot & Block", "Address", "Zip", "Neighborhood", "Ward", "Tax Code", "Owner Code", "Class", "Year Built",
+                                    "Last Sale Date", "Last Sale Price", "County Land Value", "County Building Value", "County Total Value",
+                                    "Lien Amount", "Number of Liens","Delinquent", "City Owned", "Abatements")
     hood_parcel@data
     
   }, options = list(pageLength = 10,

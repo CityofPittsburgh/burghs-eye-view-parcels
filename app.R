@@ -469,6 +469,7 @@ server <- shinyServer(function(input, output, session) {
   }, options = list(pageLength = 10,
                     dom = "Bfrtip",
                     lengthMenu = c(10,20, 30),
+                    scrollY = '750px',
                     #scrollX = TRUE,
                     initComplete = JS(
                       "function(settings, json) {",

@@ -3,6 +3,7 @@
 # Dept: Innovation & Performance
 # Team: Analytics & Strategy
 # Author: Max Cercone
+
 library(httr)
 library(jsonlite)
 library(plyr)
@@ -21,9 +22,7 @@ library(htmltools)
 library(R4CouchDB)
 library(stringi)
 
-
 options(scipen = 999)
-
 
 dollarsComma <- function(x){
   #x <- round(x, 2)
@@ -40,8 +39,8 @@ couchdb_un <- jsonlite::fromJSON("key.json")$couchdb_un
 couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
 
 # CouchDB Connection
-couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
-#couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
+# couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
+couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
 
 # Determine if on mobile device
 getWidth <- '$(document).on("shiny:connected", function(e) {
@@ -144,7 +143,6 @@ icons_egg <- iconList(
   summer = makeIcon("./icons/egg/summer.png", iconAnchorX = 45, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5),
   july_4 = makeIcon("./icons/egg/july_4.png", iconAnchorX = 45, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5)               
 )
-
 
 hood_list <- jsonlite::fromJSON("hoods.json")
 
@@ -323,7 +321,11 @@ server <- shinyServer(function(input, output, session) {
                                 choices = hood_list,
                                 selected = "Central Business District",
                                 multiple = FALSE,
-                                selectize = TRUE)
+                                selectize = TRUE),
+                    selectInput("basemap_select",
+                                label = "Basemap",
+                                choices = c(`OSM Mapnik` = "OpenStreetMap.Mapnik", `OSM France` = "OpenStreetMap.France", `OSM Humanitarian` = "OpenStreetMap.HOT", `Stamen Toner` = "Stamen.Toner", `Esri Satellite` = "Esri.WorldImagery", Esri = "Esri.WorldStreetMap", `OSM Dark Matter` = "CartoDB.DarkMatter", `OSM Positron` = "CartoDB.Positron"),
+                                selected = "OpenStreetMap.Mapnik")
                     ), style = "opacity: 0.88"
           )
         )
@@ -363,6 +365,10 @@ server <- shinyServer(function(input, output, session) {
                                           selected = "Central Business District",
                                           multiple = FALSE,
                                           selectize = TRUE),
+                              selectInput("basemap_select",
+                                          label = "Basemap",
+                                          choices = c(`OSM Mapnik` = "OpenStreetMap.Mapnik", `OSM France` = "OpenStreetMap.France", `OSM Humanitarian` = "OpenStreetMap.HOT", `Stamen Toner` = "Stamen.Toner", `Esri Satellite` = "Esri.WorldImagery", Esri = "Esri.WorldStreetMap", `OSM Dark Matter` = "CartoDB.DarkMatter", `OSM Positron` = "CartoDB.Positron"),
+                                          selected = "OpenStreetMap.Mapnik"),
                               HTML('</div>')
                               ),
                     # Generate Map
@@ -406,10 +412,8 @@ server <- shinyServer(function(input, output, session) {
     hood_parcel <- hoodinput()
     
     map <- leaflet() %>%
-      addProviderTiles("OpenStreetMap.Mapnik",
-                       options = providerTileOptions(noWrap = TRUE, minZoom = 1
-                       )
-      ) %>%
+      addProviderTiles(input$basemap_select,
+                       options = providerTileOptions(noWrap = TRUE)) %>%
       addLegend("topright", colors = c("#4daf4a", "#ffff33", "#e41a1c"), labels = c("Abated Properties", "City Owned", "Delinquent"))
     
     

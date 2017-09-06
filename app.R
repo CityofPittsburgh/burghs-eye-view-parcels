@@ -37,10 +37,11 @@ chartr0 <- function(foo) chartr('\\','\\/',foo)
 ##Set Couch credentials
 couchdb_un <- jsonlite::fromJSON("key.json")$couchdb_un
 couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
+couchdb_url <- jsonlite::fromJSON("key.json")$couchdb_url
 
 # CouchDB Connection
-# couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
-couchDB <- cdbIni(serverName = "webhost.pittsburghpa.gov", uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
+# couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
+couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
 
 # Determine if on mobile device
 getWidth <- '$(document).on("shiny:connected", function(e) {
@@ -255,19 +256,6 @@ server <- shinyServer(function(input, output, session) {
   names(sessionStart) <- "sessionStart"
   sessionID <- paste(stri_rand_strings(1, 5), gsub("\\.", "-", sessionStart) , "parcels", sep="-")
   names(sessionID) <- "sessionID"
-  observe({
-    # Trigger this observer every time an input changes
-    reactiveValuesToList(input)
-    # Connect to Couch DB
-    if (length(reactiveValuesToList(input)) > 0) {
-      dateTime <- Sys.time()
-      names(dateTime) <- "dateTime"
-      couchDB$dataList <- c(reactiveValuesToList(input), sessionID, dateTime, sessionStart)
-      #cdbAddDoc(couchDB)
-    }
-    session$doBookmark()
-  })
-  
   # Update page URL
   onBookmarked(function(url) {
     updateQueryString(url)
@@ -394,7 +382,7 @@ server <- shinyServer(function(input, output, session) {
     hoodname <- gsub(" ", "_", hoodname)
     hoodname <- gsub("\\.", "", hoodname)
     hoodname <- tolower(hoodname)
-    url <- paste0("http://webhost.pittsburghpa.gov:5984/neighborhood_parcels/", hoodname)
+    url <- paste0(couchdb_url, ":5984/neighborhood_parcels/", hoodname)
     g <- GET(url, authenticate(couchdb_un, couchdb_pw))
     c <- content(g, "text")
     hood_parcel <- readOGR(c, "OGRGeoJSON", verbose = F) 
@@ -454,6 +442,14 @@ server <- shinyServer(function(input, output, session) {
       }
       map <- addMarkers(map, data=egg, ~X, ~Y, icon = ~icons_egg[icon], popup = ~tt) %>% 
         setView(-79.9959, 40.4406, zoom = 10)
+    }
+    #Write inputs to Couch
+    if (url.exists(paste0(couchdb_url, ":5984/_utils/"))){
+      dateTime <- Sys.time()
+      names(dateTime) <- "dateTime"
+      inputs <- isolate(reactiveValuesToList(input))
+      couchDB$dataList <- c(inputs, sessionID, dateTime, sessionStart)
+      cdbAddDoc(couchDB)
     }
     map
   }) 

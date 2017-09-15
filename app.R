@@ -456,6 +456,13 @@ server <- shinyServer(function(input, output, session) {
   
   ##Data Table
   output$datatable <- DT::renderDataTable({
+    if (url.exists(paste0(couchdb_url, ":5984/_utils/"))){
+      dateTime <- Sys.time()
+      names(dateTime) <- "dateTime"
+      inputs <- isolate(reactiveValuesToList(input))
+      couchDB$dataList <- c(inputs, sessionID, dateTime, sessionStart)
+      cdbAddDoc(couchDB)
+    }
     hood_parcel <- hoodinput()
     hood_parcel@data
     hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "mapblocklo", "ADDRESS", "PROPERTYZIP", "geo_name_nhood", "MUNIDESC", "TAXDESC",

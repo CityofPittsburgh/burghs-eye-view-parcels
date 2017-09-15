@@ -1,0 +1,11 @@
+name: BurghsEyeViewParcels
+title: BurghsEyeViewParcels
+account: pittsburghpa
+server: shinyapps.io
+appId: 184002
+bundleId: 970349
+url: https://pittsburghpa.shinyapps.io/BurghsEyeViewParcels/
+when: 1504731965.30523
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: README.md

@@ -21,6 +21,7 @@ library(rgdal)
 library(htmltools)
 library(R4CouchDB)
 library(stringi)
+library(lubridate)
 
 options(scipen = 999)
 
@@ -40,8 +41,8 @@ couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
 couchdb_url <- jsonlite::fromJSON("key.json")$couchdb_url
 
 # CouchDB Connection
-# couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
-couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
+couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
+# couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
 
 # Determine if on mobile device
 getWidth <- '$(document).on("shiny:connected", function(e) {
@@ -61,16 +62,13 @@ httr::set_config(config(ssl_verifypeer = 0L))
 # this_year
 this_year <- format(Sys.Date(), format="%Y")
 
-if(Sys.Date() <= as.Date(paste0(this_year,"-10-31")) & Sys.Date() >= as.Date(paste0(this_year,"-10-01"))) {
-  # Egg
-  X <- c(-79.9573738, -79.9796721, -79.9892566, -79.9814719, -79.9517155, -79.9128181, -79.9272001, -79.983961, -79.9948964, -79.9933058, -80.0217265, -80.0215099, -79.9851465)
-  Y <- c(40.4611634, 40.4671619, 40.4667157, 40.472155, 40.4684005, 40.4401088, 40.4161835, 40.4186422, 40.4066441, 40.4012173, 40.4737751, 40.4636383, 40.4289496)
-  title <- c("Allegheny", "Voegtly", "Ridgelawn", "St. Pauls", "St. Mary", "Smithfield East", "Calvary Catholic", "St Michaels", "St John Vianney", "South Side", "Highwood", "Union Dale", "Prince of Peace")
-  load.egg <- data.frame(X,Y,title)
-  load.egg$icon <- "halloween"
-  load.egg$tt <- "Yarr! There be nuttin' to be found with that search term matey."
-} else if (Sys.Date() <= as.Date(paste0(this_year,"-11-08")) & Sys.Date() >= as.Date(paste0(this_year,"-11-01"))) {
-  load.egg <- ckan("e17e6a67-2bba-4a1a-aa36-87beb2cd0a3b")
+# Election Day
+nov <- ymd(as.Date(paste0(this_year, "-11-01")))
+dow <- sapply(seq(0,6),function(x) wday(nov+days(x)))
+eDay <- nov + days(which(dow==2))
+
+if (Sys.Date() == eDay) {
+  load.egg <- ckan("51efa73c-d4b8-4ac0-b65a-9c9b1f904372")
   load.egg <- subset(load.egg, MuniName == "PITTSBURGH")
   load.egg$icon <- "election"
   load.egg$tt <- paste0("<font color='black'>No matter who you Vote for, make sure you Vote!
@@ -78,10 +76,17 @@ if(Sys.Date() <= as.Date(paste0(this_year,"-10-31")) & Sys.Date() >= as.Date(pas
                         "<br><b>Ward: </b>", load.egg$Ward,
                         "<br><b>District: </b>", load.egg$District,
                         "<br><b>Address: </b>", load.egg$NewAddress,
-                        '<br><center><a href="https://www.pavoterservices.state.pa.us/pages/pollingplaceinfo.aspx" target="_blank">Find your polling place!</a></center>
-                        Clear the search bar to go back to the regular Burgh&#39;s Eye View!</font>'
+                        '<br><center><a href="https://www.pavoterservices.state.pa.us/pages/pollingplaceinfo.aspx" target="_blank">Find your polling place!</a></center>'
   )
-} else if (Sys.Date() <= as.Date(paste0(this_year,"-11-30")) & Sys.Date() >= as.Date(paste0(this_year,"-11-09"))) {
+} else if(Sys.Date() <= as.Date(paste0(this_year,"-10-31")) & Sys.Date() >= as.Date(paste0(this_year,"-10-01"))) {
+  # Egg
+  X <- c(-79.9573738, -79.9796721, -79.9892566, -79.9814719, -79.9517155, -79.9128181, -79.9272001, -79.983961, -79.9948964, -79.9933058, -80.0217265, -80.0215099, -79.9851465)
+  Y <- c(40.4611634, 40.4671619, 40.4667157, 40.472155, 40.4684005, 40.4401088, 40.4161835, 40.4186422, 40.4066441, 40.4012173, 40.4737751, 40.4636383, 40.4289496)
+  title <- c("Allegheny", "Voegtly", "Ridgelawn", "St. Pauls", "St. Mary", "Smithfield East", "Calvary Catholic", "St Michaels", "St John Vianney", "South Side", "Highwood", "Union Dale", "Prince of Peace")
+  load.egg <- data.frame(X,Y,title)
+  load.egg$icon <- "halloween"
+  load.egg$tt <- "Yarr! There be nuttin' to be found with that search term matey."
+} else if (Sys.Date() <= as.Date(paste0(this_year,"-11-30")) & Sys.Date() >= as.Date(paste0(this_year,"-11-01"))) {
   X <- c(-79.9773187, -80.0096757, -80.0109521)
   Y <- c(40.4644031, 40.4406418, 40.4416163)
   title <- c("Herr's Island", "Fort Pitt", "Fort Duquesne")
@@ -435,7 +440,7 @@ server <- shinyServer(function(input, output, session) {
                                         paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=',pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>')))
     } 
     if (nrow(hood_parcel) == 0) {
-      if (Sys.Date() >= as.Date(paste0(this_year,"-11-01")) & Sys.Date() <= as.Date(paste0(this_year,"-11-08"))) {
+      if (Sys.Date() == eDay) {
         egg <- load.egg
       } else {
         egg <- load.egg[sample(1:nrow(load.egg),1),]

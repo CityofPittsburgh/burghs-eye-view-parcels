@@ -1,11 +1,12 @@
 name: Burghs_iViewParcels
 title: Burghs_iViewParcels
+username:
 account: pittsburghpa
 server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
 appId: 198626
-bundleId: 970334
+bundleId: 1056534
 url: https://pittsburghpa.shinyapps.io/Burghs_iViewParcels/
-when: 1504730958.37923
+when: 1509643268.66431
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: README.md

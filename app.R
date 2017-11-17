@@ -2,7 +2,8 @@
 # Organization: City of Pittsburgh
 # Dept: Innovation & Performance
 # Team: Analytics & Strategy
-# Author: Max Cercone
+# Author: Maxwell Cercone
+# Maintained by: Geoffrey Arnold
 
 # Load required packages
 library(shiny)
@@ -17,7 +18,6 @@ library(R4CouchDB)
 library(leaflet)
 library(rgdal)
 library(DT)
-library(geojsonio)
 library(sp)
 
 # Data Transform

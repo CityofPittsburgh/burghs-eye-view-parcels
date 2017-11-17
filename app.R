@@ -4,22 +4,25 @@
 # Team: Analytics & Strategy
 # Author: Max Cercone
 
+# Load required packages
+library(shiny)
+library(shinythemes)
+
+#"Dogfooding" Packages
 library(httr)
 library(jsonlite)
-library(plyr)
-library(dplyr)
-library(sp)
-library(maptools)
-library(raster)
-library(sp)
-library(maptools)
-library(raster)
-library(dplyr)
-library(shinythemes)
+library(R4CouchDB)
+
+# Visuals Libraries
 library(leaflet)
 library(rgdal)
-library(htmltools)
-library(R4CouchDB)
+library(DT)
+library(geojsonio)
+library(sp)
+
+# Data Transform
+library(plyr)
+library(dplyr)
 library(stringi)
 library(lubridate)
 
@@ -41,8 +44,8 @@ couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
 couchdb_url <- jsonlite::fromJSON("key.json")$couchdb_url
 
 # CouchDB Connection
-couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
-# couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
+# couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
+couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
 
 # Determine if on mobile device
 getWidth <- '$(document).on("shiny:connected", function(e) {

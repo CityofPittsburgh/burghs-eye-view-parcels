@@ -5,8 +5,8 @@ account: pittsburghpa
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 198626
-bundleId: 1056534
+bundleId: 1056657
 url: https://pittsburghpa.shinyapps.io/Burghs_iViewParcels/
-when: 1509643268.66431
+when: 1509648793.65434
 asMultiple: FALSE
 asStatic: FALSE

@@ -44,8 +44,8 @@ couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
 couchdb_url <- jsonlite::fromJSON("key.json")$couchdb_url
 
 # CouchDB Connection
-couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
-# couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
+# couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
+couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
 
 # Determine if on mobile device
 getWidth <- '$(document).on("shiny:connected", function(e) {

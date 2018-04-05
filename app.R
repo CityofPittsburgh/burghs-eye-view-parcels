@@ -65,14 +65,27 @@ httr::set_config(config(ssl_verifypeer = 0L))
 # this_year
 this_year <- format(Sys.Date(), format="%Y")
 
+# Election/Primary Day
+presidential_years <- seq(2020, 2050, 4)
+
+# Check if Presidential Year for Primary
+if (this_year %in% presidential_years) {
+  apr <- as.Date(paste0(this_year, "-04-01"))
+  dow <- sapply(seq(0,31),function(x) format(apr+x, "%a"))
+  pDay <- apr + which(dow=="Tue")[4] - 1
+} else {
+  may <- as.Date(paste0(this_year, "-05-01"))
+  dow <- sapply(seq(0,31),function(x) format(may+x, "%a"))
+  pDay <- may + which(dow=="Tue")[3] - 1
+}
+
 # Election Day
 nov <- ymd(as.Date(paste0(this_year, "-11-01")))
-dow <- sapply(seq(0,6),function(x) wday(nov+days(x)))
-eDay <- nov + days(which(dow==2))
+dow <- sapply(seq(0,7),function(x) format(nov+x, "%a"))
+eDay <- nov + which(dow=="Mon")[1]
 
-if (Sys.Date() == eDay) {
-  load.egg <- ckan("51efa73c-d4b8-4ac0-b65a-9c9b1f904372")
-  load.egg <- subset(load.egg, MuniName == "PITTSBURGH")
+if (Sys.Date() == eDay | Sys.Date() == pDay) {
+  load.egg <- ckanSQL("https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%20*%20FROM%20%2251efa73c-d4b8-4ac0-b65a-9c9b1f904372%22%20WHERE%22MuniName%22%20=%20%27PITTSBURGH%27")
   load.egg$icon <- "election"
   load.egg$tt <- paste0("<font color='black'>No matter who you Vote for, make sure you Vote!
                         <br><b>Location: </b>", load.egg$LocName,

@@ -5,9 +5,9 @@ account: pittsburghpa
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 198626
-bundleId: 1303737
+bundleId: 1303854
 url: https://pittsburghpa.shinyapps.io/Burghs_iViewParcels/
-when: 1522930066.95949
+when: 1522934714.50386
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: .gitattributes|.RData|central_business_district|createdbs.R|Dockerfile|liencleaner.R|pmapcleanr.R|testpull.R|ETL
+ignoredFiles: .gitattributes|.RData|Dockerfile|ETL|neighborhoodparcels

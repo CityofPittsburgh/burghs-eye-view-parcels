@@ -1,8 +1,0 @@
-{
-"type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-                                                                                
-"features": [
-{ "type": "Feature", "id": 3459, "properties": { "pin": "0051E00179000000", "mapblocklo": "51-E-179", "shapearea": 12724.597391, "shapelen": 595.743991, "pk": "578696", "objectid": 546795483, "MUNIDESC": null, "COUNTYLAND": null, "YEARBLT": null, "COUNTYTOTAL": null, "HOMESTEADFLAG": null, "SALEDATE": null, "TAXDESC": null, "PROPERTYADDRESS": null, "PROPERTYHOUSENUM": null, "USEDESC": null, "OWNERDESC": null, "SALEPRICE": null, "CLASSDESC": null, "PROPERTYZIP": null, "COUNTYBUILDING": null, "PROPERTYFRACTION": null, "delq": null, "cityown": null, "program_name": null, "start_year": null, "num_years": null, "abatement_amt": null, "abatement": null, "ADDRESS": null, "amount": null, "owedto": null, "geo_name_nhood": null, "nhood": null, "colorval": null }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -79.949245645489398, 40.4631826690472 ], [ -79.949406268079102, 40.4632993139695 ], [ -79.949097454921798, 40.463546391924702 ], [ -79.949034345446194, 40.463499034894198 ], [ -79.949245645489398, 40.4631826690472 ] ] ] } }
-]
-}

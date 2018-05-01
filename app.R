@@ -310,10 +310,10 @@ server <- shinyServer(function(input, output, session) {
         # Generate Map
         leafletOutput("map"),
         # Map size for Desktop CSS
-        tags$style(type = "text/css", "#map {height: calc(100vh - 60px) !important;}"),
+        tags$style(type = "text/css", "#map {height: calc(100vh - 60px) !important; z-index: 0}"),
         absolutePanel(
           # Input panel for Desktops (alpha'd)
-          top = 70, left = 50, width = '300px',
+          top = 70, left = 50, width = '300px', style = "z-index: 100;",
           wellPanel(id = "tPanel", style = "max-height: calc(100vh - 90px) !important;",
                     # Add background image
                     tags$head(tags$style(type="text/css", '.Points {
@@ -407,8 +407,9 @@ server <- shinyServer(function(input, output, session) {
     url <- paste0(couchdb_url, ":5984/neighborhood_parcels/", hoodname)
     g <- GET(url, authenticate(couchdb_un, couchdb_pw))
     c <- content(g, "text")
-    hood_parcel <- readOGR(c, "OGRGeoJSON", verbose = F) 
-    
+    hood_sf <- sf::st_read(dsn = c, layer = "OGRGeoJSON")
+    hood_parcel <- as(hood_sf, 'Spatial')
+      
     # Search Filter
     if (!is.null(input$search) && input$search != "") {
       hood_parcel <- hood_parcel[apply(hood_parcel@data, 1, function(row){any(grepl(input$search, row, ignore.case = TRUE))}), ]

@@ -16,7 +16,7 @@ library(R4CouchDB)
 
 # Visuals Libraries
 library(leaflet)
-library(rgdal)
+library(sf)
 library(geojsonio)
 library(DT)
 library(sp)

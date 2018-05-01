@@ -17,6 +17,7 @@ library(R4CouchDB)
 # Visuals Libraries
 library(leaflet)
 library(rgdal)
+library(geojsonio)
 library(DT)
 library(sp)
 
@@ -139,7 +140,7 @@ if (Sys.Date() == eDay | Sys.Date() == pDay) {
   load.egg$icon <- "july_4"
   load.egg$tt <- "<i>Happy Independence Day! Looks like you need to try another search term.</i>"
 } else if (Sys.Date() >= as.Date(paste0(this_year,"-05-01")) & Sys.Date() <= as.Date(paste0(this_year,"-08-31"))) {
-  load.pools <- ckanGEO("https://data.wprdc.org/dataset/8186cabb-aa90-488c-b894-2d4a1b019155/resource/6f836153-ada7-4b18-b9c9-7a290c569ea9/download/pools.geojson")
+  load.pools <- geojson_read("https://data.wprdc.org/dataset/f7067c4e-0c1e-420c-8c31-f62769fcd29a/resource/77288f26-54a1-4c0c-bc59-7873b1109e76/download/poolsimg.geojson", what = "sp")
   load.egg <- data.frame(coordinates(load.pools))
   colnames(load.egg) <- c("X","Y")
   load.egg$icon <- "summer"

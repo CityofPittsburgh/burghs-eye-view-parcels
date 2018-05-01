@@ -54,12 +54,6 @@ var jsWidth = screen.width;
 Shiny.onInputChange("GetScreenWidth",jsWidth);
 });'
 
-ckanGEO <- function(url) {
-  r <- GET(url, add_headers(Authorization = "74b409d8-0f6f-439a-8a97-7796b9a0fc8b"))
-  c <- content(r, as ="text")
-  readOGR(c, "OGRGeoJSON", verbose = F)
-}
-
 # Make it work when Downloading stuff
 httr::set_config(config(ssl_verifypeer = 0L))
 

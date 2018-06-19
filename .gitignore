@@ -8,3 +8,5 @@ neighborhoodparcels/windgap
 *.png
 *.geojson
 allegheny_center
+
+key.json

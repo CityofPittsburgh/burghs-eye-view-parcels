@@ -80,7 +80,7 @@ dow <- sapply(seq(0,7),function(x) format(nov+x, "%a"))
 eDay <- nov + which(dow=="Mon")[1]
 
 if (Sys.Date() == eDay | Sys.Date() == pDay) {
-  load.egg <- ckanSQL("https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%20*%20FROM%20%2251efa73c-d4b8-4ac0-b65a-9c9b1f904372%22%20WHERE%22MuniName%22%20=%20%27PITTSBURGH%27")
+  load.egg <- ckanSQL("https://data.wprdc.org/api/3/action/datastore_search_sql?sql=SELECT%20*%20FROM%20%2251efa73c-d4b8-4ac0-b65a-9c9b1f904372%22%20WHERE%22MuniName%22%20=%20%27PITTSBURGH%27")
   load.egg$icon <- "election"
   load.egg$tt <- paste0("<font color='black'>No matter who you Vote for, make sure you Vote!
                         <br><b>Location: </b>", load.egg$LocName,

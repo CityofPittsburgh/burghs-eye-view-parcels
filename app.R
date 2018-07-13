@@ -54,6 +54,13 @@ var jsWidth = screen.width;
 Shiny.onInputChange("GetScreenWidth",jsWidth);
 });'
 
+ckanSQL <- function(url) {
+  r <- RETRY("GET", url)
+  c <- content(r, "text")
+  json <- gsub('NaN', '""', c, perl = TRUE)
+  data.frame(jsonlite::fromJSON(json)$result$records)
+}
+
 # Make it work when Downloading stuff
 httr::set_config(config(ssl_verifypeer = 0L))
 

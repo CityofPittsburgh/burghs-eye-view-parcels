@@ -171,7 +171,8 @@ icons_egg <- iconList(
 hood_list <- jsonlite::fromJSON("hoods.json")
 
 ##Application
-ui <- shinyUI(navbarPage(id = "navbar",
+ui <- function(request) {
+              navbarPage(id = "navbar",
                          windowTitle = "Burgh's Eye View Parcels",
                          selected = "Parcels",
                          title = HTML('<img src="burghs_eyeview_logo_small.png" alt="Burghs Eye View" height="85%">'),
@@ -201,36 +202,92 @@ ui <- shinyUI(navbarPage(id = "navbar",
                                   tags$head(includeScript("google-analytics.js")),
                                   # Add Tag Manager Script to Body
                                   tags$body(tags$noscript(tags$iframe(src='https://www.googletagmanager.com/ns.html?id=GTM-TCTCQVD', height = 0, width = 0, style="display:none;visibility:hidden"))),
-                                  # Hide error codes that may appear
-                                  tags$style(type="text/css",
-                                             ".shiny-output-error { visibility: hidden; }",
-                                             ".shiny-output-error:before { visibility: hidden; }"),
-                                  # Background of report.table
-                                  tags$style(type="text/css", '.report.table {background-color: #fff;}'),
                                   # Remove unwanted padding and margins
-                                  tags$style(type="text/css", ".container-fluid {padding:0;}"),
-                                  tags$style(type="text/css", ".navbar-header {margin:auto;"),
-                                  tags$style(type="text/css", ".navbar-static-top {margin-bottom:0;}"),
-                                  tags$style(type="text/css", ".navbar-brand {height:60px; padding:0;}"),
-                                  tags$style(type="text/css", ".navbar {border-right-width: 20px;
-                                             border-left-width: 65px;}"),
-                                  # Set max height for pop-ups
-                                  tags$style(type="text/css", ".leaflet-popup-content {overflow-y: auto; max-height: 400px !important;}"),
-                                  # Edit top bar
-                                  tags$style(type= "text/css", ".form-group {
-                                             margin-bottom: 0px;
+                                  tags$style(type="text/css", ".report.table {background-color: #fff;}
+                                             .shiny-output-error { visibility: hidden;}
+                                             .shiny-output-error:before { visibility: hidden; }
+                                             .container-fluid {padding:0;}
+                                             .navbar-header {margin:auto;}
+                                             .navbar-static-top {margin-bottom:0;}
+                                             .navbar-brand {height:60px; 
+                                             padding:0;}
+                                             .navbar {border-right-width: 20px;
+                                             border-left-width: 65px;}
+                                             .leaflet-popup-content {overflow-y: auto; 
+                                             max-height: 400px !important;}
+                                             .form-group {margin-bottom: 0px;}
+                                             @media only screen and (min-width: 600px) {
+                                             #map {height: calc(100vh - 60px) !important; 
+                                             z-index: 0;}
+                                             #tPanel {opacity: 0.88;
+                                             max-height: calc(100vh - 90px);}
+                                             .btn.collapsed {display: none;}
+                                             #mobile {display: initial;}
+                                             #outer {position: relative; padding-bottom: 0px;}
+                                             #search {width: 275px;}
+                                             }
+                                             @media only screen and (max-width: 600px) {
+                                             #map {height: calc(100vh - 115px) !important;
+                                             position: absolute !important;
+                                             top: 115px;
+                                             z-index: 0;}
+                                             #aPanel {top: 60px !important; 
+                                             left: 0px !important; 
+                                             width: 100% !important;}
+                                             .assetsBack {position: absolute;
+                                             width: 100%;
+                                             z-index: -1;
+                                             left: 0px;
+                                             top: 55px;}
+                                             #tPanel {margin-bottom:0px; 
+                                             padding:0px !important; 
+                                             overflow-y:scroll !important; 
+                                             max-height: calc(100vh - 65) !important; 
+                                             min-height: 55px !important; 
+                                             padding-left: 10px !important; 
+                                             padding-right: 10px !important;
+                                             border: none;
+                                             width: 100%;
+                                             opacity: 1 !important;}
+                                             #search {width: calc(100vw - 85px) !important; margin-left:10px !important;}
+                                             #outer {margin-top: 5px !important; position: absolute;}
+                                             .btn.collapsed {display: in-line !important;}
                                              }"),
-                                  tags$head(tags$style(type="text/css", '.Parcels {
-                                                       background-image: url("loading.png");
-                                                       background-repeat: no-repeat;
-                                                       background-position: center;
-                                                       background-size: contain;
-                                                       }')),
-                          tags$style(type= "text/css", ".form-group {
-                                     margin-bottom: 0px;
-                                     }"),
-                          # Generate layer panel & Map (checks for mobile devices)
-                          uiOutput("mapPanel")
+                          # Generate Map
+                          leafletOutput("map"),
+                          # Add background image
+                          tags$head(tags$style(type="text/css", '.Parcels {
+                                               background-image: url("loading.png");
+                                               background-repeat: no-repeat;
+                                               background-position: center;
+                                               background-size: contain;
+                                               }')),
+        absolutePanel(
+          # Input panel for Desktops (alpha'd)
+          top = 70, left = 50, width = '325px', style = "z-index: 1000", id = "aPanel",
+          wellPanel(id = "tPanel", style = "overflow-y:auto; min-height: 65px;",
+                    HTML('<div id="outer" style="z-index: 9; background-color:#ecf0f1;">'),
+                    div(style="display:inline-block;", 
+                        textInput("search", 
+                                  value = "",
+                                  label = NULL, 
+                                  placeholder = "Search")),
+                    tags$style(style="text/css", chartr0('#tPanel #outer .btn .fa:before { content: "\\f056";  }
+                                                         #tPanel #outer .btn.collapsed .fa:before { content: "\\f055";  }')),
+                    HTML('<button class="btn collapsed" data-toggle="collapse" data-target="#mobile" stye="display: block;"><i class="fa fa-search-plus" aria-hidden="true"></i></button></div>
+                         <div id="mobile" class="collapse" style="margin-top:55px;">'),
+                          selectInput("neigh_select",
+                                      label = "Neighborhood",
+                                      choices = hood_list,
+                                      selected = "Central Business District",
+                                      multiple = FALSE,
+                                      selectize = TRUE),
+                          selectInput("basemap_select",
+                                      label = "Basemap",
+                                      choices = c(`OSM Mapnik` = "OpenStreetMap.Mapnik", `Code for Pittsburgh` = "mapStack", `OSM France` = "OpenStreetMap.France", `OSM Humanitarian` = "OpenStreetMap.HOT", `Stamen Toner` = "Stamen.Toner", `Esri Satellite` = "Esri.WorldImagery", Esri = "Esri.WorldStreetMap", `OSM Dark Matter` = "CartoDB.DarkMatter", `OSM Positron` = "CartoDB.Positron"),
+                                      selected = "OpenStreetMap.Mapnik")
+                         ), HTML("</div>")
+        )
                                   ),
                          tabPanel("Data: Parcels", class = "data", value = "Data",
                                   inputPanel(
@@ -265,9 +322,8 @@ ui <- shinyUI(navbarPage(id = "navbar",
                 tags$script(HTML('header.append(\'<div class="fb-share-button" style="float:right;margin-top: 15px;margin-right: 5px;" data-href="http://pittsburghpa.shinyapps.io/BurghsEyeView/?utm_source=facebook_button&amp;utm_campaign=facebook_button&amp;utm_medium=facebook%2Fsocial\" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpittsburghpa.shinyapps.io%2FBurghsEyeView%2F%23utm_source%3Dfacebook_button%26utm_campaign%3Dfacebook_button%26utm_medium%3Dfacebook%252Fsocial&amp;src=sdkpreparse">Share</a></div>\');
                                  console.log(header)'))
                 )
-                         ) 
-                ) 
-
+                         )
+}
 
 
 
@@ -279,6 +335,12 @@ server <- shinyServer(function(input, output, session) {
   names(sessionStart) <- "sessionStart"
   sessionID <- paste(stri_rand_strings(1, 5), gsub("\\.", "-", sessionStart) , "parcels", sep="-")
   names(sessionID) <- "sessionID"
+  # Update page URL
+  observe({
+    # Trigger this observer every time an input changes
+    reactiveValuesToList(input)
+    session$doBookmark()
+  })
   # Update page URL
   onBookmarked(function(url) {
     updateQueryString(url)
@@ -302,104 +364,7 @@ server <- shinyServer(function(input, output, session) {
     
     return(report)
   })
-  
-  # Map Tab UI
-  output$mapPanel <- renderUI({  
-    # UI for Desktop Users
-    if (as.numeric(input$GetScreenWidth) > 800) {
-      tagList(
-        # Generate Map
-        leafletOutput("map"),
-        # Map size for Desktop CSS
-        tags$style(type = "text/css", "#map {height: calc(100vh - 60px) !important; z-index: 0}"),
-        absolutePanel(
-          # Input panel for Desktops (alpha'd)
-          top = 70, left = 50, width = '300px', style = "z-index: 100;",
-          wellPanel(id = "tPanel", style = "max-height: calc(100vh - 90px) !important;",
-                    # Add background image
-                    tags$head(tags$style(type="text/css", '.Points {
-                                         background-image: url("loading.png");
-                                         background-repeat: no-repeat;
-                                         background-position: center;
-                                         background-size: contain;
-    }')),
-                    textInput("search", 
-                              value = NULL,
-                              label = NULL, 
-                              placeholder = "Search"),
-                    selectInput("neigh_select",
-                                label = "Neighborhood",
-                                choices = hood_list,
-                                selected = "Central Business District",
-                                multiple = FALSE,
-                                selectize = TRUE),
-                    selectInput("basemap_select",
-                                label = "Basemap",
-                                choices = c(`OSM Mapnik` = "OpenStreetMap.Mapnik", `Code for Pittsburgh` = "mapStack", `OSM France` = "OpenStreetMap.France", `OSM Humanitarian` = "OpenStreetMap.HOT", `Stamen Toner` = "Stamen.Toner", `Esri Satellite` = "Esri.WorldImagery", Esri = "Esri.WorldStreetMap", `OSM Dark Matter` = "CartoDB.DarkMatter", `OSM Positron` = "CartoDB.Positron"),
-                                selected = "OpenStreetMap.Mapnik")
-                    ), style = "opacity: 0.88"
-          )
-        )
-  } else {
-    tagList(
-      # Input panel for Mobile (stationary at top)
-      absolutePanel(top = 65, left = 0, width = '100%' ,
-                    wellPanel(id = "tPanel", style ="padding-left: 5px; padding-right: 5px;",
-                              # Remove padding from Search Bar
-                              tags$style(type= "text/css", "#tPanel {margin-bottom:0px; padding:0px; overflow-y:scroll; max-height: calc(100vh - 60px); !important; min-height: 55px;}"),
-                              # Set background color to match panels
-                              tags$style(type = "text/css", "body {background-color: #ecf0f1}"),
-                              tags$style(type= "text/css", "{width:100%;
-                                         margin-bottom:5px;
-                                         text-align: center;}
-                                         .inner
-                                         {display: inline-block;}"),
-                              # Div for Search Bar and Expansion
-                              HTML('<div id="outer" style="position:absolute;z-index: 9; background-color:#ecf0f1; width:100%;">'),
-                              # Set Searchvar width optimal for device
-                              tags$style(type = "text/css", paste0('#search {width: calc(100vw - 85px); margin-left:10px;}')),
-                              # Inputs
-                              div(style="display:inline-block;", 
-                                  textInput("search", 
-                                            value = NULL,
-                                            label = NULL, 
-                                            placeholder = "Search")),
-                              tags$style(style="text/css", chartr0('#mapPanel button .fa:before { content: "\\f056";  }
-                                                                   #mapPanel button.collapsed .fa:before { content: "\\f055";  }')),
-                              HTML('<button class="btn collapsed" data-toggle="collapse" data-target="#mobile"><i class="fa fa-search-plus" aria-hidden="true"></i></button></div>
-                                   <div id="mobile" class="collapse" style="margin-top:55px;">
-                                   <small style="font-size:11px;margin-left:3px">Not all locations are exact. (See &rsquo;About&rsquo; for details.)</small>
-                                   <br>'),
-                              selectInput("neigh_select",
-                                          label = "Neighborhood",
-                                          choices = hood_list,
-                                          selected = "Central Business District",
-                                          multiple = FALSE,
-                                          selectize = TRUE),
-                              selectInput("basemap_select",
-                                          label = "Basemap",
-                                          choices = c(`OSM Mapnik` = "OpenStreetMap.Mapnik", `Code for Pittsburgh` = "mapStack", `OSM France` = "OpenStreetMap.France", `OSM Humanitarian` = "OpenStreetMap.HOT", `Stamen Toner` = "Stamen.Toner", `Esri Satellite` = "Esri.WorldImagery", Esri = "Esri.WorldStreetMap", `OSM Dark Matter` = "CartoDB.DarkMatter", `OSM Positron` = "CartoDB.Positron"),
-                                          selected = "OpenStreetMap.Mapnik"),
-                              HTML('</div>')
-                              ),
-                    # Generate Map
-                    div(class="mapBack", style="position: absolute;
-                        width: 100%;z-index: -1;
-                        left: 0px;
-                        top: 55px;", leafletOutput("map")),
-                    # Set map to style for Mobile
-                    tags$style(type = "text/css", "#map {height: calc(100vh - 115px) !important;}"),
-                    tags$head(tags$style(type="text/css", '.mapBack {
-                                         background-image: url("loading.png");
-                                         background-repeat: no-repeat;
-                                         background-position: center;
-                                         background-size: contain;}'))
-                    )
-                    )
-}
-}
-                    )  
-  
+
   hoodinput <- reactive({
     hoodname <- gsub("\\-", "_", input$neigh_select)
     hoodname <- gsub(" ", "_", hoodname)
@@ -529,5 +494,7 @@ server <- shinyServer(function(input, output, session) {
   
   })  
 
+enableBookmarking("url")
+
 # Run the application 
-shinyApp(ui = ui, server = server, enableBookmarking = "url") 
+shinyApp(ui = ui, server = server) 

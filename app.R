@@ -45,8 +45,8 @@ couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
 couchdb_url <- jsonlite::fromJSON("key.json")$couchdb_url
 
 # CouchDB Connection
-# couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
-couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
+couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
+# couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
 
 # Determine if on mobile device
 getWidth <- '$(document).on("shiny:connected", function(e) {
@@ -203,55 +203,57 @@ ui <- function(request) {
                                   # Add Tag Manager Script to Body
                                   tags$body(tags$noscript(tags$iframe(src='https://www.googletagmanager.com/ns.html?id=GTM-TCTCQVD', height = 0, width = 0, style="display:none;visibility:hidden"))),
                                   # Remove unwanted padding and margins
-                                  tags$style(type="text/css", ".report.table {background-color: #fff;}
-                                             .shiny-output-error { visibility: hidden;}
-                                             .shiny-output-error:before { visibility: hidden; }
-                                             .container-fluid {padding:0;}
-                                             .navbar-header {margin:auto;}
-                                             .navbar-static-top {margin-bottom:0;}
-                                             .navbar-brand {height:60px; 
-                                             padding:0;}
-                                             .navbar {border-right-width: 20px;
-                                             border-left-width: 65px;}
-                                             .leaflet-popup-content {overflow-y: auto; 
-                                             max-height: 400px !important;}
-                                             .form-group {margin-bottom: 0px;}
-                                             @media only screen and (min-width: 600px) {
-                                             #map {height: calc(100vh - 60px) !important; 
-                                             z-index: 0;}
-                                             #tPanel {opacity: 0.88;
-                                             max-height: calc(100vh - 90px);}
-                                             .btn.collapsed {display: none;}
-                                             #mobile {display: initial;}
-                                             #outer {position: relative; padding-bottom: 0px;}
-                                             #search {width: 275px;}
-                                             }
-                                             @media only screen and (max-width: 600px) {
-                                             #map {height: calc(100vh - 115px) !important;
-                                             position: absolute !important;
-                                             top: 115px;
-                                             z-index: 0;}
-                                             #aPanel {top: 60px !important; 
-                                             left: 0px !important; 
-                                             width: 100% !important;}
-                                             .assetsBack {position: absolute;
-                                             width: 100%;
-                                             z-index: -1;
-                                             left: 0px;
-                                             top: 55px;}
-                                             #tPanel {margin-bottom:0px; 
-                                             padding:0px !important; 
-                                             overflow-y:scroll !important; 
-                                             max-height: calc(100vh - 65) !important; 
-                                             min-height: 55px !important; 
-                                             padding-left: 10px !important; 
-                                             padding-right: 10px !important;
-                                             border: none;
-                                             width: 100%;
-                                             opacity: 1 !important;}
-                                             #search {width: calc(100vw - 85px) !important; margin-left:10px !important;}
-                                             #outer {margin-top: 5px !important; position: absolute;}
-                                             .btn.collapsed {display: in-line !important;}
+                                  tags$style(type="text/css", "#report.table {background-color: white;}
+                                                               #DataTables_Table_0_wrapper { background-color: white !important;}
+                                                               .shiny-input-panel { margin-bottom: 0px; }
+                                                               .shiny-output-error { visibility: hidden;}
+                                                               .shiny-output-error:before { visibility: hidden; }
+                                                               .container-fluid {padding:0;}
+                                                               .navbar-header {margin:auto;}
+                                                               .navbar-static-top {margin-bottom:0;}
+                                                               .navbar-brand {height:60px; 
+                                                                              padding:0;}
+                                                               .navbar {border-right-width: 20px;
+                                                                        border-left-width: 65px;}
+                                                               .leaflet-popup-content {overflow-y: auto; 
+                                                                                       max-height: 400px !important;}
+                                                               .form-group {margin-bottom: 0px;}
+                                                               @media only screen and (min-width: 600px) {
+                                                                  #map {height: calc(100vh - 60px) !important; 
+                                                                        z-index: 0;}
+                                                                  #tPanel {opacity: 0.88;
+                                                                           max-height: calc(100vh - 90px);}
+                                                                 .btn.collapsed {display: none;}
+                                                                 #mobile {display: initial;}
+                                                                 #outer {position: relative; padding-bottom: 0px;}
+                                                                 #search {width: 275px;}
+                                                             }
+                                                             @media only screen and (max-width: 600px) {
+                                                               #map {height: calc(100vh - 115px) !important;
+                                                                     position: absolute !important;
+                                                                     top: 115px;
+                                                                     z-index: 0;}
+                                                               #aPanel {top: 60px !important; 
+                                                                        left: 0px !important; 
+                                                                        width: 100% !important;}
+                                                               .assetsBack {position: absolute;
+                                                                            width: 100%;
+                                                                            z-index: -1;
+                                                                            left: 0px;
+                                                                            top: 55px;}
+                                                               #tPanel {margin-bottom:0px; 
+                                                                        padding:0px !important; 
+                                                                        overflow-y:scroll !important; 
+                                                                        max-height: calc(100vh - 65) !important; 
+                                                                        min-height: 55px !important; 
+                                                                        padding-left: 10px !important; 
+                                                                        padding-right: 10px !important;
+                                                                        border: none;
+                                                                        width: 100%;
+                                                                        opacity: 1 !important;}
+                                                               #search {width: calc(100vw - 85px) !important; margin-left:10px !important;}
+                                                               #outer {margin-top: 5px !important; position: absolute;}
+                                                               .btn.collapsed {display: in-line !important;}
                                              }"),
                           # Generate Map
                           leafletOutput("map"),

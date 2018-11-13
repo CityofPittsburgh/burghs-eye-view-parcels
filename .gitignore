@@ -10,4 +10,7 @@ neighborhoodparcels/windgap
 allegheny_center
 
 key.json
-ETL/pittsburghliens.txt
+ETL*
+burghs-eye-view-parcels.Rproj
+.Rhistory
+.RDataTmp

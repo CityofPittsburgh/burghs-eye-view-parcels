@@ -27,3 +27,4 @@ Burgh's Eye View is a Shiny application built on a single app file, and therefor
 * about.html: About Page tab html content
 * app.R: Main application
 * parks.csv: Centroid locations of City parks for easter egg icons.
+* hoods.json: List of City neighborhoods

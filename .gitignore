@@ -14,3 +14,7 @@ ETL*
 burghs-eye-view-parcels.Rproj
 .Rhistory
 .RDataTmp
+rsconnect/*
+tag-manager-body.js
+google-analytics.js
+tag-manager-head.js

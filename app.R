@@ -54,6 +54,22 @@ var jsWidth = screen.width;
 Shiny.onInputChange("GetScreenWidth",jsWidth);
 });'
 
+# Get ID's
+getIds <- function(phrase) {
+  url <- paste0("http://data.wprdc.org/api/action/package_search?q=", gsub(" ", "%20", phrase))
+  r <- GET(url)
+  raw <- content(r, "text")
+  df <- jsonlite::fromJSON(raw)$result$results
+  tib <- tibble(df$resources) %>%
+    unnest() %>%
+    filter(format == "CSV")
+  final <- df %>%
+    select(id, name) %>%
+    right_join(tib, by = c("id" = "package_id"))
+  
+  return(final)
+}
+
 ckanSQL <- function(url) {
   r <- RETRY("GET", url)
   c <- content(r, "text")

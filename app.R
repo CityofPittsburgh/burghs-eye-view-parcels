@@ -26,6 +26,7 @@ library(plyr)
 library(dplyr)
 library(stringi)
 library(lubridate)
+library(tidyr)
 
 options(scipen = 999)
 

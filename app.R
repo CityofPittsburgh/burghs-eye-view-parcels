@@ -67,105 +67,40 @@ httr::set_config(config(ssl_verifypeer = 0L))
 # this_year
 this_year <- format(Sys.Date(), format="%Y")
 
-# Election/Primary Day
-presidential_years <- seq(2020, 2050, 4)
-
-# Check if Presidential Year for Primary
-if (this_year %in% presidential_years) {
-  apr <- as.Date(paste0(this_year, "-04-01"))
-  dow <- sapply(seq(0,31),function(x) format(apr+x, "%a"))
-  pDay <- apr + which(dow=="Tue")[4] - 1
-} else {
-  may <- as.Date(paste0(this_year, "-05-01"))
-  dow <- sapply(seq(0,31),function(x) format(may+x, "%a"))
-  pDay <- may + which(dow=="Tue")[3] - 1
-}
+# Presidential Years
+presidential_years <- seq(2016, 3000, 4)
 
 # Election Day
 nov <- ymd(as.Date(paste0(this_year, "-11-01")))
 dow <- sapply(seq(0,7),function(x) format(nov+x, "%a"))
 eDay <- nov + which(dow=="Mon")[1]
 
-if (Sys.Date() == eDay | Sys.Date() == pDay) {
-  load.egg <- ckanSQL("https://data.wprdc.org/api/3/action/datastore_search_sql?sql=SELECT%20*%20FROM%20%2251efa73c-d4b8-4ac0-b65a-9c9b1f904372%22%20WHERE%22MuniName%22%20=%20%27PITTSBURGH%27")
-  load.egg$icon <- "election"
-  load.egg$tt <- paste0("<font color='black'>No matter who you Vote for, make sure you Vote!
-                        <br><b>Location: </b>", load.egg$LocName,
-                        "<br><b>Ward: </b>", load.egg$Ward,
-                        "<br><b>District: </b>", load.egg$District,
-                        "<br><b>Address: </b>", load.egg$NewAddress,
-                        '<br><center><a href="https://www.pavoterservices.state.pa.us/pages/pollingplaceinfo.aspx" target="_blank">Find your polling place!</a></center>'
-  )
-} else if(Sys.Date() <= as.Date(paste0(this_year,"-10-31")) & Sys.Date() >= as.Date(paste0(this_year,"-10-01"))) {
-  # Egg
-  X <- c(-79.9573738, -79.9796721, -79.9892566, -79.9814719, -79.9517155, -79.9128181, -79.9272001, -79.983961, -79.9948964, -79.9933058, -80.0217265, -80.0215099, -79.9851465)
-  Y <- c(40.4611634, 40.4671619, 40.4667157, 40.472155, 40.4684005, 40.4401088, 40.4161835, 40.4186422, 40.4066441, 40.4012173, 40.4737751, 40.4636383, 40.4289496)
-  title <- c("Allegheny", "Voegtly", "Ridgelawn", "St. Pauls", "St. Mary", "Smithfield East", "Calvary Catholic", "St Michaels", "St John Vianney", "South Side", "Highwood", "Union Dale", "Prince of Peace")
-  load.egg <- data.frame(X,Y,title)
-  load.egg$icon <- "halloween"
-  load.egg$tt <- "Yarr! There be nuttin' to be found with that search term matey."
-} else if (Sys.Date() <= as.Date(paste0(this_year,"-11-30")) & Sys.Date() >= as.Date(paste0(this_year,"-11-01"))) {
-  X <- c(-79.9773187, -80.0096757, -80.0109521)
-  Y <- c(40.4644031, 40.4406418, 40.4416163)
-  title <- c("Herr's Island", "Fort Pitt", "Fort Duquesne")
-  load.egg <- data.frame(X,Y,title)
-  load.egg$icon <- "thanksgiving"
-  load.egg$tt <- "*Gobble gobble* <br> No Results this time. Search again and have a Happy Thanksgiving!"
-} else if (Sys.Date() >= as.Date(paste0(this_year,"-12-30")) | Sys.Date() <= as.Date(paste0(this_year,"-1-02"))) {
-  X <- c(-80.00383, -80.003981)
-  Y <- c(40.441558, 40.442340)
-  title <- c("Liberty & Stanwix", "Penn & Stanwix")
-  load.egg <- data.frame(X,Y,title)
-  load.egg$icon <- "new_year"
-  load.egg$tt <- "3... 2... 1... Happy New Years! <br>Looks like a fresh start to the New Year, and a fresh blank map! Try something else in the search bar!"
-} else if (Sys.Date() >= as.Date(paste0(this_year,"-02-01")) & Sys.Date() <= as.Date(paste0(this_year,"-02-15"))) {
-  X <-  c(-80.002398,  -80.017794, -79.964644, -79.964708, -79.983140, -79.991428)
-  Y <- c(40.440397, 40.437650, 40.428210, 40.461866, 40.452217, 40.456897)
-  title <- c("Market Square", "Mt. Washington", "SouthSide Works", " Church Brew Works", "The Strip", "Penn Brewery")
-  load.egg <- data.frame(X,Y,title)
-  load.egg$icon <- "valentine"
-  load.egg$tt <- "Love is in the air, but doesn't look like any results are! <br>Would you be my Valentine?"
-} else if (Sys.Date() >= as.Date(paste0(this_year,"-03-01")) & Sys.Date() <= as.Date(paste0(this_year,"-03-31"))){
-  X <- c(-79.9968604, -80.004055)
-  Y <- c(40.4381098, 40.440631)
-  title <- c("City County Building", "Market Square")
-  load.egg <- data.frame(X,Y,title)
-  load.egg$icon <- "patrick"
-  load.egg$tt <- "<i>Your search didn't turn up anything, not even my Pot-o-Gold!</i>"
-} else if (Sys.Date() >= as.Date(paste0(this_year,"-04-01")) & Sys.Date() <= as.Date(paste0(this_year,"-04-30"))) {
-  load.egg <- read.csv("boundaries/Parks/parks.csv")
-  load.egg$icon <- "easter_egg"
-  load.egg$tt <- "<i>You couldn't find any results, but maybe you can find my eggs.</i>"
-} else if (Sys.Date() >= as.Date(paste0(this_year,"-07-01")) & Sys.Date() <= as.Date(paste0(this_year,"-07-07"))) {
-  load.egg <- read.csv("boundaries/Parks/parks.csv")
-  load.egg$icon <- "july_4"
-  load.egg$tt <- "<i>Happy Independence Day! Looks like you need to try another search term.</i>"
-} else if (Sys.Date() >= as.Date(paste0(this_year,"-05-01")) & Sys.Date() <= as.Date(paste0(this_year,"-08-31"))) {
-  load.pools <- geojson_read("https://data.wprdc.org/dataset/f7067c4e-0c1e-420c-8c31-f62769fcd29a/resource/77288f26-54a1-4c0c-bc59-7873b1109e76/download/poolsimg.geojson", what = "sp")
-  load.egg <- data.frame(coordinates(load.pools))
-  colnames(load.egg) <- c("X","Y")
-  load.egg$icon <- "summer"
-  load.egg$tt <- "<i>Ah... Summer! Chill out, relax and grab some rays with me. Or if you'd like try another search term.</i>"
+# Primary Day
+if (this_year %in% presidential_years) {
+  april <- ymd(as.Date(paste0(this_year, "-04-01")))
+  dow <- sapply(seq(0,7),function(x) format(april+x, "%a"))
+  firstTuesday <- april + which(dow=="Tue")[1]
+  # In Presidential Years PA Primaries are on the 4th Tuesday of April
+  pDay <- firstTuesday + 20
 } else {
-  X <- c(-79.9968604, -80.004055)
-  Y <- c(40.4381098, 40.440631)
-  title <- c("City County Building", "Market Square")
-  load.egg <- data.frame(X,Y,title)
-  load.egg$icon <- "snow"
-  load.egg$tt <- "Burrr!! The app's not frozen, there's just nothing that fits that description here!"
+  may <- ymd(as.Date(paste0(this_year, "-05-01")))
+  dow <- sapply(seq(0,7),function(x) format(may+x, "%a"))
+  firstTuesday <- may + which(dow=="Tue")[1]
+  # In Non-Presidential Years PA Primaries are on the 3rd Tuesay of May
+  pDay <- firstTuesday + 13
 }
 
 icons_egg <- iconList(
-  halloween = makeIcon("./icons/egg/pirate.png", iconAnchorX = 9, iconAnchorY = 12.5, popupAnchorX = 0, popupAnchorY = -12.5),
-  election = makeIcon("./icons/egg/vote.png", iconAnchorX = 9, iconAnchorY = 13, popupAnchorX = 0, popupAnchorY = -13),
-  thanksgiving = makeIcon("./icons/egg/thanksgiving.png", iconAnchorX = 9, iconAnchorY = 13, popupAnchorX = 0, popupAnchorY = -13),
-  snow = makeIcon("./icons/egg/snowboard.png", iconAnchorX = 9, iconAnchorY = 13, popupAnchorX = 0, popupAnchorY = -13),
-  new_year = makeIcon("./icons/egg/new_year.png", iconAnchorX = 9, iconAnchorY = 13.5, popupAnchorX = 0, popupAnchorY = -13.5),
-  valentine = makeIcon("./icons/egg/valentine.png", iconAnchorX = 40, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5),
-  patrick = makeIcon("./icons/egg/patrick.png", iconAnchorX = 40, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5),
-  easter_egg = makeIcon("./icons/egg/easter.png", iconAnchorX = 45, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5),
-  summer = makeIcon("./icons/egg/summer.png", iconAnchorX = 45, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5),
-  july_4 = makeIcon("./icons/egg/july_4.png", iconAnchorX = 45, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5)               
+  halloween = makeIcon("./icons/egg/pirate.png", iconAnchorX = 31, iconAnchorY = 12.5, popupAnchorX = 0, popupAnchorY = -12.5, iconWidth = 72),
+  election = makeIcon("./icons/egg/vote.png", iconAnchorX = 31, iconAnchorY = 13, popupAnchorX = 0, popupAnchorY = -13, iconWidth = 72),
+  thanksgiving = makeIcon("./icons/egg/thanksgiving.png", iconAnchorX = 31, iconAnchorY = 13, popupAnchorX = 0, popupAnchorY = -13, iconWidth = 72),
+  snow = makeIcon("./icons/egg/snowboard.png", iconAnchorX = 31, iconAnchorY = 13, popupAnchorX = 0, popupAnchorY = -13, iconWidth = 72),
+  new_year = makeIcon("./icons/egg/new_year.png", iconAnchorX = 31, iconAnchorY = 13.5, popupAnchorX = 0, popupAnchorY = -13.5, iconWidth = 72),
+  valentine = makeIcon("./icons/egg/valentine.png", iconAnchorX = 31, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5, iconWidth = 72),
+  patrick = makeIcon("./icons/egg/patrick.png", iconAnchorX = 31, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5, iconWidth = 72),
+  easter_egg = makeIcon("./icons/egg/easter.png", iconAnchorX = 31, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5, iconWidth = 72),
+  summer = makeIcon("./icons/egg/summer.png", iconAnchorX = 31, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5, iconWidth = 72),
+  july_4 = makeIcon("./icons/egg/july_4.png", iconAnchorX = 31, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5, iconWidth = 72)      
 )
 
 hood_list <- jsonlite::fromJSON("hoods.json")
@@ -355,7 +290,7 @@ server <- shinyServer(function(input, output, session) {
       div(downloadButton("downloadData", "Export Parcels", class = "dlBut"))
     }
   })
-  
+  # Download CSV
   downloadInput <- reactive({
     report <- hoodinput()
     report <- report@data
@@ -366,7 +301,7 @@ server <- shinyServer(function(input, output, session) {
     
     return(report)
   })
-
+  # Load Hood Parcel
   hoodinput <- reactive({
     hoodname <- gsub("\\-", "_", input$neigh_select)
     hoodname <- gsub(" ", "_", hoodname)
@@ -384,9 +319,98 @@ server <- shinyServer(function(input, output, session) {
     }
     
     return(hood_parcel)
-  }
-  )
-  
+  })
+  easterEgg <- reactive({
+    if (Sys.Date() == eDay | Sys.Date() == pDay | input$search == "Vote!") {
+      month <- as.numeric(format(Sys.Date(), "%m")) 
+      
+      if (month >= 10) {
+        yearQ <- format(Sys.Date(), "*%Y")
+        monthQ <- "*november*"
+      } else if (month > 3 ) {
+        yearQ <- as.character(as.numeric(format(Sys.Date(), "*%Y")) - 1)
+        monthQ <- "*november*"
+      } else {
+        yearQ <- format(Sys.Date(), "*%Y")
+        monthQ <- "*may"
+      }
+      
+      ids <- getIds("Allegheny County Polling Place Locations") %>%
+        filter(grepl(yearQ, name.x, ignore.case = T) & grepl(monthQ, name.x, ignore.case = T))
+      
+      id <- ids$id.y[1]
+      
+      load.egg <- ckanSQL(paste0("https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%20*%20FROM%20%22", id, "%22%20WHERE%22MuniName%22%20=%20%27PITTSBURGH%27")) %>%
+        mutate(icon = "election",
+               X = as.numeric(X),
+               Y = as.numeric(Y),
+               tt = paste0("<font color='black'>No matter who you Vote for, make sure you Vote!
+                           <br><br><b>Location: </b>", LocName,
+                           "<br><b>Ward: </b>", Ward,
+                           "<br><b>District: </b>", District,
+                           "<br><b>Address: </b>", NewAddress,
+                           '<br><center><a href="https://alleghenycounty.civicengine.com/" target="_blank">Find your polling place!</a></center>'
+               ))
+    } else if(Sys.Date() <= as.Date(paste0(this_year,"-10-31")) & Sys.Date() >= as.Date(paste0(this_year,"-10-01"))) {
+      # Egg
+      X <- c(-79.9573738, -79.9796721, -79.9892566, -79.9814719, -79.9517155, -79.9128181, -79.9272001, -79.983961, -79.9948964, -79.9933058, -80.0217265, -80.0215099, -79.9851465)
+      Y <- c(40.4611634, 40.4671619, 40.4667157, 40.472155, 40.4684005, 40.4401088, 40.4161835, 40.4186422, 40.4066441, 40.4012173, 40.4737751, 40.4636383, 40.4289496)
+      title <- c("Allegheny", "Voegtly", "Ridgelawn", "St. Pauls", "St. Mary", "Smithfield East", "Calvary Catholic", "St Michaels", "St John Vianney", "South Side", "Highwood", "Union Dale", "Prince of Peace")
+      load.egg <- data.frame(X,Y,title)
+      load.egg$icon <- "halloween"
+      load.egg$tt <- "Yarr! There be nuttin' to be found with that search term matey."
+    } else if (Sys.Date() <= as.Date(paste0(this_year,"-11-30")) & Sys.Date() >= as.Date(paste0(this_year,"-11-01"))) {
+      X <- c(-79.9773187, -80.0096757, -80.0109521)
+      Y <- c(40.4644031, 40.4406418, 40.4416163)
+      title <- c("Herr's Island", "Fort Pitt", "Fort Duquesne")
+      load.egg <- data.frame(X,Y,title)
+      load.egg$icon <- "thanksgiving"
+      load.egg$tt <- "*Gobble gobble* <br> No Results this time. Search again and have a Happy Thanksgiving!"
+    } else if (Sys.Date() >= as.Date(paste0(this_year,"-12-30")) | Sys.Date() <= as.Date(paste0(this_year,"-1-02"))) {
+      X <- c(-80.00383, -80.003981)
+      Y <- c(40.441558, 40.442340)
+      title <- c("Liberty & Stanwix", "Penn & Stanwix")
+      load.egg <- data.frame(X,Y,title)
+      load.egg$icon <- "new_year"
+      load.egg$tt <- "3... 2... 1... Happy New Years! <br>Looks like a fresh start to the New Year, and a fresh blank map! Try something else in the search bar!"
+    } else if (Sys.Date() >= as.Date(paste0(this_year,"-02-01")) & Sys.Date() <= as.Date(paste0(this_year,"-02-15"))) {
+      X <-  c(-80.002398,  -80.017794, -79.964644, -79.964708, -79.983140, -79.991428)
+      Y <- c(40.440397, 40.437650, 40.428210, 40.461866, 40.452217, 40.456897)
+      title <- c("Market Square", "Mt. Washington", "SouthSide Works", " Church Brew Works", "The Strip", "Penn Brewery")
+      load.egg <- data.frame(X,Y,title)
+      load.egg$icon <- "valentine"
+      load.egg$tt <- "Love is in the air, but doesn't look like any results are! <br>Would you be my Valentine?"
+    } else if (Sys.Date() >= as.Date(paste0(this_year,"-03-01")) & Sys.Date() <= as.Date(paste0(this_year,"-03-31"))){
+      X <- c(-79.9968604, -80.004055)
+      Y <- c(40.4381098, 40.440631)
+      title <- c("City County Building", "Market Square")
+      load.egg <- data.frame(X,Y,title)
+      load.egg$icon <- "patrick"
+      load.egg$tt <- "<i>Your search didn't turn up anything, not even my Pot-o-Gold!</i>"
+    } else if (Sys.Date() >= as.Date(paste0(this_year,"-04-01")) & Sys.Date() <= as.Date(paste0(this_year,"-04-30"))) {
+      load.egg <- read.csv("boundaries/Parks/parks.csv")
+      load.egg$icon <- "easter_egg"
+      load.egg$tt <- "<i>You couldn't find any results, but maybe you can find my eggs.</i>"
+    } else if (Sys.Date() >= as.Date(paste0(this_year,"-07-01")) & Sys.Date() <= as.Date(paste0(this_year,"-07-07"))) {
+      load.egg <- read.csv("boundaries/Parks/parks.csv")
+      load.egg$icon <- "july_4"
+      load.egg$tt <- "<i>Happy Independence Day! Looks like you need to try another search term.</i>"
+    } else if (Sys.Date() >= as.Date(paste0(this_year,"-05-01")) & Sys.Date() <= as.Date(paste0(this_year,"-08-31"))) {
+      load.pools <- readOGR("https://data.wprdc.org/dataset/f7067c4e-0c1e-420c-8c31-f62769fcd29a/resource/77288f26-54a1-4c0c-bc59-7873b1109e76/download/poolsimg.geojson")
+      load.egg <- data.frame(coordinates(load.pools))
+      colnames(load.egg) <- c("X","Y")
+      load.egg$icon <- "summer"
+      load.egg$tt <- "<i>Ah... Summer! Chill out, relax and grab some rays with me. Or if you'd like try another search term.</i>"
+    } else {
+      X <- c(-79.9968604, -80.004055)
+      Y <- c(40.4381098, 40.440631)
+      title <- c("City County Building", "Market Square")
+      load.egg <- data.frame(X,Y,title)
+      load.egg$icon <- "snow"
+      load.egg$tt <- "Burrr!! The app's not frozen, there's just nothing that fits that description here!"
+    }
+    return(load.egg)
+  })
   output$map <- renderLeaflet({ 
     hood_parcel <- hoodinput()
     
@@ -433,13 +457,15 @@ server <- shinyServer(function(input, output, session) {
                                         paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=',pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>')))
     } 
     if (nrow(hood_parcel) == 0) {
-      if (Sys.Date() == eDay) {
-        egg <- load.egg
+      if (input$search == "Vote!") {
+        egg <- easterEgg()
       } else {
-        egg <- load.egg[sample(1:nrow(load.egg),1),]
+        egg <- easterEgg()
+        egg <- egg[sample(1:nrow(egg),1),]
       }
-      map <- addMarkers(map, data=egg, ~X, ~Y, icon = ~icons_egg[icon], popup = ~tt) %>% 
-        setView(-79.9959, 40.4406, zoom = 10)
+      
+      map <- addMarkers(map, data = egg, lng= ~X, lat= ~Y, icon = ~icons_egg[icon], popup = ~tt) %>% 
+        setView(-79.9959, 40.4406, zoom = 12)
     }
     #Write inputs to Couch
     if (url.exists(paste0(couchdb_url, ":5984/_utils/"))){

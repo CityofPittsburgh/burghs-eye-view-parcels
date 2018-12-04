@@ -156,6 +156,15 @@ ui <- function(request) {
                                   tags$head(includeScript("google-analytics.js")),
                                   # Add Tag Manager Script to Body
                                   tags$body(tags$noscript(tags$iframe(src='https://www.googletagmanager.com/ns.html?id=GTM-TCTCQVD', height = 0, width = 0, style="display:none;visibility:hidden"))),
+                                  # Notification Centered and Color Fix
+                                  tags$head(tags$style(HTML(".shiny-notification {
+                                                            position: fixed;
+                                                            background: #2c3e50;
+                                                            top: calc(50%);;
+                                                            left: calc(50%);;
+                                                            width: calc(25%);;
+                                                            min-width: 200px;
+                                                            transform: translate(-50%, 0);}"))),
                                   # Layout CSS
                                   tags$style(type="text/css", ".shiny-output-error { visibility: hidden;}
                                                                .shiny-output-error:before { visibility: hidden; }
@@ -338,11 +347,13 @@ server <- shinyServer(function(input, output, session) {
       left_join(abatement, by = c("PARID" = "pin")) %>%
       left_join(liens, by = c("PARID" = "pin")) %>%
       select(-c(PROPERTYHOUSENUM, PROPERTYADDRESS, PROPERTYZIP))
-    
+
     return(assessments)
   })
   # Load Hood Parcel
   hoodLoad <- reactive({
+    showNotification(HTML(paste0('<center><font color = "white">Loading ', input$neigh_select, '...</font></center>')), type = "message", id = "hoodMessage", duration = NULL, closeButton = FALSE)
+    
     hoodname <- gsub("\\-", "_", input$neigh_select)
     hoodname <- gsub(" ", "_", hoodname)
     hoodname <- gsub("\\.", "", hoodname)
@@ -360,7 +371,6 @@ server <- shinyServer(function(input, output, session) {
   
     return(hood_parcel)
   })
-  
   # Load Hood Parcel
   hoodInput <- reactive({
     hood_parcel <- hoodLoad()
@@ -542,7 +552,8 @@ server <- shinyServer(function(input, output, session) {
        clearGroup("egg") %>%
        addMarkers(data = egg, lng= ~X, lat= ~Y, icon = ~icons_egg[icon], popup = ~tt, group = ) %>% 
        setView(-79.9959, 40.4406, zoom = 12)
-    }
+   }
+    removeNotification("hoodMessage")
   }) 
   ##Data Table
   output$datatable <- DT::renderDataTable({

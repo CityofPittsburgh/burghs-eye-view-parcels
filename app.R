@@ -180,6 +180,7 @@ ui <- function(request) {
                                                                  #search {width: 275px;}
                                                                }
                                                                @media only screen and (max-width: 600px) {
+                                                                 .info.legend.leaflet-control {display: none;}
                                                                  #map {height: calc(100vh - 115px) !important;
                                                                        position: absolute !important;
                                                                        top: 60px;

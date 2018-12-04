@@ -16,6 +16,8 @@ library(R4CouchDB)
 
 # Visuals Libraries
 library(leaflet)
+library(rgeos)
+library(rgdal)
 library(sf)
 library(geojsonio)
 library(DT)
@@ -309,7 +311,7 @@ server <- shinyServer(function(input, output, session) {
   })
   # Download CSV
   downloadInput <- reactive({
-    report <- hoodinput()
+    report <- hoodInput()
     report <- report@data
     # Report Table Search Filter
     if (!is.null(input$datatable_search) && input$datatable_search != "") {
@@ -318,18 +320,50 @@ server <- shinyServer(function(input, output, session) {
     
     return(report)
   })
+  assessmentsLoad <- reactive({
+    delinquent <- jsonlite::fromJSON("https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%20%22pin%22%20FROM%22ed0d1550-c300-4114-865c-82dc7c23235b%22")$result$records
+    cityown <- jsonlite::fromJSON("https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%20%22pin%22%20FROM%20%224ff5eb17-e2ad-4818-97c4-8f91fc6b6396%22")$result$records
+    liens <- jsonlite::fromJSON(paste0("https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%20%22pin%22,SUM(amount)%20as%20amount,%20count(pin)%20as%20lien_num%20FROM%20%2265d0d259-3e58-49d3-bebb-80dc75f61245%22%20WHERE%20%22municipality%22%20LIKE%20%27Pittsburgh%27%20AND%20%22satisfied%22=%27False%27%20GROUP%20BY%20%22pin%22"))$result$records
+    
+    abatement <- jsonlite::fromJSON("https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%22pin%22,%22program_name%22,%22start_year%22,%22num_years%22,%22abatement_amt%22%20FROM%22fd924520-d568-4da2-967c-60b3a305e681%22")$result$records %>%
+      mutate(tool = paste0("<dt>", program_name, ":", num_years, "</dt>", "<dd>", start_year, ":", abatement_amt, "</dd>")) %>%
+      group_by(pin) %>%
+      summarise(tt = paste0(tool, collapse = ""))
+    
+    assessments <-jsonlite::fromJSON("https://data.wprdc.org/api/action/datastore_search_sql?sql=SELECT%20%22PARID%22%2C%22PROPERTYHOUSENUM%22%2C%22PROPERTYFRACTION%22%2C%22PROPERTYADDRESS%22%2C%22PROPERTYZIP%22%2C%22MUNIDESC%22%2C%22TAXDESC%22%2C%22CLASSDESC%22%2C%22OWNERDESC%22%2C%22USEDESC%22%2C%22HOMESTEADFLAG%22%2C%22COUNTYLAND%22%2C%22COUNTYBUILDING%22%2C%22COUNTYTOTAL%22%2C%22SALEPRICE%22%2C%22SALEDATE%22%2C%22YEARBLT%22%20from%20%22518b583f-7cc8-4f60-94d0-174cc98310dc%22%20WHERE%20%22SCHOOLCODE%22%20LIKE%20%2747%27")$result$records %>%
+      mutate(delq = PARID %in% delinquent$pin,
+             cityown = PARID %in% cityown$pin,
+             ADDRESS = paste(PROPERTYHOUSENUM, PROPERTYADDRESS, "PITTSBURGH, PA", PROPERTYZIP)) %>%
+      left_join(abatement, by = c("PARID" = "pin")) %>%
+      left_join(liens, by = c("PARID" = "pin")) %>%
+      select(-c(PROPERTYHOUSENUM, PROPERTYADDRESS, PROPERTYZIP))
+    
+    return(assessments)
+  })
   # Load Hood Parcel
-  hoodinput <- reactive({
+  hoodLoad <- reactive({
     hoodname <- gsub("\\-", "_", input$neigh_select)
     hoodname <- gsub(" ", "_", hoodname)
     hoodname <- gsub("\\.", "", hoodname)
     hoodname <- tolower(hoodname)
-    url <- paste0(couchdb_url, ":5984/neighborhood_parcels/", hoodname)
-    g <- GET(url, authenticate(couchdb_un, couchdb_pw))
-    c <- content(g, "text")
-    hood_sf <- sf::st_read(dsn = c, layer = "OGRGeoJSON")
-    hood_parcel <- as(hood_sf, 'Spatial')
-      
+    hoodname <- ifelse(hoodname == "", "central_business_district", hoodname)
+    
+    r <- RETRY("GET", paste0("http://tools.wprdc.org/geoservice/parcels_in/pittsburgh_neighborhood/" , hoodname, "/"), timeout(60)) 
+    f <- content(r, "text", encoding = "ISO-8859-1")
+    #read content of API call as geojson file
+    hood_parcel <- readOGR(f, "OGRGeoJSON", verbose = F)
+    assessments <- assessmentsLoad()
+    
+    hood_parcel <- subset(hood_parcel, select = c(pin, mapblocklo))
+    hood_parcel <- merge(hood_parcel, assessments, by.x = "pin", by.y = "PARID", all.x = TRUE)
+  
+    return(hood_parcel)
+  })
+  
+  # Load Hood Parcel
+  hoodInput <- reactive({
+    hood_parcel <- hoodLoad()
+    
     # Search Filter
     if (!is.null(input$search) && input$search != "") {
       hood_parcel <- hood_parcel[apply(hood_parcel@data, 1, function(row){any(grepl(input$search, row, ignore.case = TRUE))}), ]
@@ -429,61 +463,29 @@ server <- shinyServer(function(input, output, session) {
     return(load.egg)
   })
   output$map <- renderLeaflet({ 
-    hood_parcel <- hoodinput()
-    
-    map <- leaflet() %>% 
+    leaflet()  %>% 
+      setView(-79.9959, 40.4406, zoom = 12) %>% 
       addEasyButton(easyButton(
         icon="fa-crosshairs", title="Locate Me",
-        onClick=JS("function(btn, map){ map.locate({setView: true}); }")))
-    
+        onClick=JS("function(btn, map){ map.locate({setView: true}); }"))) %>%
+      addLegend(position = "bottomright", colors = c("#ccc7c7", "#4daf4a",  "#ffff33", "#e41a1c") , labels = c("Normal", "Abated Property", "City Property", "Tax Delinquent"), title = "Parcel Info", opacity = .8)
+      
+  })
+  observe({
     # Code for Pittsburgh Basemap
     if (input$basemap_select == "mapStack") {
-      map <- addTiles(map, urlTemplate = "http://{s}.sm.mapstack.stamen.com/((terrain-background,$000[@30],$fff[hsl-saturation@80],$1b334b[hsl-color],mapbox-water[destination-in]),(watercolor,$fff[difference],$000000[hsl-color],mapbox-water[destination-out]),(terrain-background,$000[@40],$000000[hsl-color],mapbox-water[destination-out])[screen@60],(streets-and-labels,$fedd9a[hsl-color])[@50])/{z}/{x}/{y}.png", attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CARTO</a>')
+      leafletProxy("map", session = session) %>%
+        clearTiles() %>%
+        addTiles(urlTemplate = "http://{s}.sm.mapstack.stamen.com/((terrain-background,$000[@30],$fff[hsl-saturation@80],$1b334b[hsl-color],mapbox-water[destination-in]),(watercolor,$fff[difference],$000000[hsl-color],mapbox-water[destination-out]),(terrain-background,$000[@40],$000000[hsl-color],mapbox-water[destination-out])[screen@60],(streets-and-labels,$fedd9a[hsl-color])[@50])/{z}/{x}/{y}.png", attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CARTO</a>', options = providerTileOptions(noWrap = TRUE))
     } else {
-      map <- addProviderTiles(map, input$basemap_select,
-                              options = providerTileOptions(noWrap = TRUE))
+      leafletProxy("map", session = session) %>%
+        clearTiles() %>%
+        addProviderTiles(input$basemap_select, options = providerTileOptions(noWrap = TRUE))
     }
+  })
+  observeEvent(hoodInput(), {
+    hood_parcel <- hoodInput()
     
-    if(nrow(hood_parcel) > 0){ 
-      print(nrow(hood_parcel))
-      map <- addPolygons(map, data = hood_parcel, 
-                         stroke = TRUE, smoothFactor = 0.5, weight = 0.5, color = "#000000",
-                         fill = TRUE, fillColor = ~colorval, fillOpacity = .75,
-                         popup = ~paste("<font color='black'><b>Parcel ID:</b>", paste0('<a href="http://www2.county.allegheny.pa.us/RealEstate/GeneralInfo.aspx?ParcelID=',pin, '" target="_blank">', 
-                                                                                        pin, '</a>'), 
-                                        ifelse(is.na(mapblocklo), "", paste0("<br><b>Lot & Block: </b>", mapblocklo)),
-                                        ifelse(is.na(ADDRESS), "", paste0("<br><b>Address: </b>", ADDRESS)), 
-                                        ifelse(is.na(geo_name_nhood), "", paste0("<br><b>Neighborhood: </b>", geo_name_nhood)),
-                                        ifelse(is.na(MUNIDESC), "", paste0("<br><b>Ward: </b>", MUNIDESC)),
-                                        ifelse(is.na(OWNERDESC), "", paste0("<br><b>Owner Code: </b>", OWNERDESC)),
-                                        ifelse(is.na(CLASSDESC), "", paste0("<br><b>Class: </b>", CLASSDESC)),
-                                        #ifelse(is.na(USEDESC), "", paste0("<br><b>Use Code: </b>", USEDESC)),
-                                        ifelse(is.na(TAXDESC), "", paste0("<br><b>Tax Code: </b>", TAXDESC)),
-                                        ifelse(is.na(SALEDATE), "", paste0("<br><b>Last Sale Date: </b>", SALEDATE)),
-                                        ifelse(is.na(SALEPRICE), "", paste0("<br><b>Last Sale Price: </b>", dollarsComma(SALEPRICE))),
-                                        ifelse(is.na(COUNTYLAND), "", paste0("<br><b>County Land Value: </b>", dollarsComma(COUNTYLAND))),
-                                        ifelse(is.na(COUNTYBUILDING), "", paste0("<br><b>County Building Value: </b>", dollarsComma(COUNTYBUILDING))),
-                                        ifelse(is.na(COUNTYTOTAL), "", paste0("<br><b>County Total Value: </b>", dollarsComma(COUNTYTOTAL))),
-                                        ifelse(is.na(amount), "", paste0("<br><b>Total Lien Amount: </b>", dollarsComma(amount))),
-                                        ifelse(is.na(lien_num), "", paste0("<br><b>Number of Liens: </b>", lien_num)),
-                                        #"<br><b>'17 City Taxes</b>", tt_city_ta,
-                                        #"<br><b>'17 School Taxes</b>", tt_school_,
-                                        #"<br><b>'17 Library Taxes</b>", tt_lib_tax,
-                                        #"<br><b>Current Delinquent Taxes</b>", CURRENT_DE,
-                                        hood_parcel$tt,
-                                        paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=',pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>')))
-    } 
-    if (nrow(hood_parcel) == 0) {
-      if (input$search == "Vote!") {
-        egg <- easterEgg()
-      } else {
-        egg <- easterEgg()
-        egg <- egg[sample(1:nrow(egg),1),]
-      }
-      
-      map <- addMarkers(map, data = egg, lng= ~X, lat= ~Y, icon = ~icons_egg[icon], popup = ~tt) %>% 
-        setView(-79.9959, 40.4406, zoom = 12)
-    }
     #Write inputs to Couch
     if (url.exists(paste0(couchdb_url, ":5984/_utils/"))){
       dateTime <- Sys.time()
@@ -492,9 +494,55 @@ server <- shinyServer(function(input, output, session) {
       couchDB$dataList <- c(inputs, sessionID, dateTime, sessionStart)
       cdbAddDoc(couchDB)
     }
-    map
+    
+    if(nrow(hood_parcel@data) > 0) {
+      # Trim hood data
+      hood_parcel@data <- hood_parcel@data %>% 
+        mutate(colorval = case_when(!is.na(tt) ~ "#4daf4a",
+                                    cityown == TRUE ~ "#ffff33",
+                                    delq == TRUE ~ "#e41a1c",
+                                    TRUE ~ "#ccc7c7"),
+               popup = paste("<font color='black'><b>Parcel ID:</b>", paste0('<a href="http://www2.county.allegheny.pa.us/RealEstate/GeneralInfo.aspx?ParcelID=',pin, '" target="_blank">', pin, '</a>'),
+                           ifelse(is.na(mapblocklo), "", paste0("<br><b>Lot & Block: </b>", mapblocklo)),
+                           ifelse(is.na(ADDRESS), "", paste0("<br><b>Address: </b>", ADDRESS)),
+                           ifelse(is.na(MUNIDESC), "", paste0("<br><b>Ward: </b>", MUNIDESC)),
+                           ifelse(is.na(OWNERDESC), "", paste0("<br><b>Owner Code: </b>", OWNERDESC)),
+                           ifelse(is.na(CLASSDESC), "", paste0("<br><b>Class: </b>", CLASSDESC)),
+                           ifelse(is.na(TAXDESC), "", paste0("<br><b>Tax Code: </b>", TAXDESC)),
+                           ifelse(is.na(SALEDATE), "", paste0("<br><b>Last Sale Date: </b>", SALEDATE)),
+                           ifelse(is.na(SALEPRICE), "", paste0("<br><b>Last Sale Price: </b>", dollarsComma(SALEPRICE))),
+                           ifelse(is.na(COUNTYLAND), "", paste0("<br><b>County Land Value: </b>", dollarsComma(COUNTYLAND))),
+                           ifelse(is.na(COUNTYBUILDING), "", paste0("<br><b>County Building Value: </b>", dollarsComma(COUNTYBUILDING))),
+                           ifelse(is.na(COUNTYTOTAL), "", paste0("<br><b>County Total Value: </b>", dollarsComma(COUNTYTOTAL))),
+                           ifelse(is.na(amount), "", paste0("<br><b>Total Lien Amount: </b>", dollarsComma(amount))),
+                           ifelse(is.na(lien_num), "", paste0("<br><b>Number of Liens: </b>", lien_num)),
+                           hood_parcel$tt,
+                           paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=', pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>'))) %>%
+        select(pin, popup, colorval)
+      
+      leafletProxy("map") %>%
+        clearGroup("hood") %>%
+        clearGroup("egg") %>%
+        flyToBounds(hood_parcel@bbox[1,1], hood_parcel@bbox[2,1], hood_parcel@bbox[1,2], hood_parcel@bbox[2,2]) %>%
+        addPolygons(data = hood_parcel, stroke = TRUE, smoothFactor = 0.5, weight = 0.5, color = "#000000", layerId = ~pin, group = "hood",
+                    fill = TRUE, fillColor = ~colorval, fillOpacity = .75,
+                    popup = ~popup
+          )
+   } else {
+     print("ran egg")
+      if (input$search == "Vote!") {
+        egg <- easterEgg()
+      } else {
+        egg <- easterEgg()
+        egg <- egg[sample(1:nrow(egg),1),]
+      }
+     leafletProxy("map") %>%
+       clearGroup("hood") %>%
+       clearGroup("egg") %>%
+       addMarkers(data = egg, lng= ~X, lat= ~Y, icon = ~icons_egg[icon], popup = ~tt, group = ) %>% 
+       setView(-79.9959, 40.4406, zoom = 12)
+    }
   }) 
-  
   ##Data Table
   output$datatable <- DT::renderDataTable({
     if (url.exists(paste0(couchdb_url, ":5984/_utils/"))){
@@ -504,30 +552,16 @@ server <- shinyServer(function(input, output, session) {
       couchDB$dataList <- c(inputs, sessionID, dateTime, sessionStart)
       cdbAddDoc(couchDB)
     }
-    hood_parcel <- hoodinput()
-    hood_parcel@data
-    hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "mapblocklo", "ADDRESS", "PROPERTYZIP", "geo_name_nhood", "MUNIDESC", "TAXDESC",
+    hood_parcel <- hoodInput()
+    
+    hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "mapblocklo", "ADDRESS", "PROPERTYZIP", "MUNIDESC", "TAXDESC",
                                                             "OWNERDESC", "CLASSDESC", "YEARBLT", "SALEDATE", "SALEPRICE",
                                                             "COUNTYLAND", "COUNTYBUILDING", "COUNTYTOTAL", "amount", "lien_num", "delq", "cityown", "tt"))
-    colnames(hood_parcel@data) <- c("Parcel ID", "Lot & Block", "Address", "Zip", "Neighborhood", "Ward", "Tax Code", "Owner Code", "Class", "Year Built",
+    colnames(hood_parcel@data) <- c("Parcel ID", "Lot & Block", "Address", "Zip", "Ward", "Tax Code", "Owner Code", "Class", "Year Built",
                                     "Last Sale Date", "Last Sale Price", "County Land Value", "County Building Value", "County Total Value",
                                     "Lien Amount", "Number of Liens","Delinquent", "City Owned", "Abatements")
     hood_parcel@data
-    
-  }, options = list(pageLength = 10,
-                    dom = "Bfrtip",
-                    lengthMenu = c(10,20, 30),
-                    scrollY = '750px',
-                    #scrollX = TRUE,
-                    initComplete = JS(
-                      "function(settings, json) {",
-                      "$(this.api().table().header()).css({'background-color': '#95a5a6'});",
-                      "}"),
-                    searchHighlight = TRUE), 
-  class = 'cell-border stripe',
-  rownames = FALSE,
-  escape = FALSE
-  )
+  }, escape = FALSE, options = list(scrollX = TRUE), rownames = FALSE)
   
   output$downloadData <- downloadHandler(
     filename = function() {

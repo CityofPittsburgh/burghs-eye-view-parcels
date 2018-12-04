@@ -157,14 +157,33 @@ ui <- function(request) {
                                   # Add Tag Manager Script to Body
                                   tags$body(tags$noscript(tags$iframe(src='https://www.googletagmanager.com/ns.html?id=GTM-TCTCQVD', height = 0, width = 0, style="display:none;visibility:hidden"))),
                                   # Notification Centered and Color Fix
-                                  tags$head(tags$style(HTML(".shiny-notification {
+                                  tags$head(tags$style(HTML('.shiny-notification {
                                                             position: fixed;
                                                             background: #2c3e50;
                                                             top: calc(50%);;
                                                             left: calc(50%);;
                                                             width: calc(25%);;
                                                             min-width: 200px;
-                                                            transform: translate(-50%, 0);}"))),
+                                                            transform: translate(-50%, 0);}
+                                                            .loading:after {
+                                                              overflow: hidden;
+                                                              display: inline-block;
+                                                              vertical-align: bottom;
+                                                              -webkit-animation: ellipsis steps(4,end) 900ms infinite;      
+                                                              animation: ellipsis steps(4,end) 900ms infinite;
+                                                              content: "...";
+                                                              width: 0px;
+                                                            }
+                                                            @keyframes ellipsis {
+                                                              to {
+                                                                width: 1.25em;    
+                                                              }
+                                                            }
+                                                            @-webkit-keyframes ellipsis {
+                                                              to {
+                                                                width: 1.25em;    
+                                                              }
+                                                            }'))),
                                   # Layout CSS
                                   tags$style(type="text/css", ".shiny-output-error { visibility: hidden;}
                                                                .shiny-output-error:before { visibility: hidden; }
@@ -242,17 +261,19 @@ ui <- function(request) {
                                                          #tPanel #outer .btn.collapsed .fa:before { content: "\\f055";  }')),
                     HTML('<button class="btn collapsed" data-toggle="collapse" data-target="#mobile" stye="display: block;"><i class="fa fa-search-plus" aria-hidden="true"></i></button></div>
                          <div id="mobile" class="collapse" style="margin-top:55px;">'),
-                          selectInput("neigh_select",
-                                      label = "Neighborhood",
-                                      choices = hood_list,
-                                      selected = "Central Business District",
-                                      multiple = FALSE,
-                                      selectize = TRUE),
-                          selectInput("basemap_select",
-                                      label = "Basemap",
-                                      choices = c(`OSM Mapnik` = "OpenStreetMap.Mapnik", `Code for Pittsburgh` = "mapStack", `OSM France` = "OpenStreetMap.France", `OSM Humanitarian` = "OpenStreetMap.HOT", `Stamen Toner` = "Stamen.Toner", `Esri Satellite` = "Esri.WorldImagery", Esri = "Esri.WorldStreetMap", `OSM Dark Matter` = "CartoDB.DarkMatter", `OSM Positron` = "CartoDB.Positron"),
-                                      selected = "OpenStreetMap.Mapnik")
-                         ), HTML("</div>")
+                    tags$br(),
+                    selectInput("neigh_select",
+                                label = "Neighborhood",
+                                choices = hood_list,
+                                selected = "Central Business District",
+                                multiple = FALSE,
+                                selectize = TRUE),
+                    selectInput("basemap_select",
+                                label = "Basemap",
+                                choices = c(`OSM Mapnik` = "OpenStreetMap.Mapnik", `Code for Pittsburgh` = "mapStack", `OSM France` = "OpenStreetMap.France", `OSM Humanitarian` = "OpenStreetMap.HOT", `Stamen Toner` = "Stamen.Toner", `Esri Satellite` = "Esri.WorldImagery", Esri = "Esri.WorldStreetMap", `OSM Dark Matter` = "CartoDB.DarkMatter", `OSM Positron` = "CartoDB.Positron"),
+                                selected = "OpenStreetMap.Mapnik")
+                   ), 
+          HTML("</div>")
         )
                                   ),
                          tabPanel("Data: Parcels", class = "data", value = "Data",
@@ -352,7 +373,7 @@ server <- shinyServer(function(input, output, session) {
   })
   # Load Hood Parcel
   hoodLoad <- reactive({
-    showNotification(HTML(paste0('<center><font color = "white">Loading ', input$neigh_select, '...</font></center>')), type = "message", id = "hoodMessage", duration = NULL, closeButton = FALSE)
+    showNotification(HTML(paste0('<center><font color = "white"><div class="loading">Loading ', input$neigh_select, '<center></div></font>')), type = "message", id = "hoodMessage", duration = NULL, closeButton = FALSE)
     
     hoodname <- gsub("\\-", "_", input$neigh_select)
     hoodname <- gsub(" ", "_", hoodname)

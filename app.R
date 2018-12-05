@@ -122,8 +122,11 @@ icons_egg <- iconList(
   july_4 = makeIcon("./icons/egg/july_4.png", iconAnchorX = 31, iconAnchorY = 32, popupAnchorX = 0, popupAnchorY = -13.5, iconWidth = 72)      
 )
 
-hood_list <- jsonlite::fromJSON("hoods.json")
+hoods <- unique(jsonlite::fromJSON("https://tools.wprdc.org/geo/regions/pittsburgh_neighborhood")$results) %>% 
+  filter(name != "Mount Oliver Borough")
 
+hood_list <- as.list(sort(hoods$name))
+  
 ##Application
 ui <- function(request) {
               navbarPage(id = "navbar",
@@ -198,7 +201,7 @@ ui <- function(request) {
                                                                                        max-height: 400px !important;}
                                                                .form-group {margin-bottom: 0px;}
                                                                @media only screen and (min-width: 600px) {
-                                                                 #map {height: calc(100vh - 60px) !important; 
+                                                                 #map {height: calc(100vh - 55px) !important; 
                                                                        z-index: 0;}
                                                                  #tPanel {opacity: 0.88;
                                                                           max-height: calc(100vh - 90px);}
@@ -247,10 +250,10 @@ ui <- function(request) {
                                                       left: 0px;
                                                       top: 55px', 
                               leafletOutput("map")),
-        absolutePanel(
+        absolutePanel(style = "overflow:visible;",
           # Input panel for Desktops (alpha'd)
           top = 70, left = 50, width = '325px', style = "z-index: 1000", id = "aPanel",
-          wellPanel(id = "tPanel", style = "overflow-y:auto; min-height: 65px;",
+          wellPanel(id = "tPanel", style = "min-height: 65px;",
                     HTML('<div id="outer" style="z-index: 9; background-color:#ecf0f1;">'),
                     div(style="display:inline-block;", 
                         textInput("search", 

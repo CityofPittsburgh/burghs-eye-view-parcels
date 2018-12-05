@@ -209,6 +209,7 @@ ui <- function(request) {
                                                                  #mobile {display: initial;}
                                                                  #outer {position: relative; padding-bottom: 0px;}
                                                                  #search {width: 275px;}
+                                                                 #hood {padding-top: 20px;}
                                                                }
                                                                @media only screen and (max-width: 600px) {
                                                                  .info.legend.leaflet-control {display: none;}
@@ -225,9 +226,9 @@ ui <- function(request) {
                                                                              z-index: -1;
                                                                              left: 0px;
                                                                              top: 55px;}
+                                                                 #hood {padding-top: 65px;}
                                                                  #tPanel {margin-bottom:0px; 
                                                                           padding:0px !important; 
-                                                                          overflow-y:scroll !important; 
                                                                           max-height: calc(100vh - 65) !important; 
                                                                           min-height: 55px !important; 
                                                                           padding-left: 10px !important; 
@@ -250,7 +251,7 @@ ui <- function(request) {
                                                       left: 0px;
                                                       top: 55px', 
                               leafletOutput("map")),
-        absolutePanel(style = "overflow:visible;",
+        absolutePanel(style = "overflow: visible;",
           # Input panel for Desktops (alpha'd)
           top = 70, left = 50, width = '325px', style = "z-index: 1000", id = "aPanel",
           wellPanel(id = "tPanel", style = "min-height: 65px;",
@@ -263,20 +264,22 @@ ui <- function(request) {
                     tags$style(style="text/css", chartr0('#tPanel #outer .btn .fa:before { content: "\\f056";  }
                                                          #tPanel #outer .btn.collapsed .fa:before { content: "\\f055";  }')),
                     HTML('<button class="btn collapsed" data-toggle="collapse" data-target="#mobile" stye="display: block;"><i class="fa fa-search-plus" aria-hidden="true"></i></button></div>
-                         <div id="mobile" class="collapse" style="margin-top:55px;">'),
-                    tags$br(),
+                         <div id="mobile" class="collapse">
+                         <div id ="hood">'),
                     selectInput("neigh_select",
                                 label = "Neighborhood",
                                 choices = hood_list,
                                 selected = "Central Business District",
                                 multiple = FALSE,
                                 selectize = TRUE),
+                    HTML('</div>'),
                     selectInput("basemap_select",
                                 label = "Basemap",
                                 choices = c(`OSM Mapnik` = "OpenStreetMap.Mapnik", `Code for Pittsburgh` = "mapStack", `OSM France` = "OpenStreetMap.France", `OSM Humanitarian` = "OpenStreetMap.HOT", `Stamen Toner` = "Stamen.Toner", `Esri Satellite` = "Esri.WorldImagery", Esri = "Esri.WorldStreetMap", `OSM Dark Matter` = "CartoDB.DarkMatter", `OSM Positron` = "CartoDB.Positron"),
-                                selected = "OpenStreetMap.Mapnik")
-                   ), 
-          HTML("</div>")
+                                selected = "OpenStreetMap.Mapnik"),
+                    
+                    HTML("</div>")
+                   )
         )
                                   ),
                          tabPanel("Data: Parcels", class = "data", value = "Data",

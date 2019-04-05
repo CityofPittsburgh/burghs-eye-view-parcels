@@ -564,7 +564,7 @@ server <- shinyServer(function(input, output, session) {
                            ifelse(is.na(amount), "", paste0("<br><b>Total Lien Amount: </b>", dollarsComma(amount))),
                            ifelse(is.na(lien_num), "", paste0("<br><b>Number of Liens: </b>", lien_num)),
                            hood_parcel$tt,
-                           paste0('<center><img id="imgPicture" src="http://photos.county.allegheny.pa.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=', pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>'))) %>%
+                           paste0('<center><img id="imgPicture" src="https://iasworld.alleghenycounty.us/iasworld/iDoc2/Services/GetPhoto.ashx?parid=', pin, '&amp;jur=002&amp;Rank=1&amp;size=350x263" style="width:250px;"></center>'))) %>%
         select(pin, popup, colorval)
       
       leafletProxy("map") %>%

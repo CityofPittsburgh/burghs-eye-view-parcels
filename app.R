@@ -500,14 +500,23 @@ server <- shinyServer(function(input, output, session) {
     }
     return(load.egg)
   })
-  output$map <- renderLeaflet({ 
-    leaflet()  %>% 
+  output$map <- renderLeaflet({
+    map <- leaflet()  %>% 
       setView(-79.9959, 40.4406, zoom = 12) %>% 
       addEasyButton(easyButton(
         icon="fa-crosshairs", title="Locate Me",
         onClick=JS("function(btn, map){ map.locate({setView: true}); }"))) %>%
       addLegend(position = "bottomright", colors = c("#ccc7c7", "#4daf4a",  "#ffff33", "#e41a1c") , labels = c("Normal", "Abated Property", "City Property", "Tax Delinquent"), title = "Parcel Info", opacity = .8)
-      
+    # Firefox Basemap Issue
+    baseMap <- isolate(input$basemap_select)
+    if (baseMap == "mapStack") {
+      map <- map %>%
+        addTiles(urlTemplate = "http://{s}.sm.mapstack.stamen.com/((terrain-background,$000[@30],$fff[hsl-saturation@80],$1b334b[hsl-color],mapbox-water[destination-in]),(watercolor,$fff[difference],$000000[hsl-color],mapbox-water[destination-out]),(terrain-background,$000[@40],$000000[hsl-color],mapbox-water[destination-out])[screen@60],(streets-and-labels,$fedd9a[hsl-color])[@50])/{z}/{x}/{y}.png", attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CARTO</a>', options = providerTileOptions(noWrap = TRUE))
+    } else {
+      map <- map %>%
+        addProviderTiles(baseMap, options = providerTileOptions(noWrap = TRUE))
+    }
+    return(map)
   })
   observe({
     # Code for Pittsburgh Basemap

@@ -1,5 +1,5 @@
 # Burghs Eye View - Parcels
-<p align="center"><img src="http://apps.pittsburghpa.gov/cis/burgh-seye-icon.png"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/CityofPittsburgh/burghs-eye-view-parcels/master/www/burghs_eyeview_logo_horz.svg?sanitize=true"></p>
 External Burgh's Eye View displaying City Parcels by Neighborhood.
 
 ## Introduction 

@@ -12,7 +12,6 @@ library(shinythemes)
 #"Dogfooding" Packages
 library(httr)
 library(jsonlite)
-library(R4CouchDB)
 
 # Visuals Libraries
 library(leaflet)
@@ -41,15 +40,6 @@ dollarsComma <- function(x){
 
 # Function to read backslashes correctly
 chartr0 <- function(foo) chartr('\\','\\/',foo)
-
-##Set Couch credentials
-couchdb_un <- jsonlite::fromJSON("key.json")$couchdb_un
-couchdb_pw <- jsonlite::fromJSON("key.json")$couchdb_pw
-couchdb_url <- jsonlite::fromJSON("key.json")$couchdb_url
-
-# CouchDB Connection
-# couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels")
-couchDB <- cdbIni(serverName = couchdb_url, uname = couchdb_un, pwd = couchdb_pw, DBName = "burghs-eye-view-parcels-dev")
 
 # Determine if on mobile device
 getWidth <- '$(document).on("shiny:connected", function(e) {
@@ -533,15 +523,6 @@ server <- shinyServer(function(input, output, session) {
   observeEvent(hoodInput(), {
     hood_parcel <- hoodInput()
     
-    #Write inputs to Couch
-    if (url.exists(paste0(couchdb_url, ":5984/_utils/"))){
-      dateTime <- Sys.time()
-      names(dateTime) <- "dateTime"
-      inputs <- isolate(reactiveValuesToList(input))
-      couchDB$dataList <- c(inputs, sessionID, dateTime, sessionStart)
-      cdbAddDoc(couchDB)
-    }
-    
     if(nrow(hood_parcel@data) > 0) {
       # Trim hood data
       hood_parcel@data <- hood_parcel@data %>% 
@@ -593,13 +574,6 @@ server <- shinyServer(function(input, output, session) {
   }) 
   ##Data Table
   output$datatable <- DT::renderDataTable({
-    if (url.exists(paste0(couchdb_url, ":5984/_utils/"))){
-      dateTime <- Sys.time()
-      names(dateTime) <- "dateTime"
-      inputs <- isolate(reactiveValuesToList(input))
-      couchDB$dataList <- c(inputs, sessionID, dateTime, sessionStart)
-      cdbAddDoc(couchDB)
-    }
     hood_parcel <- hoodInput()
     
     hood_parcel@data <- subset(hood_parcel@data, select = c("pin", "mapblocklo", "ADDRESS", "PROPERTYZIP", "MUNIDESC", "TAXDESC",
